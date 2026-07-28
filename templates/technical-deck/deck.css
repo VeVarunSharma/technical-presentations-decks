@@ -1,0 +1,12 @@
+h1 {
+  max-width: 880px;
+  margin: 0;
+  font-size: clamp(46px, 5vw, 82px);
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+}
+
+.slide p {
+  color: var(--color-text-muted);
+  line-height: 1.45;
+}

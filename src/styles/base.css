@@ -1,0 +1,128 @@
+:root {
+  color-scheme: dark;
+  font-family: var(--font-sans, "Mona Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  background: var(--color-page, #05070b);
+  color: var(--color-text, #f0f6fc);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: var(--color-page, #05070b);
+  color: var(--color-text, #f0f6fc);
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+a {
+  color: var(--color-link, #58a6ff);
+}
+
+code,
+pre,
+.mono {
+  font-family: var(--font-mono, "Mona Sans Mono", "SFMono-Regular", Consolas, monospace);
+}
+
+.app {
+  display: grid;
+  grid-template-rows: 52px minmax(0, 1fr) 62px;
+  width: 100vw;
+  height: 100vh;
+}
+
+.stage-shell {
+  display: grid;
+  min-height: 0;
+  place-items: center;
+  padding: 10px 20px;
+}
+
+.stage {
+  position: relative;
+  width: min(94vw, calc((100vh - 134px) * 16 / 9), 1500px);
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.14));
+  border-radius: var(--radius-stage, 22px);
+  background: var(--color-canvas, #0d1117);
+  box-shadow: var(--shadow-stage, 0 30px 90px rgba(0, 0, 0, 0.56));
+  isolation: isolate;
+}
+
+.slide {
+  --accent: var(--color-accent, #0fbf3e);
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(34px, 4.3vw, 68px);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(34px) scale(0.99);
+  transition:
+    opacity 260ms ease,
+    transform 330ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 330ms;
+}
+
+.slide.active {
+  z-index: 2;
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0) scale(1);
+  transition-delay: 0s;
+}
+
+.slide.was-active {
+  transform: translateX(-34px) scale(0.99);
+}
+
+[data-build-step] {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition:
+    opacity 260ms ease,
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 300ms;
+}
+
+[data-build-step].build-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

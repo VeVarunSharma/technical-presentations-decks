@@ -1,0 +1,46 @@
+name: Presentation bug
+description: Report a content, rendering, interaction, or accessibility problem.
+title: "[presentation bug] "
+labels: ["presentation", "bug"]
+body:
+  - type: input
+    id: deck
+    attributes:
+      label: Deck path
+      placeholder: "decks/gh-aw/"
+    validations:
+      required: true
+  - type: input
+    id: slide
+    attributes:
+      label: Slide number or title
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Browser and viewport
+      placeholder: "Chrome, 1366x768"
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Content
+        - Brand or visual design
+        - Layout or clipping
+        - Keyboard or interaction
+        - Accessibility
+        - Print
+        - Source or citation
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Include reproduction steps and a screenshot when possible.
+    validations:
+      required: true

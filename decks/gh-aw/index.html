@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en" data-brand="github" data-theme="copilot-dark" data-deck-title="GitHub Agentic Workflows">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="GitHub Agentic Workflows: written intent, deterministic operations, defense in depth, cost and concurrency governance, and measurable outcomes.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23160048'/%3E%3Cpath d='M16 43 25 20h6l9 23h-6l-2-6H23l-2 6Zm9-11h5l-2.5-7Z' fill='%235FED83'/%3E%3Cpath d='M39 20h6l3 14 3-14h6l-6 23h-6Z' fill='%23C898FD'/%3E%3C/svg%3E">
+  <title>GitHub Agentic Workflows</title>
+  <link rel="stylesheet" href="../../brands/github/tokens.css">
+  <link rel="stylesheet" href="../../brands/github/themes/copilot-dark.css">
+  <link rel="stylesheet" href="./deck.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">AW</div>
+        <div class="brand-title">GitHub Agentic Workflows / Governed automation</div>
+      </div>
+      <div class="scenario-rail" id="scenarioRail" aria-live="polite">
+        <span class="scenario-label">Scenario</span>
+        <strong>Repo Care</strong>
+        <span class="scenario-stage" id="scenarioStage">Mission</span>
+      </div>
+      <div class="top-actions">
+        <span class="shortcut">Space / arrows reveal, then navigate</span>
+        <button class="small-button" id="sourcesButton" type="button">Sources</button>
+        <button class="small-button" id="fullscreenButton" type="button">Full screen</button>
+      </div>
+    </header>
+
+    <main class="stage-shell">
+      <div class="stage" id="stage" aria-live="polite">
+        <section class="slide active title-slide" data-title="Opening" data-scenario-stage="Mission" style="--accent: var(--github-green-3);">
+          <div class="title-layout">
+            <div>
+              <div class="eyebrow reveal">GitHub Agentic Workflows</div>
+              <h1 class="display reveal" style="--delay: 90ms;">Governed automation for the <span class="gradient-text">agentic software factory</span></h1>
+              <p class="lede reveal" style="--delay: 160ms;">Humans, copilots, coding agents, SDK applications, and scheduled workflows all create change. Agentic Workflows turns natural-language intent into repeatable GitHub Actions with security, cost, concurrency, and output controls built in.</p>
+              <div class="title-kicker reveal" style="--delay: 230ms;">
+                <span class="pill accent">Written intent</span>
+                <span class="pill">Deterministic first</span>
+                <span class="pill">Safe outputs</span>
+                <span class="pill">Measured outcomes</span>
+              </div>
+            </div>
+            <div class="factory-visual reveal" style="--delay: 190ms;" aria-label="Human Agent Process factory">
+              <div class="factory-core">Human<br>Agent<br>Process</div>
+              <div class="factory-source source-human">Human</div>
+              <div class="factory-source source-copilot">Copilot</div>
+              <div class="factory-source source-agent">Agents</div>
+              <div class="factory-source source-sdk">SDK apps</div>
+              <div class="factory-source source-workflow">Schedules</div>
+              <div class="factory-output">Review-ready<br>GitHub output</div>
+            </div>
+          </div>
+          <div class="source-note">
+            <span>30-minute technical session</span>
+            <span><a href="https://github.github.com/gh-aw/" target="_blank" rel="noopener">GitHub Agentic Workflows overview</a></span>
+          </div>
+        </section>
+
+        <section class="slide supply-slide" data-title="The code supply has multiplied" data-scenario-stage="Code supply" style="--accent: var(--github-green-3);">
+          <div class="section-heading compact-heading">
+            <div>
+              <div class="eyebrow">Why governed automation now</div>
+              <h2 class="section-title">The code supply has <span class="gradient-text">multiplied</span></h2>
+              <p class="section-subtitle">Development capacity is no longer a function of human headcount alone. Toggle the new producer lanes to model the security change surface.</p>
+            </div>
+            <div class="slide-index">02</div>
+          </div>
+          <div class="supply-layout">
+            <div>
+              <div class="model-banner"><strong>Illustrative change-surface index</strong><span>Not a GitHub benchmark · replace with your telemetry</span></div>
+              <div class="producer-controls" id="producerControls" aria-label="Code producer lanes"></div>
+              <div class="supply-total">
+                <span>Modeled change capacity</span>
+                <strong id="supplyTotal">100</strong>
+                <small>index units</small>
+              </div>
+            </div>
+            <div class="supply-bars" id="supplyBars" aria-label="Modeled change capacity by producer"></div>
+          </div>
+          <div class="evidence-row" id="supplyEvidence" data-build-step="1"></div>
+          <div class="source-note">
+            <span>Measured productivity context is shown separately from illustrative autonomous-producer values</span>
+            <span><a href="https://github.blog/news-insights/research/the-economic-impact-of-the-ai-powered-developer-lifecycle-and-lessons-from-github-copilot/" target="_blank" rel="noopener">Copilot economic-impact research</a></span>
+          </div>
+        </section>
+
+        <section class="slide diy-risk-slide" data-title="A CLI is not a security architecture" data-scenario-stage="DIY risk" style="--accent: var(--github-orange-2);">
+          <div class="section-heading compact-heading">
+            <div>
+              <div class="eyebrow">The original pattern</div>
+              <h2 class="section-title">A CLI in a privileged runner is <span class="gradient-text">not a security architecture</span></h2>
+              <p class="section-subtitle">The risky pattern combines untrusted GitHub content, natural-language control, secrets, powerful tools, network access, and state-changing permissions in one workflow.</p>
+            </div>
+            <div class="slide-index">03</div>
+          </div>
+          <div class="risk-chain">
+            <article><span>01</span><strong>Untrusted event</strong><p>Issue, pull request, comment, commit, or repository content.</p></article>
+            <article data-build-step="1"><span>02</span><strong>Prompt construction</strong><p>User-controlled data enters the model context and may look like instructions.</p></article>
+            <article data-build-step="2"><span>03</span><strong>Privileged agent</strong><p>File reads, Bash, MCP, tokens, provider keys, network, and write tools.</p></article>
+            <article data-build-step="3"><span>04</span><strong>External effect</strong><p>Logs, comments, pull requests, commits, deployments, or exfiltration channels.</p></article>
+          </div>
+          <div class="case-study" data-build-step="4">
+            <div class="case-label">Microsoft Threat Intelligence case</div>
+            <h3>Claude Code Action's Read path could access <code>/proc/self/environ</code></h3>
+            <p>A prompt-injected workflow could steer the Read tool outside expected subprocess isolation toward runner environment variables, then use available output channels.</p>
+            <div class="case-facts">
+              <span>Untrusted input</span><span>Secret-bearing runner</span><span>Tool boundary gap</span><span>State/external channels</span>
+            </div>
+            <strong>Mitigated by Anthropic in Claude Code 2.1.128.</strong>
+          </div>
+          <div class="source-note">
+            <span>The integration pattern is the risk: workflow authors otherwise own every trust and permission boundary</span>
+            <span><a href="https://www.microsoft.com/en-us/security/blog/2026/06/05/securing-ci-cd-in-agentic-world-claude-code-github-action-case/" target="_blank" rel="noopener">Microsoft security research</a></span>
+          </div>
+        </section>
+
+        <section class="slide platform-slide" data-title="DIY versus platform-built" data-scenario-stage="Platform boundary" style="--accent: var(--github-purple-2);">
+          <div class="section-heading compact-heading">
+            <div>
+              <div class="eyebrow">Interactive comparison</div>
+              <h2 class="section-title">Do not rebuild every <span class="gradient-text">agent security boundary</span></h2>
+              <p class="section-subtitle">Select a failure mode to compare ad hoc CLI/action wiring with a compiled Agentic Workflow.</p>
+            </div>
+            <div class="slide-index">04</div>
+          </div>
+          <div class="platform-layout">
+            <div class="platform-threats" id="platformThreats" role="tablist" aria-label="Agent workflow failure modes"></div>
+            <div class="platform-comparison">
+              <div class="comparison-heading diy-heading"><span>DIY agent action</span><strong id="diyTitle">Workflow author owns the boundary</strong></div>
+              <div class="comparison-heading platform-heading"><span>GitHub Agentic Workflows</span><strong id="platformTitle">Platform compiles and enforces the boundary</strong></div>
+              <div class="comparison-rows" id="platformRows"></div>
+            </div>
+          </div>
+          <div class="platform-verdict" data-build-step="1">
+            <strong id="platformVerdictTitle">A platform product reduces the number of security-critical decisions every workflow author must get right.</strong>
+            <span id="platformVerdictBody">The model remains untrusted; the architecture constrains what it can access and what effects it can produce.</span>
+          </div>
+          <div class="source-note">
+            <span>A model CLI is a runtime component, not a complete trust, cost, concurrency, and output-control system</span>
+            <span><a href="https://github.github.com/gh-aw/introduction/architecture/" target="_blank" rel="noopener">GH-AW security architecture</a></span>
+          </div>
+        </section>
+
+        <section class="slide prompt-slide" data-title="Classify the work" data-scenario-stage="Classify work" style="--accent: var(--github-green-3);">
+          <div class="section-heading compact-heading">
+            <div>
+              <div class="eyebrow">Audience check</div>
+              <h2 class="section-title">Deterministic CI or <span class="gradient-text">agentic workflow</span>?</h2>
+              <p class="section-subtitle">Show of hands: which work needs interpretation, and which should remain predictable code?</p>
+            </div>
+            <div class="slide-index">05</div>
+          </div>
+          <div class="classification-grid">
+            <article class="classification-card">
+              <span class="classification-number">TASK 01</span>
+              <h3>Run tests and validate a schema</h3>
+              <p>Known inputs, known commands, reproducible pass/fail criteria.</p>
+              <div class="classification-answer" data-build-step="1"><strong>Deterministic CI</strong><span>Do not pay a model to rediscover a rule.</span></div>
+            </article>
+            <article class="classification-card repo-care">
+              <span class="classification-number">TASK 02 / REPO CARE</span>
+              <h3>Choose the best maintenance improvement</h3>
+              <p>Interpret repository context, prioritize value, and produce bounded review-ready work.</p>
+              <div class="classification-answer" data-build-step="1"><strong>Hybrid agentic</strong><span>Precompute facts, reason, then verify.</span></div>
+            </article>
+            <article class="classification-card">
+              <span class="classification-number">TASK 03</span>
+              <h3>Post a validated pull request</h3>
+              <p>Reason about the change, but gate the external write deterministically.</p>
+              <div class="classification-answer" data-build-step="1"><strong>Agent + safe output</strong><span>Reasoning does not require direct write access.</span></div>
+            </article>
+          </div>
+          <div class="decision-rule" data-build-step="2">
+            <div><strong>Known rule?</strong><span>Use code, queries, filters, and tests.</span></div>
+            <div><strong>Ambiguous context?</strong><span>Use agent reasoning.</span></div>
+            <div><strong>External effect?</strong><span>Verify and apply through a trusted gate.</span></div>
+          </div>
+          <div class="source-note">
+            <span>Agentic Workflows augment deterministic CI/CD rather than replacing it</span>
+            <span><a href="https://github.github.com/gh-aw/reference/faq/#determinism" target="_blank" rel="noopener">Determinism FAQ</a></span>
+          </div>
+        </section>
+
+        <section class="slide intent-slide" data-title="Intent is a first-class artifact" data-scenario-stage="Written intent" style="--accent: var(--github-green-3);">
+          <div class="section-heading compact-heading">
+            <div>
+              <div class="eyebrow">The workflow specification</div>
+              <h2 class="section-title">The agent's job is written as an <span class="gradient-text">operating procedure</span></h2>
+              <p class="section-subtitle">Controls define the envelope. Markdown defines the task, context, decisions, constraints, and expected outcome.</p>
+            </div>
+            <div class="slide-index">06</div>
+          </div>
+          <div class="spec-tabs" role="tablist" aria-label="Workflow specification views">
+            <button type="button" data-spec-view="controls" aria-selected="false">Controls</button>
+            <button class="active" type="button" data-spec-view="intent" aria-selected="true">Written intent</button>
+            <button type="button" data-spec-view="compiled" aria-selected="false">Compiled plan</button>
+          </div>
+          <div class="spec-view" id="specView"></div>
+          <div class="spec-note" data-build-step="1">
+            <strong>Runtime editing model:</strong> Markdown intent can change directly on GitHub.com without recompilation; frontmatter capability changes require recompilation.
+          </div>
+          <div class="source-note">
+            <span>Write the prompt as if onboarding a new teammate: explicit task, criteria, constraints, and error behavior</span>
+            <span><a href="https://github.github.com/gh-aw/reference/markdown/" target="_blank" rel="noopener">Markdown instructions</a></span>
+          </div>
+        </section>
+
+        <section class="slide deterministic-slide" data-title="Deterministic operations before AI" data-scenario-stage="Precompute facts" style="--accent: var(--github-green-3);">
+          <div class="section-heading compact-heading">
+            <div>
+              <div class="eyebrow">Deterministic first</div>
+              <h2 class="section-title">Precompute facts before paying for <span class="gradient-text">reasoning</span></h2>
+              <p class="section-subtitle">Choose a Repo Care condition to see how filtering, jobs, artifacts, caching, and safe outputs reduce cost and increase repeatability.</p>
+            </div>
+            <div class="slide-index">07</div>
+          </div>
+          <div class="deterministic-layout">
+            <div class="deterministic-scenarios" id="deterministicScenarios" role="tablist" aria-label="Deterministic operations scenarios"></div>
+            <div class="deterministic-flow">
+              <article data-det-stage="filter"><span>01</span><h3>Filter trigger</h3><p>Search query, role, bot, or event conditions.</p></article>
+              <article data-det-stage="compute"><span>02</span><h3>Compute</h3><p>Custom jobs and steps fetch structured data.</p></article>
+              <article data-det-stage="artifact"><span>03</span><h3>Prepare context</h3><p>Place artifacts under <code>/tmp/gh-aw/agent/</code>.</p></article>
+              <article data-det-stage="agent"><span>04</span><h3>Reason if needed</h3><p>The agent interprets prepared evidence.</p></article>
+              <article data-det-stage="output"><span>05</span><h3>Apply safely</h3><p>Deterministic handlers validate the requested output.</p></article>
+            </div>
+          </div>
+          <div class="deterministic-result">
+            <span class="detail-kicker" id="deterministicKicker">Skip unnecessary inference</span>
+            <h3 id="deterministicTitle">No matching work means no agent startup</h3>
+            <p id="deterministicBody">Use skip conditions or write a noop safe output from a deterministic step. The harness exits before the engine starts and no AI Credits are consumed.</p>
+          </div>
+          <div class="source-note">
+            <span>Custom steps and jobs run with standard GitHub Actions security outside the agent firewall sandbox</span>
+            <span><a href="https://github.github.com/gh-aw/patterns/deterministic-ops/" target="_blank" rel="noopener">DeterministicOps pattern</a></span>
+          </div>
+        </section>
+
+        <section class="slide control-slide" data-title="Declarative control plane" data-scenario-stage="Control plane" style="--accent: var(--github-purple-2);">
+          <div class="section-heading compact-heading">
+            <div>
+              <div class="eyebrow">Interactive YAML spotlight</div>
+              <h2 class="section-title">Review the workflow's <span class="gradient-text">operating envelope</span> as code</h2>
+              <p class="section-subtitle">Select a concern to isolate the fields that govern Repo Care.</p>
+            </div>
+            <div class="slide-index">08</div>
+          </div>
+          <div class="control-layout">
+            <div class="code-card">
+              <div class="code-toolbar">
+                <span class="code-filename">.github/workflows/repo-care.md</span>
+                <div class="code-actions">
+                  <button class="copy-button" id="copyWorkflow" type="button">Copy full workflow</button>
+                  <a class="copy-button" href="./examples/repo-care.md" download>Download .md</a>
+                </div>
+              </div>
+              <div class="code-window"><code class="yaml-code" id="annotatedYaml" aria-label="Annotated workflow frontmatter"></code></div>
+            </div>
+            <aside class="focus-panel">
+              <div class="focus-menu" id="focusMenu" aria-label="YAML control categories"></div>
+              <div class="focus-detail">
+                <span class="micro-label" id="yamlFocusLabel">Complete specification</span>
+                <h3 id="yamlFocusTitle">One file declares the operating envelope</h3>
+                <p id="yamlFocusBody">Triggers, permissions, network, tools, outputs, budgets, concurrency, observability, and strict validation are reviewable together.</p>
+                <span class="takeaway" id="yamlFocusTakeaway">Policy travels with the workflow.</span>
+              </div>
+            </aside>
+          </div>
+          <div class="source-note">
+            <span>Dedicated cost and concurrency slides follow this control-plane overview</span>
+            <span><a href="https://github.github.com/gh-aw/reference/frontmatter/" target="_blank" rel="noopener">Frontmatter reference</a></span>
+          </div>
+        </section>
+
+        <section class="slide engine-slide" data-title="Engines and execution bounds" data-scenario-stage="Select runtime" style="--accent: var(--github-purple-1);">
+          <div class="section-heading compact-heading">
+            <div>
+              <div class="eyebrow">Pluggable execution</div>
+              <h2 class="section-title">Choose the engine — then bound <span class="gradient-text">how it runs</span></h2>
+              <p class="section-subtitle">Intent and safety stay stable while engine, model, version, harness, tool timeouts, and concurrency can change.</p>
+            </div>
+            <div class="slide-index">09</div>
+          </div>
+          <div class="engine-tabs" role="tablist" aria-label="Engine examples">
+            <button class="engine-tab active" type="button" aria-selected="true" data-engine="copilot">Copilot</button>
+            <button class="engine-tab" type="button" aria-selected="false" data-engine="claude">Claude</button>
+            <button class="engine-tab" type="button" aria-selected="false" data-engine="codex">Codex</button>
+            <button class="engine-tab" type="button" aria-selected="false" data-engine="gemini">Gemini</button>
+          </div>
+          <div class="engine-main">
+            <div class="code-card">
+              <div class="code-toolbar"><span class="code-filename" id="engineFilename">engine: copilot</span></div>
+              <div class="code-window"><code class="yaml-code" id="engineYaml" aria-label="Selected engine YAML"></code></div>
+            </div>
+            <aside class="engine-info">
+              <span class="engine-kicker" id="engineKicker">Default and broadest feature set</span>
+              <h3 id="engineTitle">GitHub Copilot CLI</h3>
+              <p id="engineDescription">Use custom agents, models, SDK drivers, continuations, and Copilot-specific harness customization.</p>
+              <div class="engine-facts">
+                <div><strong>Best fit</strong><span id="engineBestFit">GitHub-native repository automation</span></div>
+                <div><strong>Execution bounds</strong><span id="engineBounds">Model, version, max turns, continuations, retries, timeout, tools, and engine concurrency</span></div>
+                <div><strong>Auth</strong><span id="engineAuth">Organization Copilot billing or supported engine credentials</span></div>
+              </div>
+            </aside>
+          </div>
+          <div class="source-note">
+            <span>Right-size routine work with smaller models; reserve frontier reasoning for tasks that need it</span>
+            <span><a href="https://github.github.com/gh-aw/reference/engines/" target="_blank" rel="noopener">AI engines reference</a></span>
+          </div>
+        </section>
+
+        <section class="slide security-slide" data-title="Security architecture" data-scenario-stage="Contain threats" style="--accent: var(--github-blue-2);">
+          <div class="section-heading compact-heading">
+            <div>
+              <div class="eyebrow">Defense in depth</div>
+              <h2 class="section-title">Assume the agent can be <span class="gradient-text">manipulated</span></h2>
+              <p class="section-subtitle">Select a threat to highlight the independent controls that contain it before a repository write.</p>
+            </div>
+            <div class="slide-index">10</div>
+          </div>
+          <div class="security-flow">
+            <article data-security-stage="1"><span>01</span><h3>Compile validation</h3><p>Schema, expressions, action pins, scanners.</p></article>
+            <article data-security-stage="2"><span>02</span><h3>Read-only agent</h3><p>Minimal repository permissions.</p></article>
+            <article data-security-stage="3"><span>03</span><h3>Sandbox + firewall</h3><p>Filesystem and egress boundaries.</p></article>
+            <article data-security-stage="4"><span>04</span><h3>Tool allowlists</h3><p>Declared commands and MCP tools.</p></article>
+            <article data-security-stage="5"><span>05</span><h3>Threat detection</h3><p>Outputs and patches analyzed.</p></article>
+            <article data-security-stage="6"><span>06</span><h3>Scoped write job</h3><p>Approved structured effects only.</p></article>
+          </div>
+          <div class="security-bottom">
+            <div class="threat-options" id="threatOptions" aria-label="Threat scenarios"></div>
+            <div class="threat-verdict" aria-live="polite">
+              <span class="detail-kicker">Threat simulator</span>
+              <h3 id="threatTitle">Choose a threat scenario</h3>
+              <p id="threatBody">The architecture will highlight the independent controls that constrain it.</p>
+            </div>
+            <div class="code-card compact-code">
+              <div class="code-toolbar"><span class="code-filename">security controls</span></div>
+              <div class="code-window"><code class="yaml-code" id="securityYaml"></code></div>
+            </div>
+          </div>
+          <div class="source-note">
+            <span>The model is not trusted to enforce its own boundary</span>
+            <span><a href="https://github.github.com/gh-aw/introduction/architecture/" target="_blank" rel="noopener">Security architecture</a></span>
+          </div>
+        </section>
+
+        <section class="slide cost-slide" data-title="Cost governance" data-scenario-stage="Cost governance" style="--accent: var(--github-green-3);">
+          <div class="section-heading compact-heading">
+            <div>
+              <div class="eyebrow">Layered cost control</div>
+              <h2 class="section-title">Avoid, bound, right-size, and <span class="gradient-text">measure</span></h2>
+              <p class="section-subtitle">Select a layer to see the controls that keep Actions minutes and inference spend predictable.</p>
+            </div>
+            <div class="slide-index">11</div>
+          </div>
+          <div class="governance-layout">
+            <div class="governance-layers" id="costLayers" role="tablist" aria-label="Cost governance layers"></div>
+            <div class="governance-detail">
+              <span class="detail-kicker" id="costKicker">Avoid the agent</span>
+              <h3 id="costTitle">The cheapest inference call is the one that never starts</h3>
+              <p id="costBody">Filter triggers, precompute facts, and emit noop when there is nothing to reason about.</p>
+              <div class="control-cards" id="costControls"></div>
+            </div>
+          </div>
+          <div class="cost-equation" data-build-step="1">
+            <span>Actions minutes + AI Credits</span><strong>→</strong><span>Observed repository results</span><strong>→</strong><span>AIC per accepted outcome</span>
+          </div>
+          <div class="source-note">
+            <span>Cost control starts with deterministic filtering and ends with AI Credits per accepted outcome</span>
+            <span><a href="https://github.github.com/gh-aw/reference/cost-management/" target="_blank" rel="noopener">Cost management</a></span>
+          </div>
+        </section>
+
+        <section class="slide concurrency-slide" data-title="Concurrency and queuing" data-scenario-stage="Concurrency" style="--accent: var(--github-orange-2);">
+          <div class="section-heading compact-heading">
+            <div>
+              <div class="eyebrow">Resource governance</div>
+              <h2 class="section-title">Control overlap, queueing, fan-out, and <span class="gradient-text">duplicate effects</span></h2>
+              <p class="section-subtitle">Select an execution scenario to see which concurrency boundary prevents cancellation, overload, or conflicting writes.</p>
+            </div>
+            <div class="slide-index">12</div>
+          </div>
+          <div class="concurrency-layout">
+            <div class="concurrency-scenarios" id="concurrencyScenarios" role="tablist" aria-label="Concurrency scenarios"></div>
+            <div class="concurrency-diagram">
+              <div class="queue-lane" data-concurrency-layer="workflow"><span>Workflow</span><div id="workflowQueue"></div></div>
+              <div class="queue-lane" data-concurrency-layer="engine"><span>Engine</span><div id="engineQueue"></div></div>
+              <div class="queue-lane" data-concurrency-layer="output"><span>Safe outputs</span><div id="outputQueue"></div></div>
+              <div class="queue-lane" data-concurrency-layer="conclusion"><span>Conclusion</span><div id="conclusionQueue"></div></div>
+            </div>
+            <div class="concurrency-detail">
+              <span class="detail-kicker" id="concurrencyKicker">Repeated issue events</span>
+              <h3 id="concurrencyTitle">Serialize the right scope without blocking unrelated work</h3>
+              <p id="concurrencyBody">Workflow groups include issue, pull request, or branch context while engine concurrency protects scarce agent capacity.</p>
+              <code id="concurrencySyntax">concurrency.group: ${{ github.workflow }}-${{ github.event.issue.number }}</code>
+            </div>
+          </div>
+          <div class="source-note">
+            <span>User rate limits control admission frequency; concurrency controls overlap and ordering</span>
+            <span><a href="https://github.github.com/gh-aw/reference/concurrency/" target="_blank" rel="noopener">Concurrency reference</a></span>
+          </div>
+        </section>
+
+        <section class="slide observability-slide" data-title="Observability and outcomes" data-scenario-stage="Measure outcomes" style="--accent: var(--github-green-3);">
+          <div class="section-heading compact-heading">
+            <div>
+              <div class="eyebrow">Accountable automation</div>
+              <h2 class="section-title">Measure what the workflow spent — and <span class="gradient-text">what the repository accepted</span></h2>
+              <p class="section-subtitle">Select a view to move from one run to an end-to-end episode and finally to observable repository outcomes.</p>
+            </div>
+            <div class="slide-index">13</div>
+          </div>
+          <div class="observability-tabs" id="observabilityTabs" role="tablist" aria-label="Observability views"></div>
+          <div class="observability-layout">
+            <div class="telemetry-flow">
+              <article><span>Run</span><strong>Duration · turns · tokens · AIC</strong></article>
+              <article><span>Audit</span><strong>Tools · network · errors · artifacts</strong></article>
+              <article><span>Trace</span><strong>OTLP spans · engine · model · repository</strong></article>
+              <article><span>Outcome</span><strong>Merged · completed · acted upon</strong></article>
+            </div>
+            <div class="observability-detail">
+              <span class="detail-kicker" id="observabilityKicker">Run view</span>
+              <h3 id="observabilityTitle">Find the expensive or abnormal run</h3>
+              <p id="observabilityBody">Use gh aw logs for duration, turns, tokens, and AI Credits; then deep-dive with gh aw audit.</p>
+              <div class="metric-grid" id="observabilityMetrics"></div>
+            </div>
+          </div>
+          <div class="outcome-equation" data-build-step="1"><strong>Lower is better:</strong> AI Credits ÷ accepted outcomes</div>
+          <div class="source-note">
+            <span>Outcomes are derived from later repository state, not from the workflow rating itself</span>
+            <span><a href="https://github.github.com/gh-aw/reference/outcomes/" target="_blank" rel="noopener">Outcome evaluation</a></span>
+          </div>
+        </section>
+
+        <section class="slide patterns-slide" data-title="Human Agent Process patterns" data-scenario-stage="Process patterns" style="--accent: var(--github-purple-2);">
+          <div class="section-heading compact-heading">
+            <div>
+              <div class="eyebrow">Scale with processes, not swarms</div>
+              <h2 class="section-title">Reusable Human Agent Process <span class="gradient-text">patterns</span></h2>
+              <p class="section-subtitle">Each pattern combines deterministic preparation, bounded reasoning, concurrency policy, and observable outcomes.</p>
+            </div>
+            <div class="slide-index">14</div>
+          </div>
+          <div class="pattern-grid">
+            <article class="pattern-card"><span>Research → Plan → Assign</span><h3>Turn evidence into implementation work</h3><p>Deterministic repository data feeds research; a reviewed plan dispatches bounded tasks.</p><div><b>Concurrency:</b> task discriminator</div></article>
+            <article class="pattern-card" data-build-step="1"><span>Research → Assign → Observe</span><h3>Close the feedback loop</h3><p>Issues create work, agents propose changes, runtime telemetry informs the next pass.</p><div><b>Outcome:</b> merged and deployed</div></article>
+            <article class="pattern-card" data-build-step="2"><span>Central Repository Ops</span><h3>Govern cross-repository scale</h3><p>One orchestrator classifies work and dispatches tailored workers without fan-out cancellation.</p><div><b>Concurrency:</b> job discriminator</div></article>
+            <article class="pattern-card" data-build-step="3"><span>Agent Improver</span><h3>Optimize the automation itself</h3><p>Logs, audit, costs, and outcomes produce focused workflow improvements.</p><div><b>Metric:</b> AIC per accepted outcome</div></article>
+          </div>
+          <div class="source-note">
+            <span>Orchestration replaces chaotic swarms with reviewable processes and explicit gates</span>
+            <span><a href="https://github.github.com/gh-aw/slides/github-agentic-workflows.pdf" target="_blank" rel="noopener">Official GH-AW presentation</a></span>
+          </div>
+        </section>
+
+        <section class="slide adoption-slide" data-title="Adoption ladder" data-scenario-stage="Adopt safely" style="--accent: var(--github-green-3);">
+          <div class="section-heading compact-heading">
+            <div>
+              <div class="eyebrow">Increase autonomy deliberately</div>
+              <h2 class="section-title">Earn the right to <span class="gradient-text">scale the process</span></h2>
+              <p class="section-subtitle">Each stage adds effect only after intent, controls, cost, concurrency, and outcomes are understood.</p>
+            </div>
+            <div class="slide-index">15</div>
+          </div>
+          <div class="adoption-ladder">
+            <article><span>01 · Observe</span><h3>Staged read-only report</h3><p>Analyze and preview safe outputs.</p><div><strong>Gate</strong> Intent reviewed · budget set</div></article>
+            <article data-build-step="1"><span>02 · Recommend</span><h3>Bounded issue creation</h3><p>Allow limited, deduplicated, expiring issues.</p><div><strong>Gate</strong> output concurrency tested</div></article>
+            <article data-build-step="2"><span>03 · Propose</span><h3>One draft pull request</h3><p>Permit tested patches with protected-file policy.</p><div><strong>Gate</strong> threat detection + human review</div></article>
+            <article data-build-step="3"><span>04 · Orchestrate</span><h3>Multi-repository operations</h3><p>Dispatch proven workflows with episode-level telemetry.</p><div><strong>Gate</strong> accepted outcomes measured</div></article>
+          </div>
+          <div class="get-started" data-build-step="4">
+            <div><h3>Start with Repo Care in staged mode</h3><p>Compile the controls, review the written intent, set budgets and concurrency, then observe outcomes before enabling writes.</p></div>
+            <div class="command-sequence">
+              <div><span>$</span> gh extension install github/gh-aw</div>
+              <div><span>$</span> gh aw init</div>
+              <div><span>$</span> gh aw compile --validate --strict</div>
+            </div>
+          </div>
+          <div class="source-note">
+            <span>Autonomy follows evidence, not enthusiasm</span>
+            <span><a href="https://github.github.com/gh-aw/reference/staged-mode/" target="_blank" rel="noopener">Staged mode</a></span>
+          </div>
+        </section>
+
+        <section class="slide closing-slide" data-title="Closing" data-scenario-stage="Decision" style="--accent: var(--github-green-3);">
+          <div class="closing-layout">
+            <div>
+              <div class="eyebrow">The platform decision</div>
+              <h2>Do not bolt an unrestricted agent onto CI.</h2>
+              <p>Define the intent. Compile the controls. Run deterministic work first. Isolate reasoning. Gate writes. Bound cost and concurrency. Measure the outcome.</p>
+            </div>
+            <div class="closing-checklist">
+              <article><span>01</span><strong>Intent</strong><p>Natural-language operating procedure</p></article>
+              <article data-build-step="1"><span>02</span><strong>Controls</strong><p>Security, cost, concurrency, outputs</p></article>
+              <article data-build-step="2"><span>03</span><strong>Execution</strong><p>Deterministic first, agent when needed</p></article>
+              <article data-build-step="3"><span>04</span><strong>Accountability</strong><p>Audit, telemetry, accepted outcomes</p></article>
+            </div>
+          </div>
+          <div class="source-note">
+            <span>Recommended next step: pilot one staged workflow and review its intent, control plane, costs, queueing, and outcomes</span>
+            <span><a href="./sources.md">Complete source list</a></span>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="controls">
+      <button class="nav-button" id="previousButton" type="button" aria-label="Previous slide">&lt;</button>
+      <div class="progress-wrap">
+        <div class="dot-nav" id="dotNav" aria-label="Slide navigation"></div>
+        <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="slide-count" id="slideCount">01 / 16</div>
+        <div class="build-count" id="buildCount"></div>
+      </div>
+      <button class="nav-button" id="nextButton" type="button" aria-label="Next slide">&gt;</button>
+    </footer>
+  </div>
+
+  <dialog id="sourcesDialog">
+    <div class="dialog-head">
+      <h2>Official sources</h2>
+      <button class="small-button" id="closeSources" type="button">Close</button>
+    </div>
+    <div class="dialog-body">
+      <p>The deck cites GitHub Agentic Workflows documentation, GitHub Copilot research, and Microsoft Threat Intelligence.</p>
+      <a class="source-link" href="./sources.md">Complete source list</a>
+      <a class="source-link" href="https://github.github.com/gh-aw/" target="_blank" rel="noopener">GitHub Agentic Workflows</a>
+      <a class="source-link" href="https://www.microsoft.com/en-us/security/blog/2026/06/05/securing-ci-cd-in-agentic-world-claude-code-github-action-case/" target="_blank" rel="noopener">Microsoft CI/CD agent security case</a>
+      <a class="source-link" href="https://github.github.com/gh-aw/reference/cost-management/" target="_blank" rel="noopener">Cost management</a>
+      <a class="source-link" href="https://github.github.com/gh-aw/reference/concurrency/" target="_blank" rel="noopener">Concurrency controls</a>
+    </div>
+  </dialog>
+
+  <textarea id="workflowSource" hidden></textarea>
+  <script type="module" src="./deck.js"></script>
+</body>
+</html>

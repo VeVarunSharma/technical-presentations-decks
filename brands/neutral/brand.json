@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "identity": {
+    "id": "neutral",
+    "name": "Neutral",
+    "default": false,
+    "description": "Brand-agnostic presentation profile for content without an approved organization-specific system.",
+    "voice": ["Clear", "Direct", "Accurate", "Inclusive", "Practical"]
+  },
+  "fonts": {
+    "heading": {
+      "family": "system-ui",
+      "fallbacks": ["-apple-system", "BlinkMacSystemFont", "Segoe UI", "Arial", "sans-serif"]
+    },
+    "body": {
+      "family": "system-ui",
+      "fallbacks": ["-apple-system", "BlinkMacSystemFont", "Segoe UI", "Arial", "sans-serif"]
+    },
+    "mono": {
+      "family": "ui-monospace",
+      "fallbacks": ["SFMono-Regular", "Consolas", "Liberation Mono", "monospace"]
+    }
+  },
+  "primaryColors": {
+    "white": "#FFFFFF",
+    "black": "#111111",
+    "gray-50": "#F7F7F8",
+    "gray-100": "#E5E7EB",
+    "gray-300": "#A7ADB7",
+    "gray-600": "#4B5563",
+    "gray-800": "#1F2937",
+    "accent": "#2457D6",
+    "accent-dark": "#173B94",
+    "accent-light": "#DCE7FF"
+  },
+  "themes": ["neutral-light", "neutral-dark"],
+  "supportedModes": ["light", "dark"],
+  "ratios": {
+    "default": {
+      "neutral": 90,
+      "accent": 10
+    }
+  },
+  "sources": {
+    "lastReviewed": "2026-07-15",
+    "urls": [
+      "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
+    ],
+    "notes": "Repository-defined, brand-agnostic accessibility profile. It is not an external organization's brand system."
+  }
+}

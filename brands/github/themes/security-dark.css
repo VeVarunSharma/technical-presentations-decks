@@ -1,0 +1,35 @@
+[data-theme="security-dark"] {
+  color-scheme: dark;
+  --brand-bg-canvas: var(--github-black);
+  --brand-bg-surface: var(--github-gray-9);
+  --brand-bg-raised: var(--github-blue-6);
+  --brand-bg-inverse: var(--github-white);
+  --brand-text-primary: var(--github-white);
+  --brand-text-secondary: var(--github-gray-4);
+  --brand-text-inverse: var(--github-black);
+  --brand-text-on-accent: var(--github-black);
+  --brand-border-subtle: var(--github-gray-8);
+  --brand-border-strong: var(--github-blue-1);
+  --brand-grid-line: var(--github-gray-8);
+  --brand-accent: var(--github-blue-2);
+  --brand-accent-strong: var(--github-blue-1);
+  --brand-accent-soft: var(--github-blue-6);
+  --brand-hero: var(--github-green-3);
+  --brand-link: var(--github-blue-1);
+  --brand-focus-ring: var(--github-blue-2);
+  --brand-code-bg: var(--github-gray-9);
+  --brand-code-text: var(--github-gray-0);
+  --brand-selection-bg: var(--github-blue-5);
+  --brand-selection-text: var(--github-white);
+  --brand-chart-primary: var(--github-blue-1);
+  --brand-chart-secondary: var(--github-green-3);
+  --brand-chart-tertiary: var(--github-gray-4);
+  --brand-chart-highlight: var(--github-blue-2);
+  --brand-shadow-raised: 0 8px 24px rgb(0 0 0 / 45%);
+  --brand-shadow-stage: 0 30px 90px rgb(0 0 0 / 60%);
+  --brand-ratio-black-white: 80;
+  --brand-ratio-neutral: 10;
+  --brand-ratio-green: 5;
+  --brand-ratio-purple: 0;
+  --brand-ratio-blue: 5;
+}

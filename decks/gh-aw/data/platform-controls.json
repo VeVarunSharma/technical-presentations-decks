@@ -1,0 +1,180 @@
+{
+  "title": "Platform controls: direct integration versus GH-AW",
+  "asOf": "2026-07-16",
+  "rows": [
+    {
+      "control": "Written intent",
+      "diy": "Application code or action inputs must construct prompts, preserve task boundaries, and separate untrusted repository content from instructions.",
+      "ghAw": "The Markdown body records task intent, evidence criteria, constraints, expected outputs, and error handling as reviewable repository text.",
+      "sources": [
+        "https://github.github.com/gh-aw/reference/markdown/",
+        "https://github.github.com/gh-aw/reference/workflow-structure/"
+      ]
+    },
+    {
+      "control": "Declarative policy and compilation",
+      "diy": "Teams assemble trigger, permission, secret, tool, network, dependency, and policy checks across workflow YAML and integration code.",
+      "ghAw": "Frontmatter declares controls and `gh aw compile --validate --strict` validates and hardens them into a reviewable lock workflow.",
+      "sources": [
+        "https://github.github.com/gh-aw/reference/frontmatter/",
+        "https://github.github.com/gh-aw/introduction/architecture/"
+      ]
+    },
+    {
+      "control": "Agent isolation and secrets",
+      "diy": "The integration owner must ensure untrusted input cannot steer tools toward runner secrets, sensitive files, or unrestricted egress.",
+      "ghAw": "The agent runs read-only with sandboxing, network mediation, scoped tools, and separated credentials/write jobs.",
+      "sources": [
+        "https://github.github.com/gh-aw/introduction/architecture/",
+        "https://github.github.com/gh-aw/reference/network/",
+        "https://github.github.com/gh-aw/reference/permissions/"
+      ]
+    },
+    {
+      "control": "Writes",
+      "diy": "The agent or action commonly receives direct repository write capabilities; custom code must validate, constrain, audit, and rate-limit every effect.",
+      "ghAw": "The agent requests structured safe outputs. Separate permission-scoped jobs validate limits, protected files, and policy before applying writes.",
+      "sources": [
+        "https://github.github.com/gh-aw/reference/safe-outputs/",
+        "https://github.github.com/gh-aw/reference/safe-outputs-pull-requests/"
+      ]
+    },
+    {
+      "control": "Cost and execution volume",
+      "diy": "Teams implement provider budgets, timeouts, retries, trigger suppression, user limits, serialization, and spend telemetry themselves.",
+      "ghAw": "Declarative budgets, turns, timeouts, rate limits, deterministic skip paths, concurrency groups, logs, audit, and OTel provide layered governance.",
+      "sources": [
+        "https://github.github.com/gh-aw/reference/cost-management/",
+        "https://github.github.com/gh-aw/reference/concurrency/",
+        "https://github.github.com/gh-aw/reference/rate-limiting-controls/"
+      ]
+    },
+    {
+      "control": "Observable value",
+      "diy": "Success is often inferred from a completed run or the agent's own report unless external outcome tracking is added.",
+      "ghAw": "Safe outputs are later evaluated against visible repository state, enabling accepted outcomes and AI Credits per accepted outcome.",
+      "sources": [
+        "https://github.github.com/gh-aw/guides/open-telemetry/",
+        "https://github.github.com/gh-aw/reference/outcomes/"
+      ]
+    }
+  ],
+  "threatMappings": [
+    {
+      "threat": "Prompt injection",
+      "risk": "Attacker-controlled issue, pull request, comment, commit, or file content is interpreted as instruction and redirects tool use.",
+      "diyControls": [
+        "Explicit trust boundary in the system prompt",
+        "Input sanitization and content scanning",
+        "Least-privilege tools, secrets, and egress",
+        "Independent output review"
+      ],
+      "ghAwControls": [
+        "Written task boundary in Markdown",
+        "Read-only agent execution",
+        "Tool and network allowlists",
+        "Threat detection before writes",
+        "Staged safe outputs"
+      ],
+      "sources": [
+        "https://www.microsoft.com/en-us/security/blog/2026/06/05/securing-ci-cd-in-agentic-world-claude-code-github-action-case/?msockid=2d5ff4b38a6f64cc0049e38c8bec65b6",
+        "https://github.github.com/gh-aw/reference/threat-detection/"
+      ]
+    },
+    {
+      "threat": "Secret access",
+      "risk": "An agent with file or process visibility is steered toward credentials available in the runner environment.",
+      "diyControls": [
+        "Remove secrets from the agent process",
+        "Use one narrowly scoped credential per workflow and environment",
+        "Block sensitive file paths",
+        "Monitor provider usage and egress"
+      ],
+      "ghAwControls": [
+        "No direct write secrets in the agent job",
+        "Credential and permission separation",
+        "Sandbox and network firewall",
+        "Secret-leak detection on outputs"
+      ],
+      "sources": [
+        "https://www.microsoft.com/en-us/security/blog/2026/06/05/securing-ci-cd-in-agentic-world-claude-code-github-action-case/?msockid=2d5ff4b38a6f64cc0049e38c8bec65b6",
+        "https://github.github.com/gh-aw/introduction/architecture/"
+      ]
+    },
+    {
+      "threat": "Unsafe write",
+      "risk": "A compromised or mistaken agent directly changes code, workflow configuration, dependencies, releases, or repository state.",
+      "diyControls": [
+        "Structured output schemas",
+        "Independent validation jobs",
+        "Draft-only pull requests",
+        "Protected-file policy and human approval"
+      ],
+      "ghAwControls": [
+        "Read-only agent",
+        "Staged safe outputs",
+        "Operation maximums",
+        "Draft pull requests",
+        "Protected-file fallback",
+        "Threat-detection gate"
+      ],
+      "sources": [
+        "https://github.github.com/gh-aw/reference/safe-outputs/",
+        "https://github.github.com/gh-aw/reference/threat-detection/"
+      ]
+    },
+    {
+      "threat": "Cost runaway",
+      "risk": "Long prompts, repeated turns, retries, expensive models, or unbounded tools consume unexpected inference and Actions budget.",
+      "diyControls": [
+        "Provider and Actions budgets",
+        "Turn and wall-clock limits",
+        "Retry caps",
+        "Model routing",
+        "Cost telemetry"
+      ],
+      "ghAwControls": [
+        "max-ai-credits",
+        "max-daily-ai-credits",
+        "max-turns",
+        "timeout-minutes",
+        "tools.timeout",
+        "detection budget",
+        "logs, audit, and OTel"
+      ],
+      "sources": [
+        "https://github.github.com/gh-aw/reference/cost-management/",
+        "https://github.github.com/gh-aw/reference/billing/"
+      ]
+    },
+    {
+      "threat": "Event storm",
+      "risk": "High-frequency events, feedback loops, or fan-out create a queue of redundant agent runs and write collisions.",
+      "diyControls": [
+        "Event filtering and batching",
+        "Bot-loop prevention",
+        "Per-user rate limits",
+        "Workflow and engine serialization",
+        "Idempotent writes"
+      ],
+      "ghAwControls": [
+        "skip-if filters and deterministic noop",
+        "Schedules and batching",
+        "Bot non-triggering",
+        "user-rate-limit",
+        "Workflow, engine, and safe-output concurrency",
+        "Safe-output maximums"
+      ],
+      "sources": [
+        "https://github.github.com/gh-aw/reference/rate-limiting-controls/",
+        "https://github.github.com/gh-aw/reference/concurrency/"
+      ]
+    }
+  ],
+  "microsoftCase": {
+    "summary": "Microsoft Threat Intelligence reported a specific Claude Code GitHub Action path in which prompt injection could steer the Read tool to sensitive runner environment data.",
+    "mitigation": "Anthropic fixed the issue in Claude Code 2.1.128 by blocking access to sensitive /proc files.",
+    "lesson": "Treat workflows that combine untrusted input, sensitive access, and external write or communication tools as high risk. The case does not imply that the Claude Code CLI itself is inherently insecure.",
+    "source": "https://www.microsoft.com/en-us/security/blog/2026/06/05/securing-ci-cd-in-agentic-world-claude-code-github-action-case/?msockid=2d5ff4b38a6f64cc0049e38c8bec65b6"
+  }
+}

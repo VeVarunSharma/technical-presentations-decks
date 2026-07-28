@@ -1,0 +1,51 @@
+name: Validate presentations
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build presentations
+        run: npm run build
+
+      - name: Test presentations
+        run: npm test
+
+      - name: Install GitHub Agentic Workflows CLI
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh extension install github/gh-aw
+
+      - name: Validate GH-AW example
+        working-directory: decks/gh-aw
+        run: >-
+          gh aw compile examples/repo-care.md
+          --dir examples
+          --no-emit
+          --validate
+          --strict
+          --schedule-seed demo/gh-agentic-workflows
+          --no-check-update

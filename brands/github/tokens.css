@@ -1,0 +1,168 @@
+@font-face {
+  font-family: "Mona Sans";
+  src: url("./fonts/MonaSansVF[wdth,wght,opsz,ital].woff2")
+    format("woff2-variations");
+  font-style: normal;
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mona Sans Mono";
+  src: url("./fonts/MonaSansMonoVF[wdth,wght].woff2")
+    format("woff2-variations");
+  font-style: normal;
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+
+  --github-white: #ffffff;
+  --github-black: #000000;
+  --github-gray-0: #f5f5f3;
+  --github-gray-1: #e4ebe6;
+  --github-gray-2: #d2d9d4;
+  --github-gray-3: #c4ccc6;
+  --github-gray-4: #b6bfb8;
+  --github-gray-5: #96a199;
+  --github-gray-6: #77827a;
+  --github-gray-7: #5a615c;
+  --github-gray-8: #353d37;
+  --github-gray-9: #121613;
+
+  --github-green-1: #bfffd1;
+  --github-green-2: #8cf2a6;
+  --github-green-3: #5fed83;
+  --github-green-4: #0fbf3e;
+  --github-green-5: #08872b;
+  --github-green-6: #0a2418;
+
+  --github-purple-1: #c898fd;
+  --github-purple-2: #b870ff;
+  --github-purple-3: #8534f3;
+  --github-purple-4: #43179e;
+  --github-purple-5: #26115f;
+  --github-purple-6: #160048;
+
+  --github-orange-1: #f4a876;
+  --github-orange-2: #f08a3a;
+  --github-orange-3: #fe4c25;
+  --github-orange-4: #c53211;
+  --github-orange-5: #801e0f;
+  --github-orange-6: #500a00;
+
+  --github-blue-1: #9eecff;
+  --github-blue-2: #3094ff;
+  --github-blue-3: #1a61fe;
+  --github-blue-4: #0527fc;
+  --github-blue-5: #212183;
+  --github-blue-6: #001c4d;
+
+  --github-lime-1: #dcff96;
+  --github-lime-2: #d3fa37;
+  --github-lime-3: #d8bd0e;
+  --github-lime-4: #db9d00;
+  --github-lime-5: #d67200;
+  --github-lime-6: #703100;
+
+  --brand-font-heading: "Mona Sans", Inter, Arial, sans-serif;
+  --brand-font-body: "Mona Sans", Inter, Arial, sans-serif;
+  --brand-font-mono: "Mona Sans Mono", ui-monospace, "SFMono-Regular",
+    Consolas, monospace;
+  --brand-font-weight-body: 400;
+  --brand-font-weight-medium: 500;
+  --brand-font-weight-heading: 700;
+  --brand-line-height-heading: 1.05;
+  --brand-line-height-body: 1.45;
+  --brand-letter-spacing-eyebrow: 0.08em;
+
+  --brand-bg-canvas: var(--github-white);
+  --brand-bg-surface: var(--github-gray-0);
+  --brand-bg-raised: var(--github-white);
+  --brand-bg-inverse: var(--github-black);
+  --brand-text-primary: var(--github-black);
+  --brand-text-secondary: var(--github-gray-7);
+  --brand-text-inverse: var(--github-white);
+  --brand-text-on-accent: var(--github-black);
+  --brand-border-subtle: var(--github-gray-2);
+  --brand-border-strong: var(--github-gray-7);
+  --brand-grid-line: var(--github-gray-2);
+  --brand-accent: var(--github-green-4);
+  --brand-accent-strong: var(--github-green-5);
+  --brand-accent-soft: var(--github-green-1);
+  --brand-hero: var(--github-green-4);
+  --brand-link: var(--github-green-5);
+  --brand-focus-ring: var(--github-blue-4);
+  --brand-code-bg: var(--github-gray-9);
+  --brand-code-text: var(--github-gray-0);
+  --brand-selection-bg: var(--github-green-2);
+  --brand-selection-text: var(--github-black);
+  --brand-chart-primary: var(--github-green-5);
+  --brand-chart-secondary: var(--github-gray-7);
+  --brand-chart-tertiary: var(--github-gray-4);
+  --brand-chart-highlight: var(--github-green-3);
+  --brand-status-success: var(--github-green-5);
+  --brand-status-warning: var(--github-orange-5);
+  --brand-status-danger: var(--github-orange-4);
+  --brand-status-info: var(--github-blue-4);
+
+  --brand-slide-aspect-ratio: 16 / 9;
+  --brand-slide-width: 1600px;
+  --brand-slide-height: 900px;
+  --brand-grid-columns: 12;
+  --brand-margin-inline: 6%;
+  --brand-margin-block: 6%;
+  --brand-gutter: 2%;
+  --brand-space-1: 0.25rem;
+  --brand-space-2: 0.5rem;
+  --brand-space-3: 0.75rem;
+  --brand-space-4: 1rem;
+  --brand-space-6: 1.5rem;
+  --brand-space-8: 2rem;
+  --brand-space-12: 3rem;
+  --brand-space-16: 4rem;
+  --brand-border-width: 1px;
+  --brand-rule-width: 4px;
+  --brand-radius-small: 0.375rem;
+  --brand-radius-medium: 0.75rem;
+  --brand-shadow-raised: 0 8px 24px rgb(18 22 19 / 10%);
+  --brand-shadow-stage: 0 30px 90px rgb(18 22 19 / 18%);
+  --brand-motion-duration-fast: 120ms;
+  --brand-motion-duration-standard: 220ms;
+  --brand-motion-easing: cubic-bezier(0.2, 0, 0, 1);
+
+  --color-page: var(--brand-bg-canvas);
+  --color-canvas: var(--brand-bg-surface);
+  --color-panel: var(--brand-bg-raised);
+  --color-panel-strong: var(--brand-bg-surface);
+  --color-border: var(--brand-border-subtle);
+  --color-border-strong: var(--brand-border-strong);
+  --color-text: var(--brand-text-primary);
+  --color-text-muted: var(--brand-text-secondary);
+  --color-text-subtle: var(--brand-text-secondary);
+  --color-accent: var(--brand-hero);
+  --color-accent-secondary: var(--brand-accent);
+  --color-link: var(--brand-link);
+  --font-sans: var(--brand-font-body);
+  --font-mono: var(--brand-font-mono);
+  --shadow-stage: var(--brand-shadow-stage);
+  --radius-card: var(--brand-radius-medium);
+  --radius-stage: 1.375rem;
+
+  --brand-ratio-neutral: 90;
+  --brand-ratio-black-white: 0;
+  --brand-ratio-green: 10;
+  --brand-ratio-purple: 0;
+  --brand-ratio-blue: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --brand-motion-duration-fast: 0ms;
+    --brand-motion-duration-standard: 0ms;
+  }
+}

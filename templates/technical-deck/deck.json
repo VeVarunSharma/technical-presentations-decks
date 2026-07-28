@@ -1,0 +1,14 @@
+{
+  "id": "{{DECK_ID}}",
+  "title": "{{DECK_TITLE}}",
+  "brand": "{{DECK_BRAND}}",
+  "theme": "{{DECK_THEME}}",
+  "audience": "technical",
+  "durationMinutes": 15,
+  "status": "draft",
+  "default": false,
+  "sources": "sources.md",
+  "learningObjectives": [
+    "Replace this objective with a measurable learning outcome."
+  ]
+}

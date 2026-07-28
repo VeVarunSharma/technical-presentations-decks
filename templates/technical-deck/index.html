@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" data-brand="{{DECK_BRAND}}" data-theme="{{DECK_THEME}}" data-deck-title="{{DECK_TITLE}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{DECK_TITLE}} technical presentation">
+  <title>{{DECK_TITLE}}</title>
+  <link rel="stylesheet" href="../../brands/{{DECK_BRAND}}/tokens.css">
+  <link rel="stylesheet" href="../../brands/{{DECK_BRAND}}/themes/{{DECK_THEME}}.css">
+  <link rel="stylesheet" href="./deck.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">GH</div>
+        <div class="brand-title">{{DECK_TITLE}}</div>
+      </div>
+      <div class="top-actions">
+        <button class="small-button" id="sourcesButton" type="button">Sources</button>
+        <button class="small-button" id="fullscreenButton" type="button">Full screen</button>
+      </div>
+    </header>
+
+    <main class="stage-shell">
+      <div class="stage" id="stage" aria-live="polite">
+        <section class="slide active" data-title="Opening">
+          <div class="slide-grid two-column">
+            <div>
+              <div class="eyebrow">Technical presentation</div>
+              <h1>{{DECK_TITLE}}</h1>
+              <p>Replace this starter content with a scenario-led narrative.</p>
+            </div>
+            <div class="card">Add a meaningful visual.</div>
+          </div>
+        </section>
+
+        <section class="slide" data-title="Key idea">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">Key idea</div>
+              <h2 class="section-title">Make one idea memorable</h2>
+              <p class="section-subtitle">Use progressive disclosure and evidence-backed technical content.</p>
+            </div>
+          </div>
+          <div class="slide-grid three-column">
+            <article class="card">Context</article>
+            <article class="card" data-build-step="1">Mechanism</article>
+            <article class="card" data-build-step="2">Outcome</article>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="controls">
+      <button class="nav-button" id="previousButton" type="button" aria-label="Previous slide">&lt;</button>
+      <div class="progress-wrap">
+        <div class="dot-nav" id="dotNav" aria-label="Slide navigation"></div>
+        <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="slide-count" id="slideCount">01 / 02</div>
+        <div class="build-count" id="buildCount"></div>
+      </div>
+      <button class="nav-button" id="nextButton" type="button" aria-label="Next slide">&gt;</button>
+    </footer>
+  </div>
+
+  <dialog id="sourcesDialog">
+    <div class="card">
+      <h2>Sources</h2>
+      <p>Maintain the deck's complete source list in <a href="./sources.md">sources.md</a>.</p>
+      <button class="small-button" id="closeSources" type="button">Close</button>
+    </div>
+  </dialog>
+
+  <script type="module" src="./deck.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+name: Presentation request
+description: Request a new technical presentation.
+title: "[deck] "
+labels: ["presentation"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Presentation title
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Audience and learning objective
+      description: Who is the audience, and what should they be able to explain or do afterward?
+    validations:
+      required: true
+  - type: input
+    id: duration
+    attributes:
+      label: Delivery duration
+      placeholder: "15 minutes"
+    validations:
+      required: true
+  - type: dropdown
+    id: brand
+    attributes:
+      label: Brand profile
+      options:
+        - GitHub
+        - Neutral
+        - Microsoft (requires configured profile)
+    validations:
+      required: true
+  - type: input
+    id: theme
+    attributes:
+      label: Theme
+      placeholder: "default-dark, copilot-dark, security-dark"
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Required sources
+      description: Add authoritative product, brand, research, and data URLs.
+    validations:
+      required: true
+  - type: textarea
+    id: scenario
+    attributes:
+      label: Narrative scenario
+      description: Describe the technical story or use case that should connect the deck.

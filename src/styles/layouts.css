@@ -1,0 +1,61 @@
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: clamp(24px, 2.8vw, 42px);
+}
+
+.slide-grid {
+  display: grid;
+  min-height: 0;
+  flex: 1;
+  gap: clamp(28px, 4vw, 70px);
+}
+
+.two-column {
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+  align-items: center;
+}
+
+.three-column {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.four-column {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.code-layout {
+  display: grid;
+  min-height: 0;
+  flex: 1;
+  grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.6fr);
+  gap: 22px;
+}
+
+.source-note {
+  position: absolute;
+  right: clamp(28px, 4.3vw, 68px);
+  bottom: clamp(18px, 2.1vw, 31px);
+  left: clamp(28px, 4.3vw, 68px);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--color-text-subtle, #7d8590);
+  font-size: clamp(9px, 0.7vw, 11px);
+}
+
+@media (max-width: 920px) {
+  .two-column,
+  .three-column,
+  .four-column,
+  .code-layout {
+    gap: 14px;
+  }
+
+  .source-note {
+    right: 30px;
+    left: 30px;
+  }
+}

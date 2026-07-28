@@ -1,0 +1,95 @@
+{
+  "title": "Code supply is a portfolio of human and agent capacity",
+  "asOf": "2026-07-16",
+  "unit": "relative capacity proxy",
+  "baseline": {
+    "id": "human",
+    "label": "Human delivery baseline",
+    "value": 100,
+    "evidenceType": "baseline",
+    "interpretation": "A neutral planning baseline, not a claim about lines of code or individual productivity."
+  },
+  "supplyLayers": [
+    {
+      "id": "copilot-assistance",
+      "label": "Synchronous Copilot assistance",
+      "value": 55,
+      "valueRole": "measured task-speed capacity proxy",
+      "evidenceType": "measured-controlled-task",
+      "illustrative": false,
+      "interpretation": "The 55-point increment represents the published 55% faster completion result for one controlled JavaScript HTTP-server task. It is not LOC, a universal productivity multiplier, or a forecast.",
+      "citation": "https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-on-developer-productivity-and-happiness/",
+      "telemetryRecommendation": "Measure task cycle time, completion rate, quality, rework, and developer experience for comparable work in your own environment."
+    },
+    {
+      "id": "cloud-agent",
+      "label": "Copilot cloud agent",
+      "value": 70,
+      "valueRole": "illustrative incremental capacity",
+      "evidenceType": "illustrative",
+      "illustrative": true,
+      "interpretation": "Illustrates asynchronous repository work that produces reviewable branches or pull requests; no published universal capacity multiplier is asserted.",
+      "citation": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent",
+      "telemetryRecommendation": "Track assigned sessions, completion rate, merged pull requests, median time to merge, human review time, Actions minutes, AI credits, and rework."
+    },
+    {
+      "id": "third-party-agent",
+      "label": "Third-party coding agent",
+      "value": 65,
+      "valueRole": "illustrative incremental capacity",
+      "evidenceType": "illustrative",
+      "illustrative": true,
+      "interpretation": "Represents an externally supplied agent integrated into repository delivery. Actual capacity and risk depend on the action, engine, permissions, tools, secrets, triggers, and review model.",
+      "citation": "https://www.microsoft.com/en-us/security/blog/2026/06/05/securing-ci-cd-in-agentic-world-claude-code-github-action-case/?msockid=2d5ff4b38a6f64cc0049e38c8bec65b6",
+      "telemetryRecommendation": "Measure run volume, accepted changes, review effort, tool denials, secret exposure paths, blocked egress, failures, cost, and incident signals by integration and version."
+    },
+    {
+      "id": "copilot-sdk",
+      "label": "Copilot SDK application",
+      "value": 80,
+      "valueRole": "illustrative incremental capacity",
+      "evidenceType": "illustrative",
+      "illustrative": true,
+      "interpretation": "Represents product-specific agent experiences built on the Copilot CLI runtime. The number is a design placeholder, not a published SDK benchmark.",
+      "citation": "https://github.com/github/copilot-sdk",
+      "telemetryRecommendation": "Instrument task success, latency, token and AI-credit use, model, tool calls, permission decisions, user abandonment, quality, and business outcomes."
+    },
+    {
+      "id": "agentic-workflow",
+      "label": "GitHub Agentic Workflow",
+      "value": 90,
+      "valueRole": "illustrative governed automation capacity",
+      "evidenceType": "illustrative",
+      "illustrative": true,
+      "interpretation": "Represents repeatable scheduled or event-driven repository automation with declarative controls, safe outputs, and observable outcomes. It is not a published capacity multiplier.",
+      "citation": "https://github.github.com/gh-aw/",
+      "telemetryRecommendation": "Track runs and episodes, AI Credits, turns, duration, blocked requests, safe outputs, accepted outcomes, AIC per accepted outcome, queue time, and human review effort."
+    }
+  ],
+  "contextCards": [
+    {
+      "metric": "55% faster",
+      "context": "In a controlled experiment, 95 professional developers completed a specific JavaScript HTTP-server task; the Copilot group finished 55% faster on average.",
+      "caveat": "Task-specific measured speed, not LOC or a universal productivity rate.",
+      "source": "https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-on-developer-productivity-and-happiness/"
+    },
+    {
+      "metric": "Up to 46%",
+      "context": "Historical GitHub reporting said Copilot completed up to 46% of code in files where it was enabled.",
+      "caveat": "Historical enabled-file context, not a current share of all production code.",
+      "source": "https://github.blog/news-insights/research/the-economic-impact-of-the-ai-powered-developer-lifecycle-and-lessons-from-github-copilot/"
+    },
+    {
+      "metric": "More than 3 billion",
+      "context": "GitHub reported more than three billion accepted lines of code during Copilot's first year.",
+      "caveat": "Cumulative adoption context, not a quality, value, or productivity measure.",
+      "source": "https://github.blog/news-insights/research/the-economic-impact-of-the-ai-powered-developer-lifecycle-and-lessons-from-github-copilot/"
+    },
+    {
+      "metric": "More than 97%",
+      "context": "In a 2024 survey of 2,000 respondents across the United States, Brazil, Germany, and India, more than 97% reported having used AI coding tools at work at some point.",
+      "caveat": "Survey usage at some point; it does not measure frequency, authorization, or production deployment.",
+      "source": "https://github.blog/news-insights/research/survey-ai-wave-grows/"
+    }
+  ]
+}

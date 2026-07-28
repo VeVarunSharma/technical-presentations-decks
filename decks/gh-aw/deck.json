@@ -1,0 +1,25 @@
+{
+  "id": "gh-aw",
+  "title": "GitHub Agentic Workflows",
+  "description": "A scenario-led briefing on secure, governed agentic automation for software delivery.",
+  "brand": "github",
+  "theme": "copilot-dark",
+  "audience": "technical leaders, platform engineers, security teams, and developers",
+  "durationMinutes": 30,
+  "status": "active",
+  "default": true,
+  "sources": "sources.md",
+  "learningObjectives": [
+    "Explain the security, supply-chain, and operational risks of wiring agent CLIs or actions directly into CI.",
+    "Identify written Markdown intent and the declarative controls that constrain an agentic workflow.",
+    "Apply a deterministic-first execution model that invokes an agent only when reasoning is necessary.",
+    "Use budgets, timeouts, rate limits, and concurrency controls to govern cost and execution volume.",
+    "Design staged safe outputs and observable outcomes that support review, audit, and value measurement."
+  ],
+  "validators": [
+    {
+      "name": "gh-aw workflow compiler",
+      "command": "gh aw compile examples/repo-care.md --dir examples --no-emit --validate --strict --schedule-seed demo/gh-agentic-workflows --no-check-update"
+    }
+  ]
+}
