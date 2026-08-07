@@ -49,6 +49,16 @@ Prefer active voice, concrete verbs, short headings, and useful examples. Avoid
 empty superlatives, forced slang, unexplained acronyms, and anthropomorphizing
 systems in ways that obscure responsibility.
 
+## Repository homepage
+
+The GitHub Pages catalog MAY use official
+[Primer Primitives](https://github.com/primer/primitives) CSS variables and
+[Octicons](https://primer.style/octicons/) for the surrounding product
+interface. It MUST remain vanilla HTML, CSS, and JavaScript, use semantic Primer
+tokens, provide text labels for icon actions, and follow the visitor's system
+light or dark preference. This exception applies only to the repository
+homepage; deck canvases continue to use the selected profile under `brands/`.
+
 ## Colors
 
 GitHub is neutral-first with GitHub Green as the hero. A default composition

@@ -3,10 +3,122 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="refresh" content="0; url=./decks/gh-aw/">
+  <meta name="color-scheme" content="light dark">
+  <meta
+    name="description"
+    content="Source-controlled technical presentations for GitHub platform, AI, security, and governance topics."
+  >
   <title>Technical presentations</title>
+  <script type="module" src="./src/home/home.js"></script>
 </head>
-<body>
-  <p>Opening the default presentation: <a href="./decks/gh-aw/">GitHub Agentic Workflows</a>.</p>
+<body
+  data-home-catalog
+  data-color-mode="auto"
+  data-light-theme="light"
+  data-dark-theme="dark"
+>
+  <a class="skip-link" href="#main-content">Skip to presentations</a>
+
+  <header class="site-header">
+    <div class="page-shell site-header__inner">
+      <a class="site-brand" href="./" aria-label="Technical presentations home">
+        <span class="site-brand__mark" data-octicon="mark-github" data-octicon-size="32"></span>
+        <span>Technical presentations</span>
+      </a>
+      <a
+        class="button button--secondary"
+        href="https://github.com/VeVarunSharma/technical-presentations-decks"
+      >
+        <span data-octicon="repo"></span>
+        <span>View repository</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="page-shell hero__inner">
+        <div class="hero__copy">
+          <p class="eyebrow">GitHub technical briefings</p>
+          <h1 id="hero-title">Ideas built to be presented.</h1>
+          <p class="hero__lede">
+            Source-controlled decks for platform, AI, security, and governance
+            conversations—designed for the room and published for the web.
+          </p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#presentations">
+              <span data-octicon="book"></span>
+              <span>Browse presentations</span>
+            </a>
+            <a
+              class="button button--secondary"
+              href="https://github.com/VeVarunSharma/technical-presentations-decks"
+            >
+              <span data-octicon="repo"></span>
+              <span>Explore the source</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="hero__summary" aria-label="Presentation collection summary">
+          <span class="hero__summary-label">Available now</span>
+          <strong class="hero__summary-value" data-deck-total>—</strong>
+          <span class="hero__summary-caption">active technical presentations</span>
+          <div class="hero__summary-rule" aria-hidden="true"></div>
+          <p>
+            Open any deck directly, then use the keyboard, touch controls, or
+            presenter navigation to move through the story.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section
+      class="catalog"
+      id="presentations"
+      aria-labelledby="catalog-title"
+    >
+      <div class="page-shell">
+        <div class="catalog__header">
+          <div>
+            <p class="eyebrow">Presentation library</p>
+            <h2 id="catalog-title">Choose a briefing</h2>
+          </div>
+          <p class="catalog__count" id="deck-count" aria-live="polite">
+            Loading presentations…
+          </p>
+        </div>
+
+        <div
+          class="deck-grid"
+          id="deck-grid"
+          aria-busy="true"
+          aria-describedby="deck-count"
+        ></div>
+
+        <noscript>
+          <div class="no-script">
+            <p>JavaScript is required for the presentation catalog.</p>
+            <ul>
+              <li><a href="./decks/gh-aw/">GitHub Agentic Workflows</a></li>
+              <li><a href="./decks/ghas-ai-sdlc/">GitHub Advanced Security in the AI SDLC</a></li>
+              <li><a href="./decks/governance-at-scale/">Govern GitHub Copilot at Scale</a></li>
+            </ul>
+          </div>
+        </noscript>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="page-shell site-footer__inner">
+      <p>Reusable, source-controlled presentations for technical teams.</p>
+      <nav class="site-footer__links" aria-label="Design system resources">
+        <a href="https://primer.style/product/getting-started/react/">Primer Product</a>
+        <a href="https://github.com/primer/primitives">Primer Primitives</a>
+        <a href="https://primer.style/octicons/">Octicons</a>
+      </nav>
+    </div>
+  </footer>
 </body>
 </html>

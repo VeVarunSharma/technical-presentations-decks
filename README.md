@@ -4,10 +4,11 @@ Reusable, source-controlled HTML presentations for GitHub and broader technical 
 
 The repository uses Vite as a multi-page static build. Each deck lives at an independent path under `decks/` and shares a small presentation runtime, layout system, accessibility behavior, and explicit brand profile.
 
-## Current deck
+## Current decks
 
 - [GitHub Agentic Workflows](decks/gh-aw/)
 - [GitHub Advanced Security in the AI SDLC](decks/ghas-ai-sdlc/)
+- [Govern GitHub Copilot at Scale](decks/governance-at-scale/)
 
 ## Repository principles
 
@@ -17,6 +18,7 @@ The repository uses Vite as a multi-page static build. Each deck lives at an ind
 - Every deck includes metadata and a complete `sources.md`.
 - External templates and brand guides are referenced rather than committed.
 - Built output must work at a direct GitHub Pages deck URL.
+- The root catalog uses Primer Primitives and Octicons without changing the vanilla deck runtime.
 
 Read [design.md](design.md) before creating or substantially editing a deck.
 
@@ -34,7 +36,7 @@ npx playwright install chromium
 npm run dev
 ```
 
-Open the default deck at <http://localhost:5173/> or browse a deck directly:
+Open the presentation catalog at <http://localhost:5173/> or browse a deck directly:
 
 ```text
 http://localhost:5173/decks/gh-aw/
@@ -96,6 +98,12 @@ The published site is:
 
 <https://vevarunsharma.github.io/technical-presentations-decks/>
 
+The root page is a system-themed catalog generated from active `deck.json`
+manifests. It uses
+[Primer Primitives](https://github.com/primer/primitives) and
+[Octicons](https://primer.style/octicons/) while the presentations retain their
+existing shared runtime and deck-specific themes.
+
 GitHub Pages is configured to use GitHub Actions. A push to `main` runs
 `.github/workflows/deploy-pages.yml`, which installs dependencies from the lockfile,
 builds the Vite site, tests the generated `dist/` output at all supported
@@ -110,4 +118,4 @@ https://vevarunsharma.github.io/technical-presentations-decks/decks/ghas-ai-sdlc
 https://vevarunsharma.github.io/technical-presentations-decks/decks/governance-at-scale/
 ```
 
-The root page redirects to the deck marked `"default": true`.
+The deck marked `"default": true` appears first and is labeled as featured.

@@ -82,8 +82,17 @@ if (manifests.length && defaults.length !== 1) {
 } else if (defaults.length === 1) {
   const rootIndex = readFileSync(resolve(root, "index.html"), "utf8");
   const expectedPath = `./decks/${defaults[0].id}/`;
+  if (!rootIndex.includes("data-home-catalog")) {
+    errors.push("Root index.html must declare the presentation catalog with data-home-catalog.");
+  }
+  if (!rootIndex.includes('src="./src/home/home.js"')) {
+    errors.push("Root index.html must load ./src/home/home.js.");
+  }
+  if (/<meta\b[^>]*http-equiv=["']refresh["']/i.test(rootIndex)) {
+    errors.push("Root index.html must render the catalog instead of redirecting.");
+  }
   if (!rootIndex.includes(expectedPath)) {
-    errors.push(`Root index.html must redirect or link to the default deck at ${expectedPath}`);
+    errors.push(`Root index.html must include a fallback link to the default deck at ${expectedPath}`);
   }
 }
 

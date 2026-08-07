@@ -13,9 +13,8 @@ const isExternal = (value) =>
   value.startsWith("tel:") ||
   /^[a-z]+:\/\//i.test(value);
 
-for (const entry of readdirSync(decksDirectory, { withFileTypes: true }).filter((item) => item.isDirectory())) {
-  const htmlPath = resolve(decksDirectory, entry.name, "index.html");
-  if (!existsSync(htmlPath)) continue;
+function validateHtmlLinks(label, htmlPath) {
+  if (!existsSync(htmlPath)) return;
 
   const html = readFileSync(htmlPath, "utf8");
   for (const match of html.matchAll(attributePattern)) {
@@ -24,9 +23,15 @@ for (const entry of readdirSync(decksDirectory, { withFileTypes: true }).filter(
 
     const target = resolve(dirname(htmlPath), value);
     if (!existsSync(target)) {
-      errors.push(`${entry.name}: ${match[1]} does not resolve from index.html`);
+      errors.push(`${label}: ${match[1]} does not resolve from index.html`);
     }
   }
+}
+
+validateHtmlLinks("root", resolve(root, "index.html"));
+
+for (const entry of readdirSync(decksDirectory, { withFileTypes: true }).filter((item) => item.isDirectory())) {
+  validateHtmlLinks(entry.name, resolve(decksDirectory, entry.name, "index.html"));
 }
 
 if (errors.length) {
@@ -35,4 +40,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log("Validated local deck links and assets.");
+console.log("Validated local page links and assets.");

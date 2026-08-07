@@ -9,6 +9,100 @@ const root = process.cwd();
 const decks = readdirSync(resolve(root, "decks"), { withFileTypes: true })
   .filter((entry) => entry.isDirectory())
   .map((entry) => JSON.parse(readFileSync(resolve(root, "decks", entry.name, "deck.json"), "utf8")));
+const activeDecks = decks
+  .filter((deck) => deck.status === "active")
+  .sort(
+    (left, right) =>
+      Number(Boolean(right.default)) - Number(Boolean(left.default)) ||
+      left.title.localeCompare(right.title),
+  );
+
+test.describe("homepage", () => {
+  test("renders the active presentation catalog from deck metadata", async ({ page }) => {
+    const errors = [];
+    page.on("console", (message) => {
+      if (message.type() === "error") errors.push(message.text());
+    });
+    page.on("pageerror", (error) => errors.push(error.message));
+
+    await page.goto("/");
+
+    await expect(page).toHaveTitle("Technical presentations");
+    await expect(page.locator("body")).toHaveAttribute("data-home-catalog", "");
+    await expect(page.locator("body")).toHaveAttribute("data-color-mode", "auto");
+    await expect(page.locator("body")).toHaveAttribute("data-light-theme", "light");
+    await expect(page.locator("body")).toHaveAttribute("data-dark-theme", "dark");
+    await expect(page.getByRole("heading", { name: "Ideas built to be presented." })).toBeVisible();
+    await expect(page.locator("#deck-grid")).toHaveAttribute("aria-busy", "false");
+
+    const cards = page.locator(".deck-card");
+    await expect(cards).toHaveCount(activeDecks.length);
+    expect(await cards.evaluateAll((elements) => elements.map((element) => element.dataset.deckId))).toEqual(
+      activeDecks.map((deck) => deck.id),
+    );
+    await expect(cards.first()).toHaveAttribute("data-default", "true");
+    await expect(page.locator("#deck-count")).toHaveText(
+      `${activeDecks.length} active presentation${activeDecks.length === 1 ? "" : "s"}`,
+    );
+
+    for (const deck of activeDecks) {
+      const card = page.locator(`[data-deck-id="${deck.id}"]`);
+      await expect(card).toHaveAttribute("href", `./decks/${deck.id}/`);
+      await expect(card.getByRole("heading", { name: deck.title })).toBeVisible();
+    }
+
+    expect(errors).toEqual([]);
+  });
+
+  test("has no horizontal overflow or serious accessibility violations", async ({ page }) => {
+    for (const colorScheme of ["light", "dark"]) {
+      await page.emulateMedia({ colorScheme });
+      await page.goto("/");
+      await page.addScriptTag({ path: axePath });
+
+      const result = await page.evaluate(async () => {
+        const axeResults = await window.axe.run(document.body, {
+          resultTypes: ["violations"],
+        });
+
+        return {
+          hasHorizontalOverflow:
+            document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
+          violations: axeResults.violations
+            .filter((violation) => ["serious", "critical"].includes(violation.impact))
+            .map((violation) => `${violation.id}: ${violation.help}`),
+        };
+      });
+
+      expect(result.hasHorizontalOverflow, colorScheme).toBe(false);
+      expect(result.violations, colorScheme).toEqual([]);
+    }
+  });
+
+  test("uses one, two, and three column layouts responsively", async ({ page }) => {
+    const layouts = [
+      { width: 390, height: 844, columns: 1 },
+      { width: 900, height: 900, columns: 2 },
+      { width: 1200, height: 796, columns: 3 },
+    ];
+
+    for (const layout of layouts) {
+      await page.setViewportSize({ width: layout.width, height: layout.height });
+      await page.goto("/");
+
+      const columnCount = await page.locator(".deck-card").evaluateAll((cards) => {
+        const leftEdges = cards.map((card) => Math.round(card.getBoundingClientRect().left));
+        return new Set(leftEdges).size;
+      });
+      const hasHorizontalOverflow = await page.evaluate(
+        () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
+      );
+
+      expect(columnCount).toBe(layout.columns);
+      expect(hasHorizontalOverflow).toBe(false);
+    }
+  });
+});
 
 for (const deck of decks) {
   test.describe(deck.id, () => {
