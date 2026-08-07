@@ -1,5 +1,7 @@
 import { defineConfig } from "@playwright/test";
 
+const testBuiltOutput = process.env.PLAYWRIGHT_SERVER === "preview";
+
 export default defineConfig({
   testDir: "./tests",
   fullyParallel: true,
@@ -24,7 +26,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "npm run dev -- --host 127.0.0.1 --port 4175",
+    command: testBuiltOutput
+      ? "npm run preview -- --host 127.0.0.1 --port 4175"
+      : "npm run dev -- --host 127.0.0.1 --port 4175",
     url: "http://127.0.0.1:4175",
     reuseExistingServer: false,
   },

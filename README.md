@@ -25,10 +25,28 @@ Repository-local Copilot instructions are available in
 
 ## Setup
 
+Use Node.js 24, matching the GitHub Actions build:
+
 ```bash
-npm install
+nvm use
+npm ci
 npx playwright install chromium
 npm run dev
+```
+
+Open the default deck at <http://localhost:5173/> or browse a deck directly:
+
+```text
+http://localhost:5173/decks/gh-aw/
+http://localhost:5173/decks/ghas-ai-sdlc/
+http://localhost:5173/decks/governance-at-scale/
+```
+
+To test the exact static output that GitHub Pages receives:
+
+```bash
+npm run build
+npm run preview
 ```
 
 ## Commands
@@ -74,12 +92,22 @@ Deck-specific examples and downloadable artifacts belong in a subfolder such as 
 
 ## Publishing
 
-GitHub Pages deploys the Vite `dist/` output. Individual decks are available at paths such as:
+The published site is:
+
+<https://vevarunsharma.github.io/technical-presentations-decks/>
+
+GitHub Pages is configured to use GitHub Actions. A push to `main` runs
+`.github/workflows/deploy-pages.yml`, which installs dependencies from the lockfile,
+builds the Vite site, tests the generated `dist/` output at all supported
+viewports, validates the GH-AW example, and deploys the Pages artifact. The
+workflow can also be run manually from the Actions tab.
+
+Individual decks retain direct URLs:
 
 ```text
-/decks/gh-aw/
-/decks/ghas-overview/
-/decks/ghcp-overview/
+https://vevarunsharma.github.io/technical-presentations-decks/decks/gh-aw/
+https://vevarunsharma.github.io/technical-presentations-decks/decks/ghas-ai-sdlc/
+https://vevarunsharma.github.io/technical-presentations-decks/decks/governance-at-scale/
 ```
 
 The root page redirects to the deck marked `"default": true`.
