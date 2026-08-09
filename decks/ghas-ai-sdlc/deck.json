@@ -1,0 +1,19 @@
+{
+  "id": "ghas-ai-sdlc",
+  "title": "GitHub Advanced Security in the AI SDLC",
+  "description": "Why AI-accelerated software delivery needs integrated application security, how GHAS compounds existing GitHub and Copilot investments, and what changed across seven months of releases.",
+  "brand": "github",
+  "theme": "security-dark",
+  "audience": "mixed executive and technical leaders",
+  "durationMinutes": 30,
+  "status": "active",
+  "default": false,
+  "sources": "sources.md",
+  "learningObjectives": [
+    "Explain why AI-assisted development increases the need for continuous security controls.",
+    "Map GitHub Advanced Security capabilities across the AI software development lifecycle.",
+    "Show how GHAS reuses GitHub repositories, pull requests, Actions, policies, Copilot, and runtime integrations.",
+    "Demonstrate developer security review, pull-request scanning, and Autofix remediation flows.",
+    "Prioritize adoption using the latest application-security releases and a practical rollout plan."
+  ]
+}

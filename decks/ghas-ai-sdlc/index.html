@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en" data-brand="github" data-theme="security-dark" data-deck-title="GitHub Advanced Security in the AI SDLC">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="GitHub Advanced Security in the AI SDLC: integrated security, GitHub Copilot, demos, use cases, and seven months of application-security releases.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230A2418'/%3E%3Cpath d='M32 10 49 16v13c0 11-6 19-17 25C21 48 15 40 15 29V16Zm0 8-10 3v8c0 7 3 12 10 17 7-5 10-10 10-17v-8Z' fill='%239EECFF'/%3E%3C/svg%3E">
+  <title>GitHub Advanced Security in the AI SDLC</title>
+  <link rel="stylesheet" href="../../brands/github/tokens.css">
+  <link rel="stylesheet" href="../../brands/github/themes/security-dark.css">
+  <link rel="stylesheet" href="./deck.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">GHAS</div>
+        <div class="brand-title">GitHub Advanced Security / AI SDLC</div>
+      </div>
+      <div class="scenario-rail" aria-live="polite">
+        <span class="scenario-label">Scenario</span>
+        <strong>AI checkout service</strong>
+        <span class="scenario-stage" id="scenarioStage">Mission</span>
+      </div>
+      <div class="top-actions">
+        <span class="shortcut">Space / arrows reveal, then navigate</span>
+        <button class="small-button" id="releaseButton" type="button">79 updates</button>
+        <button class="small-button" id="sourcesButton" type="button">Sources</button>
+        <button class="small-button" id="fullscreenButton" type="button">Full screen</button>
+      </div>
+    </header>
+
+    <main class="stage-shell">
+      <div class="stage" id="stage" aria-live="polite">
+        <section class="slide active title-slide" data-title="Opening" data-scenario-stage="Mission">
+          <div class="title-layout">
+            <div>
+              <div class="eyebrow reveal">GitHub Advanced Security</div>
+              <h1 class="display reveal" style="--delay: 90ms;">Secure the <span class="gradient-text">AI SDLC</span> at the speed of creation</h1>
+              <p class="lede reveal" style="--delay: 160ms;">AI accelerates software delivery. GHAS makes security continuous across the same repositories, pull requests, Actions, policies, and Copilot experiences teams already use.</p>
+              <div class="title-pills reveal" style="--delay: 230ms;">
+                <span class="pill accent">GitHub platform</span>
+                <span class="pill">GitHub Copilot</span>
+                <span class="pill">Code Security</span>
+                <span class="pill">Secret Protection</span>
+              </div>
+            </div>
+            <div class="mission-visual reveal" style="--delay: 180ms;" aria-label="AI SDLC protected by integrated security controls">
+              <div class="mission-core">AI<br>SDLC</div>
+              <div class="mission-ring ring-one"></div>
+              <div class="mission-ring ring-two"></div>
+              <div class="mission-node node-code">Generate</div>
+              <div class="mission-node node-review">Review</div>
+              <div class="mission-node node-build">Build</div>
+              <div class="mission-node node-run">Operate</div>
+              <div class="mission-shield">GHAS</div>
+            </div>
+          </div>
+          <div class="source-note">
+            <span>30-minute executive + technical briefing with three demo flows</span>
+            <span><a href="https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security" target="_blank" rel="noopener">GHAS product overview</a></span>
+          </div>
+        </section>
+
+        <section class="slide" data-title="AI changes the risk equation" data-scenario-stage="Risk equation">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">Why now</div>
+              <h2 class="section-title">AI compresses delivery time — and <span class="gradient-text">security decision time</span></h2>
+              <p class="section-subtitle">The control problem is not whether developers use AI. It is whether every AI-assisted change inherits reliable security checks before and after merge.</p>
+            </div>
+            <div class="slide-index">02</div>
+          </div>
+          <div class="risk-layout">
+            <article class="risk-card">
+              <span class="risk-number">01</span>
+              <h3>More code</h3>
+              <p>Generation raises change volume and expands the review surface.</p>
+            </article>
+            <article class="risk-card" data-build-step="1">
+              <span class="risk-number">02</span>
+              <h3>More dependencies</h3>
+              <p>Agents select packages and patterns faster than humans can inspect them manually.</p>
+            </article>
+            <article class="risk-card" data-build-step="2">
+              <span class="risk-number">03</span>
+              <h3>More actors</h3>
+              <p>Copilot and third-party coding agents contribute code alongside developers.</p>
+            </article>
+            <article class="risk-card" data-build-step="3">
+              <span class="risk-number">04</span>
+              <h3>Less reaction time</h3>
+              <p>Security must prevent, prioritize, and remediate inside the development flow.</p>
+            </article>
+          </div>
+          <div class="risk-conclusion" data-build-step="4">
+            <strong>Security must become an always-on property of the platform — not a downstream review queue.</strong>
+          </div>
+          <div class="source-note">
+            <span>Scenario: Copilot helps add a file-upload capability to an internet-facing checkout service</span>
+            <span><a href="https://github.blog/changelog/2026-06-09-security-validation-for-third-party-coding-agents/" target="_blank" rel="noopener">Agent code security validation</a></span>
+          </div>
+        </section>
+
+        <section class="slide" data-title="Compounding investments" data-scenario-stage="Investment model">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">No new security island</div>
+              <h2 class="section-title">GHAS compounds the investments already made in <span class="gradient-text">GitHub and Copilot</span></h2>
+              <p class="section-subtitle">Security signals, developer workflow, policy, remediation, and audit stay connected to the system where software is created.</p>
+            </div>
+            <div class="slide-index">03</div>
+          </div>
+          <div class="investment-stack">
+            <article class="investment-layer github-layer">
+              <span>Foundation</span>
+              <h3>GitHub platform</h3>
+              <p>Repositories, pull requests, Actions, environments, rulesets, identity, audit, and APIs.</p>
+              <div class="investment-tags"><span>Source of truth</span><span>Workflow</span><span>Governance</span></div>
+            </article>
+            <article class="investment-layer copilot-layer" data-build-step="1">
+              <span>Acceleration</span>
+              <h3>GitHub Copilot</h3>
+              <p>Assisted coding, code review, agents, CLI, app experiences, and remediation workflows.</p>
+              <div class="investment-tags"><span>Create</span><span>Review</span><span>Act</span></div>
+            </article>
+            <article class="investment-layer security-layer" data-build-step="2">
+              <span>Continuous assurance</span>
+              <h3>GitHub Advanced Security</h3>
+              <p>Code scanning, secret protection, supply-chain controls, campaigns, runtime context, and Autofix.</p>
+              <div class="investment-tags"><span>Prevent</span><span>Detect</span><span>Prioritize</span><span>Remediate</span></div>
+            </article>
+          </div>
+          <div class="investment-outcome" data-build-step="3">
+            <span>Shared context</span><strong>One developer experience, one policy plane, one evidence trail.</strong>
+          </div>
+          <div class="source-note">
+            <span>GHAS integrates into GitHub workflows rather than exporting security into a separate queue</span>
+            <span><a href="https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security" target="_blank" rel="noopener">Code Security + Secret Protection</a></span>
+          </div>
+        </section>
+
+        <section class="slide lifecycle-slide" data-title="AI SDLC controls" data-scenario-stage="Control loop">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">Integrated control loop</div>
+              <h2 class="section-title">Protect every handoff in the <span class="gradient-text">AI software lifecycle</span></h2>
+              <p class="section-subtitle">Select a lifecycle stage to see how existing GitHub, Copilot, and GHAS capabilities work together.</p>
+            </div>
+            <div class="slide-index">04</div>
+          </div>
+          <div class="lifecycle-layout">
+            <div class="lifecycle-steps" role="tablist" aria-label="AI SDLC stages">
+              <button class="lifecycle-step active" type="button" data-lifecycle="generate" aria-selected="true"><span>01</span>Generate</button>
+              <button class="lifecycle-step" type="button" data-lifecycle="review" aria-selected="false"><span>02</span>Review</button>
+              <button class="lifecycle-step" type="button" data-lifecycle="build" aria-selected="false"><span>03</span>Build</button>
+              <button class="lifecycle-step" type="button" data-lifecycle="deploy" aria-selected="false"><span>04</span>Deploy</button>
+              <button class="lifecycle-step" type="button" data-lifecycle="operate" aria-selected="false"><span>05</span>Operate</button>
+              <button class="lifecycle-step" type="button" data-lifecycle="learn" aria-selected="false"><span>06</span>Learn</button>
+            </div>
+            <div class="lifecycle-detail">
+              <span class="detail-kicker" id="lifecycleKicker">Before commit</span>
+              <h3 id="lifecycleTitle">Review AI-assisted changes while context is fresh</h3>
+              <p id="lifecycleBody">Run Copilot security review and MCP secret scanning locally. Keep developers in their terminal or Copilot workspace while preventing obvious issues from reaching a pull request.</p>
+              <div class="control-columns">
+                <div><strong>GitHub + Copilot</strong><span id="lifecyclePlatform">Copilot app, Copilot CLI, GitHub MCP Server</span></div>
+                <div><strong>GHAS control</strong><span id="lifecycleSecurity">Security review, secret scanning, push-protection policy</span></div>
+                <div><strong>Outcome</strong><span id="lifecycleOutcome">Cleaner changes enter the repository.</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="source-note">
+            <span>Security is strongest when signals stay connected from authoring through runtime</span>
+            <span><a href="https://docs.github.com/en/code-security/responsible-use/security-and-quality-ai-features" target="_blank" rel="noopener">Security and quality AI features</a></span>
+          </div>
+        </section>
+
+        <section class="slide" data-title="GHAS coverage stack" data-scenario-stage="Coverage">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">Coverage stack</div>
+              <h2 class="section-title">Move from isolated scanners to a <span class="gradient-text">connected security fabric</span></h2>
+              <p class="section-subtitle">Each layer adds a different signal. The value compounds when they share pull-request, repository, artifact, and runtime context.</p>
+            </div>
+            <div class="slide-index">05</div>
+          </div>
+          <div class="coverage-grid">
+            <article class="coverage-card">
+              <span class="coverage-icon">&lt;/&gt;</span>
+              <h3>Code Security</h3>
+              <p>CodeQL, third-party SARIF, AI security detections, Autofix, and campaigns.</p>
+            </article>
+            <article class="coverage-card" data-build-step="1">
+              <span class="coverage-icon">KEY</span>
+              <h3>Secret Protection</h3>
+              <p>Push protection, partner patterns, generic detection, validity, public monitoring, and revocation.</p>
+            </article>
+            <article class="coverage-card" data-build-step="1">
+              <span class="coverage-icon">DEP</span>
+              <h3>Supply chain</h3>
+              <p>Dependency graph, dependency review, Dependabot, attestations, and SBOM inventory.</p>
+            </article>
+            <article class="coverage-card" data-build-step="2">
+              <span class="coverage-icon">ORG</span>
+              <h3>Security at scale</h3>
+              <p>Security overview, configurations, policies, risk assessments, and security campaigns.</p>
+            </article>
+            <article class="coverage-card" data-build-step="2">
+              <span class="coverage-icon">RUN</span>
+              <h3>Runtime context</h3>
+              <p>Deployment records, Microsoft Defender for Cloud, Dynatrace, and deployed-artifact prioritization.</p>
+            </article>
+          </div>
+          <div class="coverage-thread" data-build-step="3"><strong>Shared thread:</strong> findings appear where developers work and remain traceable to code, commits, artifacts, and deployments.</div>
+          <div class="source-note">
+            <span>Use Code Security and Secret Protection independently or together based on risk and repository scope</span>
+            <span><a href="https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-graph" target="_blank" rel="noopener">Dependency graph</a></span>
+          </div>
+        </section>
+
+        <section class="slide demo-slide" data-title="Demo: local security review" data-scenario-stage="Demo 1 / local">
+          <div class="section-heading compact-heading">
+            <div>
+              <div class="eyebrow">Quick demo 1</div>
+              <h2 class="section-title">Catch risk before the <span class="gradient-text">first push</span></h2>
+              <p class="section-subtitle">The AI checkout change includes a path-handling flaw and a test credential. Review and secret scanning happen inside the developer workflow.</p>
+            </div>
+            <div class="slide-index">06</div>
+          </div>
+          <div class="demo-layout">
+            <div class="demo-tabs" role="tablist" aria-label="Local security demo modes">
+              <button class="demo-tab active" type="button" data-demo="cli" aria-selected="true">Copilot CLI</button>
+              <button class="demo-tab" type="button" data-demo="app" aria-selected="false">Copilot app</button>
+              <button class="demo-tab" type="button" data-demo="mcp" aria-selected="false">MCP secret scan</button>
+            </div>
+            <div class="terminal-window">
+              <div class="terminal-toolbar"><span></span><span></span><span></span><strong id="demoWindowTitle">Copilot CLI</strong></div>
+              <pre id="demoCommand"><code><span class="prompt">$</span> copilot
+<span class="command">/security-review</span>
+
+Scanning current worktree changes...
+
+<span class="finding">HIGH · Path traversal</span>
+src/uploads/saveReceipt.ts:42
+User-controlled filename reaches a filesystem path.
+
+<span class="suggestion">Suggested action:</span>
+Normalize the path, enforce an allowlisted directory,
+and re-run tests before commit.</code></pre>
+            </div>
+            <div class="demo-explanation">
+              <span class="detail-kicker" id="demoKicker">On-demand review</span>
+              <h3 id="demoTitle">Focused findings without leaving the terminal</h3>
+              <p id="demoBody">The security review command analyzes in-flight changes, returns severity and confidence, and suggests actions. It complements CodeQL, Dependabot, and secret scanning.</p>
+              <div class="demo-takeaway"><strong>Why it matters:</strong><span id="demoTakeaway">Fix while implementation context is still in the developer's head.</span></div>
+            </div>
+          </div>
+          <div class="source-note">
+            <span>Demo command is based on current public-preview and GA product experiences</span>
+            <span><a href="https://github.blog/changelog/2026-06-10-dedicated-security-review-command-now-available-in-copilot-cli/" target="_blank" rel="noopener">Copilot CLI security review</a></span>
+          </div>
+        </section>
+
+        <section class="slide demo-slide" data-title="Demo: secure pull request" data-scenario-stage="Demo 2 / pull request">
+          <div class="section-heading compact-heading">
+            <div>
+              <div class="eyebrow">Quick demo 2</div>
+              <h2 class="section-title">Turn the pull request into a <span class="gradient-text">security integration point</span></h2>
+              <p class="section-subtitle">One change, multiple signals — delivered in the same review experience developers already use.</p>
+            </div>
+            <div class="slide-index">07</div>
+          </div>
+          <div class="pr-demo">
+            <div class="pr-header">
+              <div><span class="pr-badge">OPEN</span><strong>Add receipt upload to checkout API</strong></div>
+              <span class="pr-meta">copilot/receipt-upload → main</span>
+            </div>
+            <div class="pr-body">
+              <div class="pr-file">
+                <div class="file-header">src/uploads/saveReceipt.ts</div>
+                <div class="code-row"><span>39</span><code>const target = join(UPLOAD_DIR, request.fileName);</code></div>
+                <div class="code-row danger"><span>40</span><code>await writeFile(target, request.body);</code></div>
+                <div class="alert-marker" data-build-step="1"><strong>High severity</strong><span>CodeQL · Path expression is not validated.</span></div>
+                <div class="alert-marker ai-marker" data-build-step="2"><strong>Medium severity</strong><span>AI security detection · Missing content-type and size validation.</span></div>
+              </div>
+              <div class="pr-checks">
+                <article><span class="check-dot codeql"></span><div><strong>Code scanning</strong><p>Semantic vulnerability detection</p></div></article>
+                <article data-build-step="1"><span class="check-dot secret"></span><div><strong>Secret scanning</strong><p>Credential and token protection</p></div></article>
+                <article data-build-step="2"><span class="check-dot dependency"></span><div><strong>Dependency review</strong><p>New package and advisory impact</p></div></article>
+                <article data-build-step="3"><span class="check-dot ai"></span><div><strong>AI security detection</strong><p>Broader language and framework coverage</p></div></article>
+              </div>
+            </div>
+            <div class="pr-outcome" data-build-step="4"><strong>Result:</strong> risk is visible before merge, with evidence attached to the exact change that introduced it.</div>
+          </div>
+          <div class="source-note">
+            <span>AI detections are labeled separately and are informational during public preview</span>
+            <span><a href="https://github.blog/changelog/2026-07-14-code-scanning-shows-ai-security-detections-on-pull-requests/" target="_blank" rel="noopener">AI security detections on PRs</a></span>
+          </div>
+        </section>
+
+        <section class="slide demo-slide" data-title="Demo: Autofix" data-scenario-stage="Demo 3 / remediate">
+          <div class="section-heading compact-heading">
+            <div>
+              <div class="eyebrow">Quick demo 3</div>
+              <h2 class="section-title">Move from alert to <span class="gradient-text">validated remediation</span></h2>
+              <p class="section-subtitle">Autofix reduces developer effort. Agentic Autofix extends remediation across the codebase and verifies the result with CodeQL.</p>
+            </div>
+            <div class="slide-index">08</div>
+          </div>
+          <div class="autofix-layout">
+            <div class="autofix-flow">
+              <article class="autofix-step">
+                <span>01</span><h3>Alert</h3><p>CodeQL identifies path traversal in the upload handler.</p>
+              </article>
+              <article class="autofix-step" data-build-step="1">
+                <span>02</span><h3>Explore</h3><p>Copilot reads relevant files, tests, and surrounding implementation.</p>
+              </article>
+              <article class="autofix-step" data-build-step="2">
+                <span>03</span><h3>Fix + verify</h3><p>The agent proposes a change and reruns CodeQL to confirm closure.</p>
+              </article>
+              <article class="autofix-step" data-build-step="3">
+                <span>04</span><h3>Draft PR</h3><p>A review-ready pull request explains the fix and validation steps.</p>
+              </article>
+            </div>
+            <div class="diff-window" data-build-step="2">
+              <div class="diff-header">Agentic Autofix proposal</div>
+              <pre><code><span class="minus">- const target = join(UPLOAD_DIR, fileName);</span>
+<span class="plus">+ const safeName = basename(fileName);</span>
+<span class="plus">+ const target = resolve(UPLOAD_DIR, safeName);</span>
+<span class="plus">+ assertInsideDirectory(target, UPLOAD_DIR);</span>
+
+<span class="verified">✓ CodeQL re-scan: alert closed</span>
+<span class="verified">✓ Unit tests: 48 passed</span></code></pre>
+            </div>
+          </div>
+          <div class="autofix-note" data-build-step="4">
+            <strong>Be precise about the investment:</strong> Copilot Autofix is part of Code Security and does not require a Copilot subscription. Agentic Autofix uses the Copilot cloud agent, requires eligible Copilot licensing, and consumes AI credits.
+          </div>
+          <div class="source-note">
+            <span>Agentic Autofix explores, iterates, reruns CodeQL, and opens a draft pull request</span>
+            <span><a href="https://github.blog/changelog/2026-07-10-agentic-autofix-for-code-scanning-alerts-in-public-preview/" target="_blank" rel="noopener">Agentic Autofix preview</a></span>
+          </div>
+        </section>
+
+        <section class="slide" data-title="Real use cases" data-scenario-stage="Production use cases">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">From prevention to prioritization</div>
+              <h2 class="section-title">Real use cases that connect <span class="gradient-text">developer and security outcomes</span></h2>
+              <p class="section-subtitle">GHAS protects the AI checkout service across code authorship, credential exposure, security debt, and runtime risk.</p>
+            </div>
+            <div class="slide-index">09</div>
+          </div>
+          <div class="use-case-grid">
+            <article class="use-case-card">
+              <span class="use-case-label">Agent-generated code</span>
+              <h3>Apply the same validation to every coding agent</h3>
+              <p>CodeQL, dependency checks, and secret scanning validate Copilot and supported third-party agent pull requests.</p>
+              <strong>Outcome: consistent guardrails regardless of author.</strong>
+            </article>
+            <article class="use-case-card" data-build-step="1">
+              <span class="use-case-label">Credential incident</span>
+              <h3>Detect beyond owned repositories and revoke fast</h3>
+              <p>Public monitoring finds enterprise-linked secrets across public GitHub content; break-glass APIs revoke credentials.</p>
+              <strong>Outcome: reduced exposure and incident response time.</strong>
+            </article>
+            <article class="use-case-card" data-build-step="2">
+              <span class="use-case-label">Runtime prioritization</span>
+              <h3>Fix what is deployed and exposed first</h3>
+              <p>Defender for Cloud or Dynatrace maps artifacts back to repositories and adds runtime risk to alerts and campaigns.</p>
+              <strong>Outcome: remediation ordered by business exposure.</strong>
+            </article>
+            <article class="use-case-card" data-build-step="3">
+              <span class="use-case-label">Security debt</span>
+              <h3>Mobilize teams with targeted campaigns</h3>
+              <p>Security overview and campaigns convert alert backlogs into scoped, measurable remediation work.</p>
+              <strong>Outcome: security work becomes an engineering program.</strong>
+            </article>
+          </div>
+          <div class="source-note">
+            <span>Runtime signals and agent validation turn GHAS findings into prioritized developer work</span>
+            <span><a href="https://github.blog/changelog/2026-05-05-code-to-cloud-risk-visibility-with-microsoft-defender-for-cloud-is-now-generally-available/" target="_blank" rel="noopener">Code-to-cloud risk visibility</a></span>
+          </div>
+        </section>
+
+        <section class="slide" data-title="Operating model" data-scenario-stage="Operating model">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">Leverage existing investments</div>
+              <h2 class="section-title">Make security a shared <span class="gradient-text">platform capability</span></h2>
+              <p class="section-subtitle">The operating model works because responsibilities stay clear while signals and workflows stay connected.</p>
+            </div>
+            <div class="slide-index">10</div>
+          </div>
+          <div class="operating-layout">
+            <div class="role-lanes">
+              <article><span>Developers</span><h3>Fix in flow</h3><p>Security review, PR alerts, suggested fixes, dependency context, and clear ownership.</p></article>
+              <article data-build-step="1"><span>Security</span><h3>Set policy + prioritize</h3><p>Configurations, campaigns, risk assessments, alert routing, runtime context, and governance.</p></article>
+              <article data-build-step="2"><span>Platform engineering</span><h3>Scale the paved road</h3><p>Default setup, rulesets, Actions, OIDC, integrations, APIs, and reusable repository standards.</p></article>
+            </div>
+            <div class="investment-map" data-build-step="3">
+              <h3>Reuse what already exists</h3>
+              <div><span>GitHub repositories + PRs</span><strong>Developer experience and evidence</strong></div>
+              <div><span>GitHub Actions + policies</span><strong>Automation and enforcement</strong></div>
+              <div><span>GitHub Copilot</span><strong>Assisted review and remediation</strong></div>
+              <div><span>Defender / Dynatrace</span><strong>Runtime prioritization</strong></div>
+              <div><span>REST APIs + webhooks</span><strong>Enterprise integration and reporting</strong></div>
+            </div>
+          </div>
+          <div class="source-note">
+            <span>Measure prevention, time-to-remediate, accepted fixes, coverage, and deployed-risk reduction</span>
+            <span><a href="https://docs.github.com/en/code-security/concepts/security-at-scale/security-overview" target="_blank" rel="noopener">Security overview</a></span>
+          </div>
+        </section>
+
+        <section class="slide release-slide" data-title="Release radar" data-scenario-stage="Release radar">
+          <div class="section-heading compact-heading">
+            <div>
+              <div class="eyebrow">Seven-month release radar</div>
+              <h2 class="section-title"><span class="gradient-text">79 application-security updates</span> signal a platform shift</h2>
+              <p class="section-subtitle">Select a category to spotlight recent releases. The complete list is available from the “79 updates” button.</p>
+            </div>
+            <div class="slide-index">11</div>
+          </div>
+          <div class="release-layout">
+            <div>
+              <div class="release-stat-row">
+                <div><strong>79</strong><span>updates</span></div>
+                <div><strong>7</strong><span>months</span></div>
+                <div><strong>6</strong><span>strategic themes</span></div>
+              </div>
+              <div class="monthly-bars" id="monthlyBars" aria-label="Monthly application-security changelog update counts"></div>
+            </div>
+            <div>
+              <div class="release-categories" id="releaseCategories" role="tablist" aria-label="Release categories"></div>
+              <div class="release-spotlight">
+                <span class="detail-kicker" id="releaseKicker">AI & agent security</span>
+                <h3 id="releaseTitle">Security is moving into AI-assisted creation</h3>
+                <span class="release-showing" id="releaseShowing">Showing 4 of 8 latest updates</span>
+                <div id="releaseItems"></div>
+              </div>
+            </div>
+          </div>
+          <div class="release-shifts" data-build-step="1">
+            <span>Before commit</span><span>AI-enhanced PR detection</span><span>Agentic remediation</span><span>Runtime prioritization</span><span>Enterprise governance</span>
+          </div>
+          <div class="source-note">
+            <span>Dataset includes every application-security changelog entry from 2026-01-01 through 2026-07-15</span>
+            <span><a href="https://github.blog/changelog/?label=application-security&opened-months=7" target="_blank" rel="noopener">Filtered changelog</a></span>
+          </div>
+        </section>
+
+        <section class="slide" data-title="90-day adoption roadmap" data-scenario-stage="Adoption roadmap">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">Practical adoption</div>
+              <h2 class="section-title">Turn existing GitHub usage into a <span class="gradient-text">90-day security program</span></h2>
+              <p class="section-subtitle">Start with visibility and prevention, then add remediation automation and runtime context as teams prove the workflow.</p>
+            </div>
+            <div class="slide-index">12</div>
+          </div>
+          <div class="roadmap">
+            <article class="roadmap-stage">
+              <span class="roadmap-time">Days 0–30</span>
+              <h3>Assess + enable</h3>
+              <ul>
+                <li>Run Code Security and Secret Protection risk assessments.</li>
+                <li>Use guided GHAS setup and repository targeting.</li>
+                <li>Enable CodeQL default setup and push protection.</li>
+              </ul>
+              <strong>Exit: coverage and ownership are known.</strong>
+            </article>
+            <article class="roadmap-stage" data-build-step="1">
+              <span class="roadmap-time">Days 31–60</span>
+              <h3>Prevent + remediate</h3>
+              <ul>
+                <li>Make PR findings part of normal review.</li>
+                <li>Adopt Autofix and batch suggestions.</li>
+                <li>Launch one focused security campaign.</li>
+              </ul>
+              <strong>Exit: fixes are accepted in developer flow.</strong>
+            </article>
+            <article class="roadmap-stage" data-build-step="2">
+              <span class="roadmap-time">Days 61–90</span>
+              <h3>Automate + prioritize</h3>
+              <ul>
+                <li>Pilot agentic Autofix and agent validation.</li>
+                <li>Add public monitoring and credential response.</li>
+                <li>Connect runtime context and budget controls.</li>
+              </ul>
+              <strong>Exit: security is measurable platform behavior.</strong>
+            </article>
+          </div>
+          <div class="roadmap-measures" data-build-step="3">
+            <span>Coverage</span><span>Prevented leaks</span><span>Median remediation time</span><span>Fix acceptance</span><span>Deployed-risk reduction</span>
+          </div>
+          <div class="source-note">
+            <span>Start from risk assessment, use existing workflows, and expand automation based on evidence</span>
+            <span><a href="https://github.blog/changelog/2026-05-19-start-a-github-advanced-security-trial-from-a-risk-assessment/" target="_blank" rel="noopener">Risk assessment to trial</a></span>
+          </div>
+        </section>
+
+        <section class="slide closing-slide" data-title="Closing" data-scenario-stage="Decision">
+          <div class="closing-layout">
+            <div>
+              <div class="eyebrow">The decision</div>
+              <h2>Use AI to build faster.<br><span class="gradient-text">Use GHAS to keep faster safe.</span></h2>
+              <p>Protect the same repositories, pull requests, Actions, and Copilot workflows already driving the AI SDLC.</p>
+            </div>
+            <div class="closing-actions">
+              <article><span>01</span><strong>Assess</strong><p>Measure code and secret risk.</p></article>
+              <article data-build-step="1"><span>02</span><strong>Prevent</strong><p>Enable default setup and push protection.</p></article>
+              <article data-build-step="2"><span>03</span><strong>Remediate</strong><p>Bring Autofix and campaigns into developer flow.</p></article>
+              <article data-build-step="3"><span>04</span><strong>Optimize</strong><p>Add agents, runtime context, APIs, and governance.</p></article>
+            </div>
+          </div>
+          <div class="source-note">
+            <span>Recommended next step: run a risk assessment and select one AI-assisted service for a 90-day pilot</span>
+            <span><a href="./sources.md">Complete source list</a></span>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="controls">
+      <button class="nav-button" id="previousButton" type="button" aria-label="Previous slide">&lt;</button>
+      <div class="progress-wrap">
+        <div class="dot-nav" id="dotNav" aria-label="Slide navigation"></div>
+        <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="slide-count" id="slideCount">01 / 13</div>
+        <div class="build-count" id="buildCount"></div>
+      </div>
+      <button class="nav-button" id="nextButton" type="button" aria-label="Next slide">&gt;</button>
+    </footer>
+  </div>
+
+  <dialog id="sourcesDialog">
+    <div class="dialog-head">
+      <h2>Sources</h2>
+      <button class="small-button" id="closeSources" type="button">Close</button>
+    </div>
+    <div class="dialog-body">
+      <p>This presentation uses official GitHub documentation and the complete seven-month application-security changelog dataset.</p>
+      <a class="dialog-link" href="./sources.md">Open the complete source list</a>
+      <a class="dialog-link" href="https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security" target="_blank" rel="noopener">GitHub Advanced Security overview</a>
+      <a class="dialog-link" href="https://docs.github.com/en/code-security/responsible-use/security-and-quality-ai-features" target="_blank" rel="noopener">Security and quality AI application card</a>
+      <a class="dialog-link" href="https://github.blog/changelog/?label=application-security&opened-months=7" target="_blank" rel="noopener">Application-security changelog</a>
+    </div>
+  </dialog>
+
+  <dialog id="changelogDialog">
+    <div class="dialog-head">
+      <div>
+        <span class="detail-kicker">Release explorer</span>
+        <h2>Application-security changelog</h2>
+      </div>
+      <button class="small-button" id="closeChangelog" type="button">Close</button>
+    </div>
+    <div class="changelog-controls">
+      <div id="changelogFilters" role="tablist" aria-label="Filter changelog by category"></div>
+      <label>Month
+        <select id="changelogMonth">
+          <option value="all">All months</option>
+        </select>
+      </label>
+    </div>
+    <div class="changelog-summary" id="changelogSummary"></div>
+    <div class="changelog-list" id="changelogList"></div>
+  </dialog>
+
+  <script type="module" src="./deck.js"></script>
+</body>
+</html>

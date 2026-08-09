@@ -1,0 +1,201 @@
+{
+  "title": "Cost controls by decision point",
+  "asOf": "2026-07-16",
+  "categories": [
+    {
+      "id": "avoid-agent",
+      "label": "Avoid the agent",
+      "principle": "Use deterministic logic first and do not start inference when no reasoning is needed.",
+      "controls": [
+        {
+          "name": "Search-based skip filters",
+          "fields": ["on.skip-if-match", "on.skip-if-no-match"],
+          "syntax": "on:\n  issues:\n    types: [opened]\n  skip-if-match: 'label:duplicate OR label:wont-fix'\n  skip-if-no-match: 'label:needs-triage'",
+          "effect": "Runs in pre-activation and skips the agent job before inference.",
+          "sources": [
+            "https://github.github.com/gh-aw/reference/cost-management/",
+            "https://github.github.com/gh-aw/reference/triggers/"
+          ]
+        },
+        {
+          "name": "Deterministic steps and noop",
+          "fields": ["steps", "pre-agent-steps", "GH_AW_SAFE_OUTPUTS"],
+          "syntax": "steps:\n  - name: Skip empty backlog\n    run: |\n      count=$(gh issue list --state open --json number --jq length)\n      if [ \"$count\" -eq 0 ]; then\n        echo '{\"type\":\"noop\",\"message\":\"No work\"}' >> \"$GH_AW_SAFE_OUTPUTS\"\n      fi",
+          "effect": "Performs deterministic preprocessing and can stop the engine without AI Credits when scripting is required.",
+          "sources": [
+            "https://github.github.com/gh-aw/patterns/deterministic-ops/",
+            "https://github.github.com/gh-aw/reference/steps-jobs/",
+            "https://github.github.com/gh-aw/reference/cost-management/"
+          ]
+        },
+        {
+          "name": "Schedules and batching",
+          "fields": ["on.schedule", "on.workflow_dispatch"],
+          "syntax": "on:\n  schedule: daily on weekdays\n  workflow_dispatch:",
+          "effect": "Replaces one-run-per-event patterns with predictable, batchable invocation volume.",
+          "sources": [
+            "https://github.github.com/gh-aw/reference/cost-management/",
+            "https://github.github.com/gh-aw/reference/triggers/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bound-run",
+      "label": "Bound each run",
+      "principle": "Cap inference, turns, elapsed time, tools, and security analysis independently.",
+      "controls": [
+        {
+          "name": "Per-run AI Credits",
+          "fields": ["max-ai-credits"],
+          "syntax": "max-ai-credits: 500",
+          "effect": "Sets a hard AI Credits budget for one workflow run.",
+          "sources": ["https://github.github.com/gh-aw/reference/cost-management/"]
+        },
+        {
+          "name": "Rolling daily AI Credits",
+          "fields": ["max-daily-ai-credits"],
+          "syntax": "max-daily-ai-credits: 3000",
+          "effect": "Blocks new eligible runs after the workflow reaches the explicitly configured rolling 24-hour budget.",
+          "sources": ["https://github.github.com/gh-aw/reference/cost-management/"]
+        },
+        {
+          "name": "Turn limit",
+          "fields": ["max-turns"],
+          "syntax": "max-turns: 12",
+          "effect": "Caps model/tool interaction turns for engines that honor the compiled control.",
+          "sources": [
+            "https://github.github.com/gh-aw/reference/cost-management/",
+            "https://github.github.com/gh-aw/reference/engines/"
+          ]
+        },
+        {
+          "name": "Agent job timeout",
+          "fields": ["timeout-minutes"],
+          "syntax": "timeout-minutes: 30",
+          "effect": "Bounds wall-clock time for the agent job.",
+          "sources": [
+            "https://github.github.com/gh-aw/reference/frontmatter/",
+            "https://github.github.com/gh-aw/reference/rate-limiting-controls/"
+          ]
+        },
+        {
+          "name": "Tool operation timeout",
+          "fields": ["tools.timeout", "tools.startup-timeout"],
+          "syntax": "tools:\n  timeout: 120\n  startup-timeout: 60",
+          "effect": "Bounds individual tool/MCP operations and MCP startup where supported by the engine.",
+          "sources": ["https://github.github.com/gh-aw/reference/tools/"]
+        },
+        {
+          "name": "Threat-detection budget",
+          "fields": ["safe-outputs.threat-detection.max-ai-credits"],
+          "syntax": "safe-outputs:\n  create-pull-request:\n  threat-detection:\n    max-ai-credits: 200",
+          "effect": "Caps the independent threat-detection inference run. Current documentation explicitly states a 400 AIC fallback when unset.",
+          "sources": ["https://github.github.com/gh-aw/reference/threat-detection/"]
+        }
+      ]
+    },
+    {
+      "id": "bound-repeat",
+      "label": "Bound repetition",
+      "principle": "Control retries, continuations, user invocation rate, and workflow lifetime.",
+      "controls": [
+        {
+          "name": "Harness retries",
+          "fields": [
+            "engine.harness.max-retries",
+            "engine.harness.initial-delay-ms",
+            "engine.harness.backoff-multiplier",
+            "engine.harness.max-delay-ms"
+          ],
+          "syntax": "engine:\n  id: copilot\n  harness:\n    max-retries: 1\n    initial-delay-ms: 5000\n    backoff-multiplier: 2\n    max-delay-ms: 30000",
+          "effect": "Bounds retry attempts and backoff after engine failures; set explicitly when the documented engine defaults do not fit the workload.",
+          "sources": ["https://github.github.com/gh-aw/reference/engines/"]
+        },
+        {
+          "name": "Copilot continuations",
+          "fields": ["max-continuations"],
+          "syntax": "max-continuations: 2",
+          "effect": "Bounds Copilot autopilot continuations when that mode is used.",
+          "sources": ["https://github.github.com/gh-aw/reference/engines/"]
+        },
+        {
+          "name": "Per-user trigger rate",
+          "fields": [
+            "user-rate-limit.max-runs-per-window",
+            "user-rate-limit.window",
+            "user-rate-limit.events",
+            "user-rate-limit.ignored-roles"
+          ],
+          "syntax": "user-rate-limit:\n  max-runs-per-window: 3\n  window: 60\n  events: [workflow_dispatch, issue_comment]\n  ignored-roles: []",
+          "effect": "Limits how often one actor can start selected event types; it does not replace concurrency serialization.",
+          "sources": ["https://github.github.com/gh-aw/reference/rate-limiting-controls/"]
+        },
+        {
+          "name": "Workflow expiry",
+          "fields": ["on.stop-after"],
+          "syntax": "on:\n  workflow_dispatch:\n  stop-after: +48h",
+          "effect": "Prevents execution after an absolute or relative deadline.",
+          "sources": [
+            "https://github.github.com/gh-aw/reference/triggers/",
+            "https://github.github.com/gh-aw/reference/rate-limiting-controls/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "right-size",
+      "label": "Right-size",
+      "principle": "Use the least costly model and smallest context that can reliably satisfy the task.",
+      "controls": [
+        {
+          "name": "Model selection",
+          "fields": ["engine.id", "engine.model"],
+          "syntax": "engine:\n  id: copilot\n  model: gpt-4.1-mini",
+          "effect": "Routes structured, routine work to an appropriately capable model; available models and prices vary, so validate with current provider data.",
+          "sources": [
+            "https://github.github.com/gh-aw/reference/engines/",
+            "https://github.github.com/gh-aw/reference/cost-management/",
+            "https://github.github.com/gh-aw/reference/billing/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "measure-value",
+      "label": "Measure value",
+      "principle": "Optimize cost against externally observable outcomes, not token reduction alone.",
+      "controls": [
+        {
+          "name": "Run logs",
+          "fields": ["gh aw logs", "gh aw logs --json"],
+          "syntax": "gh aw logs --start-date -30d --json",
+          "effect": "Reports run and episode duration, tokens, turns, AI Credits, lineage, and anomalies.",
+          "sources": ["https://github.github.com/gh-aw/reference/cost-management/"]
+        },
+        {
+          "name": "Run audit",
+          "fields": ["gh aw audit"],
+          "syntax": "gh aw audit <run-id>",
+          "effect": "Supports a detailed review of token use, tool calls, performance, and inference spend for one run.",
+          "sources": ["https://github.github.com/gh-aw/reference/cost-management/"]
+        },
+        {
+          "name": "OpenTelemetry",
+          "fields": ["observability.otlp.endpoint", "observability.otlp.headers", "observability.otlp.attributes"],
+          "syntax": "observability:\n  otlp:\n    endpoint: ${{ secrets.OTLP_ENDPOINT }}\n    headers:\n      Authorization: ${{ secrets.OTLP_TOKEN }}",
+          "effect": "Exports traces and model/token metadata for cross-repository dashboards, alerting, and analysis.",
+          "sources": ["https://github.github.com/gh-aw/guides/open-telemetry/"]
+        },
+        {
+          "name": "Repository-observed outcomes",
+          "fields": ["gh aw outcomes", "accepted outcomes", "AIC per accepted outcome"],
+          "syntax": "gh aw outcomes <run-id>",
+          "effect": "Relates spend to later visible repository state such as merged pull requests or completed issues.",
+          "sources": ["https://github.github.com/gh-aw/reference/outcomes/"]
+        }
+      ]
+    }
+  ],
+  "defaultPolicy": "Values in examples are representative, not recommended universal defaults. Set budgets from workload evidence and current documentation, then review provider billing and repository outcomes."
+}

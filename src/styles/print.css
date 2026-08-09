@@ -1,0 +1,45 @@
+@media print {
+  body {
+    overflow: visible;
+    background: #fff;
+  }
+
+  .app {
+    display: block;
+    height: auto;
+  }
+
+  .topbar,
+  .controls {
+    display: none;
+  }
+
+  .stage-shell {
+    display: block;
+    padding: 0;
+  }
+
+  .stage {
+    width: auto;
+    overflow: visible;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .slide {
+    position: relative;
+    width: 13.333in;
+    height: 7.5in;
+    break-after: page;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  [data-build-step] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "title": "Concurrency and rate controls",
+  "asOf": "2026-07-16",
+  "controls": [
+    {
+      "id": "workflow",
+      "label": "Workflow-level concurrency",
+      "scope": "Entire workflow run",
+      "field": "concurrency",
+      "syntax": "concurrency:\n  group: repo-care-${{ github.repository }}\n  cancel-in-progress: false\n  queue: max",
+      "purpose": "Prevents overlapping runs for the chosen repository, branch, issue, pull request, or custom context.",
+      "source": "https://github.github.com/gh-aw/reference/concurrency/"
+    },
+    {
+      "id": "engine",
+      "label": "Engine-level concurrency",
+      "scope": "Agent execution across workflows",
+      "field": "engine.concurrency",
+      "syntax": "engine:\n  id: copilot\n  concurrency:\n    group: gh-aw-copilot-${{ github.repository }}\n    queue: max",
+      "purpose": "Serializes scarce or expensive agent execution independently from workflow-level grouping.",
+      "source": "https://github.github.com/gh-aw/reference/concurrency/"
+    },
+    {
+      "id": "safe-outputs",
+      "label": "Safe-output concurrency",
+      "scope": "Permission-scoped output job",
+      "field": "safe-outputs.concurrency-group",
+      "syntax": "safe-outputs:\n  concurrency-group: safe-outputs-${{ github.repository }}\n  create-pull-request:",
+      "purpose": "Serializes application of issues, pull requests, or other writes so independent agent runs do not race.",
+      "behavior": "The safe-output group uses cancel-in-progress false so queued writes wait rather than cancel.",
+      "source": "https://github.github.com/gh-aw/reference/concurrency/"
+    },
+    {
+      "id": "queue-max",
+      "label": "Queue preservation",
+      "scope": "A concurrency group",
+      "field": "concurrency.queue",
+      "syntax": "concurrency:\n  group: ${{ github.workflow }}-${{ github.ref }}\n  queue: max",
+      "purpose": "Preserves all pending runs in arrival order instead of retaining only the latest pending run.",
+      "caveat": "Use only when every queued run remains valuable; otherwise skip, batch, or deduplicate before inference.",
+      "source": "https://github.github.com/gh-aw/reference/concurrency/"
+    },
+    {
+      "id": "job-discriminator",
+      "label": "Fan-out job discriminator",
+      "scope": "Compiler-generated agent, output, and conclusion job groups",
+      "field": "concurrency.job-discriminator",
+      "syntax": "concurrency:\n  job-discriminator: ${{ inputs.finding_id }}",
+      "purpose": "Appends a unique expression so intentional fan-out runs do not cancel or block one another at generated job-level groups.",
+      "caveat": "It preserves fan-out; it is not a rate limit and can increase simultaneous work.",
+      "source": "https://github.github.com/gh-aw/reference/concurrency/"
+    },
+    {
+      "id": "conclusion",
+      "label": "Conclusion concurrency",
+      "scope": "Compiler-generated reporting and cleanup job",
+      "field": "compiler-generated",
+      "syntax": "group: gh-aw-conclusion-<workflow>[-<job-discriminator>]\ncancel-in-progress: false\nqueue: max",
+      "purpose": "Ensures reporting, cleanup, and outcome summaries complete in order without colliding.",
+      "caveat": "Generated automatically; configure a job discriminator only when separate fan-out conclusion lanes are required.",
+      "source": "https://github.github.com/gh-aw/reference/concurrency/"
+    },
+    {
+      "id": "user-rate-limit",
+      "label": "Per-user rate limit",
+      "scope": "Pre-activation starts by actor and event window",
+      "field": "user-rate-limit",
+      "syntax": "user-rate-limit:\n  max-runs-per-window: 3\n  window: 60\n  events: [workflow_dispatch, issue_comment]\n  ignored-roles: []",
+      "purpose": "Limits how frequently one user can trigger selected workflow events.",
+      "distinction": "Rate limiting controls admission over time. Concurrency controls overlap and queue behavior after admission. Use both for event-storm protection.",
+      "source": "https://github.github.com/gh-aw/reference/rate-limiting-controls/"
+    }
+  ],
+  "selectionGuide": [
+    {
+      "situation": "Repeated updates to one issue or pull request",
+      "control": "Use context-specific workflow concurrency."
+    },
+    {
+      "situation": "A shared provider or model must not run many agents at once",
+      "control": "Use engine concurrency."
+    },
+    {
+      "situation": "Multiple runs may create duplicate or conflicting repository writes",
+      "control": "Use safe-output concurrency plus deduplication and operation maximums."
+    },
+    {
+      "situation": "Every fan-out worker must complete independently",
+      "control": "Use job-discriminator, then add an explicit capacity or rate policy."
+    },
+    {
+      "situation": "One actor can generate too many admitted runs",
+      "control": "Use user-rate-limit; concurrency alone only creates a longer queue."
+    }
+  ],
+  "sources": [
+    "https://github.github.com/gh-aw/reference/concurrency/",
+    "https://github.github.com/gh-aw/reference/rate-limiting-controls/"
+  ]
+}

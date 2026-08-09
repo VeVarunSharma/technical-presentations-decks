@@ -1,0 +1,35 @@
+[data-theme="copilot-light"] {
+  color-scheme: light;
+  --brand-bg-canvas: var(--github-white);
+  --brand-bg-surface: var(--github-gray-0);
+  --brand-bg-raised: var(--github-white);
+  --brand-bg-inverse: var(--github-black);
+  --brand-text-primary: var(--github-black);
+  --brand-text-secondary: var(--github-gray-7);
+  --brand-text-inverse: var(--github-white);
+  --brand-text-on-accent: var(--github-white);
+  --brand-border-subtle: var(--github-gray-2);
+  --brand-border-strong: var(--github-gray-7);
+  --brand-grid-line: var(--github-gray-2);
+  --brand-accent: var(--github-purple-3);
+  --brand-accent-strong: var(--github-purple-4);
+  --brand-accent-soft: var(--github-purple-1);
+  --brand-hero: var(--github-green-4);
+  --brand-link: var(--github-purple-4);
+  --brand-focus-ring: var(--github-purple-3);
+  --brand-code-bg: var(--github-gray-9);
+  --brand-code-text: var(--github-gray-0);
+  --brand-selection-bg: var(--github-purple-1);
+  --brand-selection-text: var(--github-black);
+  --brand-chart-primary: var(--github-purple-4);
+  --brand-chart-secondary: var(--github-green-5);
+  --brand-chart-tertiary: var(--github-gray-7);
+  --brand-chart-highlight: var(--github-purple-2);
+  --brand-shadow-raised: 0 8px 24px rgb(38 17 95 / 12%);
+  --brand-shadow-stage: 0 30px 90px rgb(38 17 95 / 22%);
+  --brand-ratio-black-white: 80;
+  --brand-ratio-neutral: 10;
+  --brand-ratio-green: 5;
+  --brand-ratio-purple: 5;
+  --brand-ratio-blue: 0;
+}

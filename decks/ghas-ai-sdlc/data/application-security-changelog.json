@@ -1,0 +1,660 @@
+{
+  "source": "https://github.blog/changelog/?label=application-security&opened-months=7",
+  "retrieved": "2026-07-15",
+  "range": {
+    "start": "2026-01-01",
+    "end": "2026-07-15"
+  },
+  "total": 79,
+  "categoryCounts": {
+    "AI & agent security": 8,
+    "Secret protection": 19,
+    "Code quality & coverage": 13,
+    "Code scanning & CodeQL": 21,
+    "Governance & platform": 13,
+    "Supply chain & runtime": 5
+  },
+  "monthCounts": {
+    "2026-07": 11,
+    "2026-06": 15,
+    "2026-05": 13,
+    "2026-04": 15,
+    "2026-03": 15,
+    "2026-02": 5,
+    "2026-01": 5
+  },
+  "entries": [
+    {
+      "date": "2026-07-14",
+      "month": "2026-07",
+      "title": "Code scanning shows AI security detections on pull requests",
+      "url": "https://github.blog/changelog/2026-07-14-code-scanning-shows-ai-security-detections-on-pull-requests/",
+      "category": "AI & agent security",
+      "summary": "GitHub code scanning now surfaces AI-powered security detections directly on pull requests, expanding vulnerability coverage to languages and frameworks not currently supported by CodeQL. These detections help teams identify and…"
+    },
+    {
+      "date": "2026-07-14",
+      "month": "2026-07",
+      "title": "Security reviews now available in the GitHub Copilot app",
+      "url": "https://github.blog/changelog/2026-07-14-security-reviews-now-available-in-the-github-copilot-app/",
+      "category": "AI & agent security",
+      "summary": "You can now run a security review on your in-flight code changes directly from the GitHub Copilot app. The /security-review slash command is shipping in public preview, bringing the same…"
+    },
+    {
+      "date": "2026-07-13",
+      "month": "2026-07",
+      "title": "Manage secret scanning custom patterns via REST API",
+      "url": "https://github.blog/changelog/2026-07-13-create-and-manage-secret-scanning-custom-patterns-via-rest-api/",
+      "category": "Secret protection",
+      "summary": "Starting today, security teams can create, edit, and manage secret scanning custom patterns with the REST API. What's new The following endpoints are generally available: GET …/secret-scanning/custom-patterns list patterns POST…"
+    },
+    {
+      "date": "2026-07-13",
+      "month": "2026-07",
+      "title": "GitHub Code Quality license estimate in public preview",
+      "url": "https://github.blog/changelog/2026-07-13-github-code-quality-license-estimate-in-public-preview/",
+      "category": "Code quality & coverage",
+      "summary": "You can now see the number of active committers on repositories using GitHub Code Quality across your enterprise, giving you an estimate of your Code Quality license cost before it…"
+    },
+    {
+      "date": "2026-07-10",
+      "month": "2026-07",
+      "title": "CodeQL 2.26.0 adds Kotlin 2.4.0 support and AI prompt injection detection",
+      "url": "https://github.blog/changelog/2026-07-10-codeql-2-26-0-adds-kotlin-2-4-0-support-and-ai-prompt-injection-detection/",
+      "category": "Code scanning & CodeQL",
+      "summary": "CodeQL is the static analysis engine behind GitHub code scanning, which finds and remediates security issues in your code. We've recently released CodeQL 2.26.0, which adds support for Kotlin 2.4.0,…"
+    },
+    {
+      "date": "2026-07-10",
+      "month": "2026-07",
+      "title": "Clearer names for secret scanning detector types",
+      "url": "https://github.blog/changelog/2026-07-10-clearer-names-for-secret-scanning-detector-types/",
+      "category": "Secret protection",
+      "summary": "To make secret scanning easier to understand, we're updating the names we use for our detector types to better reflect how each one finds secrets. This is a naming change…"
+    },
+    {
+      "date": "2026-07-10",
+      "month": "2026-07",
+      "title": "Agentic autofix for code scanning alerts in public preview",
+      "url": "https://github.blog/changelog/2026-07-10-agentic-autofix-for-code-scanning-alerts-in-public-preview/",
+      "category": "AI & agent security",
+      "summary": "Agentic autofix is now in public preview for code scanning alerts. It remediates alerts by working across your codebase the way a developer would: it explores relevant files, proposes a…"
+    },
+    {
+      "date": "2026-07-09",
+      "month": "2026-07",
+      "title": "Organization-level targeting for GitHub Code Quality",
+      "url": "https://github.blog/changelog/2026-07-09-organization-level-targeting-for-github-code-quality/",
+      "category": "Code quality & coverage",
+      "summary": "Organization owners can now target a subset of repositories when enabling or disabling GitHub Code Quality, rather than applying it to every repository at once. This gives you more granular…"
+    },
+    {
+      "date": "2026-07-07",
+      "month": "2026-07",
+      "title": "Secret scanning extended metadata and multipart validation",
+      "url": "https://github.blog/changelog/2026-07-07-secret-scanning-extended-metadata-and-multipart-validation/",
+      "category": "Secret protection",
+      "summary": "To help you understand ownership and impact of a leaked secret, GitHub secret scanning surfaces enriched metadata for supported secret types. Extended metadata checks are now generally available, including support…"
+    },
+    {
+      "date": "2026-07-01",
+      "month": "2026-07",
+      "title": "Secret scanning public monitoring for enterprises",
+      "url": "https://github.blog/changelog/2026-07-01-secret-scanning-public-monitoring-for-enterprises/",
+      "category": "Secret protection",
+      "summary": "GitHub is committed to empowering the developer community by helping organizations recognize and address the risks of secret leaks wherever they happen. We believe every enterprise should know the moment…"
+    },
+    {
+      "date": "2026-07-01",
+      "month": "2026-07",
+      "title": "Secret scanning adds validators for Asana, IBM, and MessageBird",
+      "url": "https://github.blog/changelog/2026-07-01-secret-scanning-adds-validators-for-asana-ibm-and-messagebird/",
+      "category": "Secret protection",
+      "summary": "Secret scanning now runs validity checks on Asana, IBM, and MessageBird secrets so you can tell whether a leaked credential is still active. Validity checks added These patterns now support…"
+    },
+    {
+      "date": "2026-06-30",
+      "month": "2026-06",
+      "title": "GitHub code coverage merge protection for pull requests",
+      "url": "https://github.blog/changelog/2026-06-30-github-code-coverage-merge-protection-for-pull-requests/",
+      "category": "Code quality & coverage",
+      "summary": "You can now use branch rulesets to block pull requests from merging when test coverage drops below thresholds you set. You can set a minimum coverage percentage, a maximum allowed…"
+    },
+    {
+      "date": "2026-06-30",
+      "month": "2026-06",
+      "title": "Upcoming cloud data retention policy for closed security alerts",
+      "url": "https://github.blog/changelog/2026-06-30-cloud-data-retention-policy-for-closed-security-alerts/",
+      "category": "Governance & platform",
+      "summary": "Starting August 25, 2026, GitHub will introduce a data retention policy for closed Dependabot security alerts. This policy gives you a clear commitment for how long your alert data stays…"
+    },
+    {
+      "date": "2026-06-30",
+      "month": "2026-06",
+      "title": "Upcoming access restrictions to public API endpoints and UI views",
+      "url": "https://github.blog/changelog/2026-06-30-upcoming-access-restrictions-to-public-api-endpoints-and-ui-views/",
+      "category": "Governance & platform",
+      "summary": "As part of our ongoing commitment to protect our users and ensure responsible use of our platform, the Notifications team will soon introduce access restrictions to several public API endpoints…"
+    },
+    {
+      "date": "2026-06-24",
+      "month": "2026-06",
+      "title": "Self-service credential revocation for incident response",
+      "url": "https://github.blog/changelog/2026-06-24-self-service-credential-revocation-for-incident-response/",
+      "category": "Secret protection",
+      "summary": "For a timely response to security incidents involving compromised accounts or stolen credentials, GitHub Enterprise owners can now use new \"break-glass\" capabilities to instantly revoke all credentials for a given…"
+    },
+    {
+      "date": "2026-06-23",
+      "month": "2026-06",
+      "title": "Secret scanning adds extended metadata for Replicate secrets",
+      "url": "https://github.blog/changelog/2026-06-23-secret-scanning-adds-extended-metadata-for-replicate-secrets/",
+      "category": "Secret protection",
+      "summary": "Secret scanning now includes extended metadata for Replicate secrets, providing richer context for leaked credentials. Extended metadata support This pattern now includes extended metadata when detected, providing richer context about…"
+    },
+    {
+      "date": "2026-06-23",
+      "month": "2026-06",
+      "title": "Fetch Code Quality findings via REST API",
+      "url": "https://github.blog/changelog/2026-06-23-fetch-code-quality-findings-via-rest-api/",
+      "category": "Code quality & coverage",
+      "summary": "Repository-level REST APIs for Code Quality findings are now available in public preview, bringing API support closer to the functionality already available in the GitHub UI. Two new read-only endpoints…"
+    },
+    {
+      "date": "2026-06-17",
+      "month": "2026-06",
+      "title": "Secret scanning updates – June 2026",
+      "url": "https://github.blog/changelog/2026-06-17-secret-scanning-updates-june-2026/",
+      "category": "Secret protection",
+      "summary": "Since our last pattern update, we've expanded secret scanning's detection coverage with new partners, more patterns blocked by push protection by default, additional validity checks, and richer metadata for leaked…"
+    },
+    {
+      "date": "2026-06-16",
+      "month": "2026-06",
+      "title": "GitHub Code Quality generally available July 20, 2026",
+      "url": "https://github.blog/changelog/2026-06-16-github-code-quality-generally-available-july-20-2026/",
+      "category": "Code quality & coverage",
+      "summary": "More than 10,000 enterprises have used the GitHub Code Quality public preview to detect maintainability and reliability issues, enforce quality gates, and track code coverage. On July 20, 2026, Code…"
+    },
+    {
+      "date": "2026-06-16",
+      "month": "2026-06",
+      "title": "Organization-level enablement for GitHub Code Quality",
+      "url": "https://github.blog/changelog/2026-06-16-organization-level-enablement-for-github-code-quality/",
+      "category": "Code quality & coverage",
+      "summary": "Organization administrators can now enable or disable GitHub Code Quality across all repositories in their organization with a single toggle, instead of configuring each repository individually. What's new A new…"
+    },
+    {
+      "date": "2026-06-10",
+      "month": "2026-06",
+      "title": "Incremental analysis for Go, C/C++, and CodeQL CLI",
+      "url": "https://github.blog/changelog/2026-06-10-incremental-analysis-for-go-c-c-and-codeql-cli/",
+      "category": "Code scanning & CodeQL",
+      "summary": "CodeQL scans on pull requests for C/C++ and Go now run incrementally, making them faster. Earlier this year, we released improved incremental analysis for CodeQL analysis of C#, Java, JavaScript/TypeScript,…"
+    },
+    {
+      "date": "2026-06-10",
+      "month": "2026-06",
+      "title": "Dedicated security review command now available in Copilot CLI",
+      "url": "https://github.blog/changelog/2026-06-10-dedicated-security-review-command-now-available-in-copilot-cli/",
+      "category": "AI & agent security",
+      "summary": "You can now run a security review on your code changes directly from GitHub Copilot CLI. The new /security-review slash command is shipping as an experimental feature in public preview,…"
+    },
+    {
+      "date": "2026-06-09",
+      "month": "2026-06",
+      "title": "Periodic code scanning of inactive repositories",
+      "url": "https://github.blog/changelog/2026-06-09-periodic-code-scanning-of-inactive-repositories/",
+      "category": "Code scanning & CodeQL",
+      "summary": "GitHub code scanning now supports scheduled security scans of repositories that have had no pushes or pull requests for six months or more. Organizations can use this to maintain continuous…"
+    },
+    {
+      "date": "2026-06-09",
+      "month": "2026-06",
+      "title": "Security validation for third-party coding agents",
+      "url": "https://github.blog/changelog/2026-06-09-security-validation-for-third-party-coding-agents/",
+      "category": "AI & agent security",
+      "summary": "Security validation for third-party coding agents is now generally available. GitHub supports third-party coding agents (including Claude and OpenAI Codex) that work directly within your repositories to implement features, fix…"
+    },
+    {
+      "date": "2026-06-05",
+      "month": "2026-06",
+      "title": "CodeQL 2.25.6 adds Swift 6.3.2 support and improves C# coverage",
+      "url": "https://github.blog/changelog/2026-06-05-codeql-2-25-6-adds-swift-6-3-2-support-and-improves-c-coverage/",
+      "category": "Code scanning & CodeQL",
+      "summary": "CodeQL is the static analysis engine behind GitHub code scanning, which finds and remediates security issues in your code. We've recently released CodeQL 2.25.6, which adds Swift 6.3.2 support, completes…"
+    },
+    {
+      "date": "2026-06-02",
+      "month": "2026-06",
+      "title": "Cloud and local sandboxes for GitHub Copilot now in public preview",
+      "url": "https://github.blog/changelog/2026-06-02-cloud-and-local-sandboxes-for-github-copilot-now-in-public-preview/",
+      "category": "AI & agent security",
+      "summary": "GitHub Copilot can now run inside secure, isolated sandboxes, both locally on your machine and in the cloud. Sandboxed Copilot experiences provide isolated environments for Copilot's tool execution locally as…"
+    },
+    {
+      "date": "2026-05-28",
+      "month": "2026-05",
+      "title": "Hard budget limits now available for GitHub Advanced Security",
+      "url": "https://github.blog/changelog/2026-05-28-hard-budget-limits-now-available-for-github-advanced-security/",
+      "category": "Governance & platform",
+      "summary": "Enterprise administrators and billing managers can now set hard budget limits for GitHub Advanced Security (GHAS) SKUs, preventing teams from exceeding their allocated license budgets. Previously, license-based products like GHAS…"
+    },
+    {
+      "date": "2026-05-28",
+      "month": "2026-05",
+      "title": "CodeQL 2.25.5 improves query accuracy for GitHub Actions",
+      "url": "https://github.blog/changelog/2026-05-28-codeql-2-25-5-improves-query-accuracy-for-github-actions/",
+      "category": "Code scanning & CodeQL",
+      "summary": "CodeQL is the static analysis engine behind GitHub code scanning, which finds and remediates security issues in your code. We've recently released CodeQL 2.25.5, which includes accuracy improvements across C/C++,…"
+    },
+    {
+      "date": "2026-05-26",
+      "month": "2026-05",
+      "title": "GitHub Code Quality: Repository Enablement API",
+      "url": "https://github.blog/changelog/2026-05-26-github-code-quality-repository-enablement-api/",
+      "category": "Code quality & coverage",
+      "summary": "You can now programmatically enable and configure GitHub Code Quality on individual repositories using the new Repository Enablement API, available today in public preview. Two new endpoints are now available:…"
+    },
+    {
+      "date": "2026-05-26",
+      "month": "2026-05",
+      "title": "Filter secret scanning approval requests by sort order and bypass status",
+      "url": "https://github.blog/changelog/2026-05-26-filter-secret-scanning-approval-requests-by-sort-order-and-bypass-status/",
+      "category": "Secret protection",
+      "summary": "This week, we're rolling out two improvements to our delegated workflows for secret scanning. What's changing Sort bypass and dismissal requests in the UI: You can now choose between ascending…"
+    },
+    {
+      "date": "2026-05-26",
+      "month": "2026-05",
+      "title": "Code coverage on pull requests is now in public preview",
+      "url": "https://github.blog/changelog/2026-05-26-code-coverage-in-pull-requests-is-now-in-public-preview/",
+      "category": "Code quality & coverage",
+      "summary": "Code coverage metrics are now in public preview for all GitHub Code Quality users on github.com. You can now see an aggregate percent of code covered directly on pull requests,…"
+    },
+    {
+      "date": "2026-05-19",
+      "month": "2026-05",
+      "title": "Expanded OIDC support for Dependabot and code scanning",
+      "url": "https://github.blog/changelog/2026-05-19-expanded-oidc-support-for-dependabot-and-code-scanning/",
+      "category": "Code scanning & CodeQL",
+      "summary": "Dependabot and code scanning now support OpenID Connect (OIDC) authentication for private registries configured at the organization level for two additional registries: Cloudsmith and Google Artifact Registry. What's new Organization…"
+    },
+    {
+      "date": "2026-05-19",
+      "month": "2026-05",
+      "title": "Start a GitHub Advanced Security trial from a risk assessment",
+      "url": "https://github.blog/changelog/2026-05-19-start-a-github-advanced-security-trial-from-a-risk-assessment/",
+      "category": "Governance & platform",
+      "summary": "Eligible enterprise admins can now start a GitHub Advanced Security trial directly from the Secret Protection or Code Security risk assessment to start evaluating the products faster. If you aren't…"
+    },
+    {
+      "date": "2026-05-19",
+      "month": "2026-05",
+      "title": "Removal of code_scanning_upload field from rate_limit API endpoint",
+      "url": "https://github.blog/changelog/2026-05-19-removal-of-code_scanning_upload-field-from-rate_limit-api-endpoint/",
+      "category": "Governance & platform",
+      "summary": "As of May 19, 2026, we have removed the code_scanning_upload field from the rate limit REST API endpoint response. What changed The code_scanning_upload field no longer appears in the resources…"
+    },
+    {
+      "date": "2026-05-12",
+      "month": "2026-05",
+      "title": "CodeQL 2.25.4 adds Swift 6.3.1 support, improvements to C# and Java, and more",
+      "url": "https://github.blog/changelog/2026-05-12-codeql-2-25-4-adds-swift-6-3-1-support-improvements-to-c-and-java-and-more/",
+      "category": "Code scanning & CodeQL",
+      "summary": "CodeQL is the static analysis engine behind GitHub code scanning, which finds and remediates security issues in your code. We've recently released CodeQL 2.25.4, which adds Swift 6.3.1 support, improves…"
+    },
+    {
+      "date": "2026-05-08",
+      "month": "2026-05",
+      "title": "CodeQL 2.25.3 adds Swift 6.3 support",
+      "url": "https://github.blog/changelog/2026-05-08-codeql-2-25-3-adds-swift-6-3-support/",
+      "category": "Code scanning & CodeQL",
+      "summary": "CodeQL is the static analysis engine behind GitHub code scanning, which finds and remediates security issues in your code. We've recently released CodeQL 2.25.3, which adds support for Swift 6.3,…"
+    },
+    {
+      "date": "2026-05-05",
+      "month": "2026-05",
+      "title": "Secret scanning with GitHub MCP Server is now generally available",
+      "url": "https://github.blog/changelog/2026-05-05-secret-scanning-with-github-mcp-server-is-now-generally-available/",
+      "category": "AI & agent security",
+      "summary": "GitHub secret scanning in the GitHub MCP (Model Context Protocol) server is now generally available. When you use an MCP-compatible AI coding agent or IDE (like GitHub Copilot CLI or…"
+    },
+    {
+      "date": "2026-05-05",
+      "month": "2026-05",
+      "title": "Code-to-cloud risk visibility with Microsoft Defender for Cloud is now generally available",
+      "url": "https://github.blog/changelog/2026-05-05-code-to-cloud-risk-visibility-with-microsoft-defender-for-cloud-is-now-generally-available/",
+      "category": "Supply chain & runtime",
+      "summary": "This integration is now generally available. Since entering public preview, we've heard valuable feedback from customers, and we've shipped follow-up improvements that bring artifact and runtime context closer to the…"
+    },
+    {
+      "date": "2026-05-05",
+      "month": "2026-05",
+      "title": "Deprecation notice: code_scanning_upload field will be removed from rate_limit API endpoint",
+      "url": "https://github.blog/changelog/2026-05-05-deprecation-notice-code_scanning_upload-field-will-be-removed-from-rate_limit-api-endpoint/",
+      "category": "Governance & platform",
+      "summary": "On May 19, 2026, we'll remove the code_scanning_upload field from the rate_limit REST API endpoint response. Why did we make this change? The code_scanning_upload field in the rate_limit response has…"
+    },
+    {
+      "date": "2026-04-24",
+      "month": "2026-04",
+      "title": "Notice about upcoming new format for GitHub App installation tokens",
+      "url": "https://github.blog/changelog/2026-04-24-notice-about-upcoming-new-format-for-github-app-installation-tokens/",
+      "category": "Governance & platform",
+      "summary": "Starting April 27th 2026 and over the coming weeks, we will begin a staged rollout that updates the format of newly minted GitHub App installation tokens, making them more performant…"
+    },
+    {
+      "date": "2026-04-21",
+      "month": "2026-04",
+      "title": "Deprecation of security-related organization API fields",
+      "url": "https://github.blog/changelog/2026-04-21-deprecation-of-security-related-organization-api-fields/",
+      "category": "Governance & platform",
+      "summary": "We have deprecated the following fields from the get an organization and update an organization REST API endpoints: advanced_security_enabled_for_new_repositories dependabot_alerts_enabled_for_new_repositories dependabot_security_updates_enabled_for_new_repositories dependency_graph_enabled_for_new_repositories secret_scanning_enabled_for_new_repositories secret_scanning_push_protection_enabled_for_new_repositories secret_scanning_validity_checks_enabled GitHub Code Security configurations now…"
+    },
+    {
+      "date": "2026-04-21",
+      "month": "2026-04",
+      "title": "CodeQL now supports sanitizers and validators in models-as-data",
+      "url": "https://github.blog/changelog/2026-04-21-codeql-now-supports-sanitizers-and-validators-in-models-as-data/",
+      "category": "Code scanning & CodeQL",
+      "summary": "CodeQL is the static analysis engine behind GitHub code scanning, which finds and remediates security issues in your code. You can now define custom sanitizers and validators using data extensions…"
+    },
+    {
+      "date": "2026-04-15",
+      "month": "2026-04",
+      "title": "CodeQL 2.25.2 adds Kotlin 2.3.20 support and other updates",
+      "url": "https://github.blog/changelog/2026-04-15-codeql-2-25-2-adds-kotlin-2-3-20-support-and-other-updates/",
+      "category": "Code scanning & CodeQL",
+      "summary": "CodeQL is the static analysis engine behind GitHub code scanning, which finds and remediates security issues in your code. We've recently released CodeQL 2.25.2, which brings a new Kotlin version…"
+    },
+    {
+      "date": "2026-04-14",
+      "month": "2026-04",
+      "title": "OIDC support for Dependabot and code scanning",
+      "url": "https://github.blog/changelog/2026-04-14-oidc-support-for-dependabot-and-code-scanning/",
+      "category": "Code scanning & CodeQL",
+      "summary": "Dependabot and code scanning now support OpenID Connect (OIDC) authentication for private registries configured at the organization level, eliminating the need to store long-lived credentials as repository secrets. What's new…"
+    },
+    {
+      "date": "2026-04-14",
+      "month": "2026-04",
+      "title": "Deployment context in repository properties and alerts",
+      "url": "https://github.blog/changelog/2026-04-14-deployment-context-in-repository-properties-and-alerts/",
+      "category": "Supply chain & runtime",
+      "summary": "Artifact and deployment context now appears in two new places: repository properties and security alert pages. Repository properties: deployable and deployed Two new built-in repository properties—deployable and deployed—are now available.…"
+    },
+    {
+      "date": "2026-04-14",
+      "month": "2026-04",
+      "title": "Link code scanning alerts to GitHub Issues",
+      "url": "https://github.blog/changelog/2026-04-14-link-code-scanning-alerts-to-github-issues/",
+      "category": "Code scanning & CodeQL",
+      "summary": "You can now link code scanning alerts to GitHub Issues, bringing security remediation into your existing planning and tracking workflows. This functionality is in public preview. With this update, you…"
+    },
+    {
+      "date": "2026-04-14",
+      "month": "2026-04",
+      "title": "Secret scanning pattern updates and product improvements",
+      "url": "https://github.blog/changelog/2026-04-14-secret-scanning-pattern-updates-and-product-improvements/",
+      "category": "Secret protection",
+      "summary": "This week, we're rolling out several improvements to our detection coverage, APIs, and workflows. These improvements strengthen our continued investment in the developer experience of our secret scanning features. Built…"
+    },
+    {
+      "date": "2026-04-14",
+      "month": "2026-04",
+      "title": "GitHub Code Quality: Improvements to standard findings in public preview",
+      "url": "https://github.blog/changelog/2026-04-14-github-code-quality-improvements-to-standard-findings-in-public-preview/",
+      "category": "Code quality & coverage",
+      "summary": "We've updated the GitHub Code Quality experience to make it easier to navigate and triage findings across your repository. GitHub Code Quality standard findings help you detect potential reliability and…"
+    },
+    {
+      "date": "2026-04-09",
+      "month": "2026-04",
+      "title": "Ask Copilot in security assessments now available",
+      "url": "https://github.blog/changelog/2026-04-09-ask-copilot-in-security-assessments-now-available/",
+      "category": "Governance & platform",
+      "summary": "Organization admins and security managers can now jump into a Copilot experience directly from secret risk assessment or Code Security risk assessment results to get contextual explanations and guided next…"
+    },
+    {
+      "date": "2026-04-08",
+      "month": "2026-04",
+      "title": "Secret scanning improvements to alert APIs, webhooks, and delegated workflows",
+      "url": "https://github.blog/changelog/2026-04-08-secret-scanning-improvements-to-alert-apis-webhooks-and-delegated-workflows/",
+      "category": "Secret protection",
+      "summary": "This week, we're rolling out several improvements to our APIs, webhooks, and delegated workflows. These improvements strengthen our continued investment in the developer experience of our secret scanning features. Built…"
+    },
+    {
+      "date": "2026-04-08",
+      "month": "2026-04",
+      "title": "Code Security risk assessment available for organizations",
+      "url": "https://github.blog/changelog/2026-04-08-code-security-risk-assessment-available-for-organizations/",
+      "category": "Governance & platform",
+      "summary": "Organization admins and security managers can now run a free Code Security risk assessment to review security vulnerabilities across their organization. The assessment summarizes vulnerabilities by severity, rule type, and…"
+    },
+    {
+      "date": "2026-04-07",
+      "month": "2026-04",
+      "title": "Prioritize security alerts with runtime context from Dynatrace",
+      "url": "https://github.blog/changelog/2026-04-07-prioritize-security-alerts-with-runtime-context-from-dynatrace/",
+      "category": "Supply chain & runtime",
+      "summary": "You can now use runtime context from Dynatrace to prioritize GitHub Advanced Security alerts based on deployed artifacts and runtime risk in your Kubernetes environment. When you connect Dynatrace to…"
+    },
+    {
+      "date": "2026-04-07",
+      "month": "2026-04",
+      "title": "Code scanning: Batch apply security alert suggestions on pull requests",
+      "url": "https://github.blog/changelog/2026-04-07-code-scanning-batch-apply-security-alert-suggestions-on-pull-requests/",
+      "category": "Code scanning & CodeQL",
+      "summary": "GitHub code scanning alerts on pull requests are now easier to address with bulk actions. You can now apply fixes for code scanning alerts in the Files changed tab by…"
+    },
+    {
+      "date": "2026-04-02",
+      "month": "2026-04",
+      "title": "The Security tab is now Security & quality",
+      "url": "https://github.blog/changelog/2026-04-02-the-security-tab-is-now-security-quality/",
+      "category": "Governance & platform",
+      "summary": "The top-level Security tab across repositories, organizations, and enterprises has been renamed to Security & quality on github.com. This change restructures the navigation to colocate code quality findings alongside security…"
+    },
+    {
+      "date": "2026-03-31",
+      "month": "2026-03",
+      "title": "GitHub secret scanning — coverage update",
+      "url": "https://github.blog/changelog/2026-03-31-github-secret-scanning-nine-new-types-and-more/",
+      "category": "Secret protection",
+      "summary": "GitHub secret scanning continually updates its detectors, validators, and analyzers. Here's what's new. Nine new secret detectors from seven providers, including Langchain, Salesforce, and Figma. Secrets from Figma, Google, OpenVSX,…"
+    },
+    {
+      "date": "2026-03-31",
+      "month": "2026-03",
+      "title": "CodeQL 2.25.0 adds Swift 6.2.4 support",
+      "url": "https://github.blog/changelog/2026-03-31-codeql-2-25-0-adds-swift-6-2-4-support/",
+      "category": "Code scanning & CodeQL",
+      "summary": "CodeQL is the static analysis engine behind GitHub code scanning, which finds and remediates security issues in your code. We've recently released CodeQL 2.25.0, which upgrades Swift analysis to 6.2.4,…"
+    },
+    {
+      "date": "2026-03-31",
+      "month": "2026-03",
+      "title": "CodeQL pull requests insights on security overview now cover all protected branches",
+      "url": "https://github.blog/changelog/2026-03-31-codeql-pull-requests-insights-on-security-overview-now-cover-all-protected-branches/",
+      "category": "Code scanning & CodeQL",
+      "summary": "The CodeQL pull request insights tab in GitHub security overview now reports Copilot Autofix and alert statistics from all protected branches, not just the default branch. This gives you a…"
+    },
+    {
+      "date": "2026-03-26",
+      "month": "2026-03",
+      "title": "Credential revocation API now supports GitHub OAuth and GitHub app credentials",
+      "url": "https://github.blog/changelog/2026-03-26-credential-revocation-api-now-supports-github-oauth-and-github-app-credentials/",
+      "category": "Secret protection",
+      "summary": "We've extended the Credential revocation API to support additional token types, enabling you to programmatically revoke any exposed credentials found on repositories or elsewhere. This helps you quickly limit the…"
+    },
+    {
+      "date": "2026-03-24",
+      "month": "2026-03",
+      "title": "Upcoming deprecation of security-related organization API fields",
+      "url": "https://github.blog/changelog/2026-03-24-upcoming-deprecation-of-security-related-organization-api-fields/",
+      "category": "Governance & platform",
+      "summary": "On April 21, 2026, we're deprecating and removing the following fields from the get an organization and update an organization REST API endpoints: advanced_security_enabled_for_new_repositories dependabot_alerts_enabled_for_new_repositories dependabot_security_updates_enabled_for_new_repositories dependency_graph_enabled_for_new_repositories secret_scanning_enabled_for_new_repositories secret_scanning_push_protection_enabled_for_new_repositories secret_scanning_validity_checks_enabled…"
+    },
+    {
+      "date": "2026-03-24",
+      "month": "2026-03",
+      "title": "Faster incremental analysis with CodeQL in pull requests",
+      "url": "https://github.blog/changelog/2026-03-24-faster-incremental-analysis-with-codeql-in-pull-requests/",
+      "category": "Code scanning & CodeQL",
+      "summary": "CodeQL scans on pull requests for C#, Java, JavaScript/TypeScript, Python, and Ruby are now incremental, making them faster. Earlier this year, we sped up scans during pull requests with CodeQL…"
+    },
+    {
+      "date": "2026-03-23",
+      "month": "2026-03",
+      "title": "Push protection exemptions from repository settings",
+      "url": "https://github.blog/changelog/2026-03-23-push-protection-exemptions-from-repository-settings/",
+      "category": "Secret protection",
+      "summary": "You can now designate secret scanning push protection exemptions from your repository settings. Previously, exemptions could only be managed from security configurations at the organization and enterprise levels. What are…"
+    },
+    {
+      "date": "2026-03-17",
+      "month": "2026-03",
+      "title": "Secret scanning in AI coding agents via the GitHub MCP Server",
+      "url": "https://github.blog/changelog/2026-03-17-secret-scanning-in-ai-coding-agents-via-the-github-mcp-server/",
+      "category": "AI & agent security",
+      "summary": "The GitHub MCP Server can now scan your code changes for exposed secrets before you commit or open a pull request. This helps you prevent credential leaks by detecting secrets…"
+    },
+    {
+      "date": "2026-03-17",
+      "month": "2026-03",
+      "title": "Push protection exemptions for roles, teams, and apps",
+      "url": "https://github.blog/changelog/2026-03-17-push-protection-exemptions-for-apps-teams-and-roles/",
+      "category": "Secret protection",
+      "summary": "Organizations with secret scanning push protection can now designate specific roles, teams, and apps as exempt from push protection enforcement. Exemption status is evaluated at the time of each push.…"
+    },
+    {
+      "date": "2026-03-17",
+      "month": "2026-03",
+      "title": "GitHub Advanced Security setup made simple",
+      "url": "https://github.blog/changelog/2026-03-17-github-advanced-security-setup-made-simple/",
+      "category": "Governance & platform",
+      "summary": "GitHub Advanced Security is now easier to manage in organizations. A new guided experience helps you set up and configure Advanced Security, so you can now edit configurations and repository…"
+    },
+    {
+      "date": "2026-03-17",
+      "month": "2026-03",
+      "title": "Code Quality permissions removed from security manager role",
+      "url": "https://github.blog/changelog/2026-03-17-code-quality-permissions-removed-from-security-manager-role/",
+      "category": "Code quality & coverage",
+      "summary": "The security manager role can no longer enable or disable GitHub Code Quality for a repository unless they are also an administrator for that repository. Only repository administrators can enable…"
+    },
+    {
+      "date": "2026-03-17",
+      "month": "2026-03",
+      "title": "GitHub Code Quality: Batch apply quality suggestions on pull requests",
+      "url": "https://github.blog/changelog/2026-03-17-github-code-quality-batch-apply-quality-suggestions-on-pull-requests/",
+      "category": "Code quality & coverage",
+      "summary": "GitHub Code Quality findings on pull requests are now easier to address with bulk actions. You can now apply fixes for Code Quality findings in the Files changed tab by…"
+    },
+    {
+      "date": "2026-03-10",
+      "month": "2026-03",
+      "title": "Secret scanning pattern updates — March 2026",
+      "url": "https://github.blog/changelog/2026-03-10-secret-scanning-pattern-updates-march-2026/",
+      "category": "Secret protection",
+      "summary": "GitHub secret scanning continually updates its detectors, validators, and analyzers. Here's what's new for March 2026. 28 new secret detectors from 15 providers, including Lark, Vercel, Snowflake, and Supabase. 39…"
+    },
+    {
+      "date": "2026-03-10",
+      "month": "2026-03",
+      "title": "CodeQL 2.24.3 adds Java 26 support and other improvements",
+      "url": "https://github.blog/changelog/2026-03-10-codeql-2-24-3-adds-java-26-support-and-other-improvements/",
+      "category": "Code scanning & CodeQL",
+      "summary": "CodeQL is the static analysis engine behind GitHub code scanning, which finds and remediates security issues in your code. We've recently released CodeQL 2.24.3, which adds support for Java 26…"
+    },
+    {
+      "date": "2026-03-03",
+      "month": "2026-03",
+      "title": "GitHub Code Quality enterprise policy",
+      "url": "https://github.blog/changelog/2026-03-03-github-code-quality-enterprise-policy/",
+      "category": "Code quality & coverage",
+      "summary": "You can now manage GitHub Code Quality availability separately from Code Security in GitHub Advanced Security policies. This gives you more flexibility to make GitHub Code Quality available across your…"
+    },
+    {
+      "date": "2026-02-24",
+      "month": "2026-02",
+      "title": "CodeQL adds Go 1.26 and Kotlin 2.3.10 support and improves query accuracy",
+      "url": "https://github.blog/changelog/2026-02-24-codeql-adds-go-1-26-and-kotlin-2-3-10-support-and-improves-query-accuracy/",
+      "category": "Code scanning & CodeQL",
+      "summary": "CodeQL is the static analysis engine behind GitHub code scanning, which finds and remediates security issues in your code. We've released CodeQL 2.24.2, which adds support for Go 1.26 and…"
+    },
+    {
+      "date": "2026-02-24",
+      "month": "2026-02",
+      "title": "GitHub Code Quality: Organization-level dashboard in public preview",
+      "url": "https://github.blog/changelog/2026-02-24-github-code-quality-organization-level-dashboard-in-public-preview/",
+      "category": "Code quality & coverage",
+      "summary": "GitHub Code Quality now includes an organization-level dashboard in public preview. It gives organization owners, administrators, and developers a view of code health across repositories where code quality is enabled.…"
+    },
+    {
+      "date": "2026-02-18",
+      "month": "2026-02",
+      "title": "Secret scanning improvements to extended metadata checks",
+      "url": "https://github.blog/changelog/2026-02-18-secret-scanning-improvements-to-extended-metadata-checks/",
+      "category": "Secret protection",
+      "summary": "GitHub secret scanning is adding support for extended metadata checks in security configurations. This change makes it substantially easier to enable extended metadata checks at scale. As announced previously, repositories…"
+    },
+    {
+      "date": "2026-02-17",
+      "month": "2026-02",
+      "title": "Enterprise-wide credential management tools for incident response",
+      "url": "https://github.blog/changelog/2026-02-17-enterprise-wide-credential-management-tools-for-incident-response/",
+      "category": "Secret protection",
+      "summary": "Enterprise owners can now use new credential management actions to respond decisively to high-impact security incidents in their GitHub Enterprise Cloud enterprise accounts. These new capabilities are available for enterprise…"
+    },
+    {
+      "date": "2026-02-06",
+      "month": "2026-02",
+      "title": "CodeQL 2.24.1 improves Maven private registry support and improves query accuracy",
+      "url": "https://github.blog/changelog/2026-02-06-codeql-2-24-1-improves-maven-private-registry-support-and-improves-query-accuracy/",
+      "category": "Code scanning & CodeQL",
+      "summary": "CodeQL is the static analysis engine behind GitHub code scanning, which finds and remediates security issues in your code. We've recently released CodeQL 2.24.1, improving support for Maven private package…"
+    },
+    {
+      "date": "2026-01-29",
+      "month": "2026-01",
+      "title": "CodeQL 2.24.0 adds Swift 6.2 and .NET 10 support, and improves file handling for minified JavaScript",
+      "url": "https://github.blog/changelog/2026-01-29-codeql-2-24-0-adds-swift-6-2-support-net-10-compatibility-and-file-handling-for-minified-javascript/",
+      "category": "Code scanning & CodeQL",
+      "summary": "CodeQL is the static analysis engine behind GitHub code scanning, which finds and remediates security issues in your code. We've recently released CodeQL 2.24.0, which adds support for new language…"
+    },
+    {
+      "date": "2026-01-20",
+      "month": "2026-01",
+      "title": "CodeQL 2.23.9 has been released",
+      "url": "https://github.blog/changelog/2026-01-20-codeql-2-23-9-has-been-released/",
+      "category": "Code scanning & CodeQL",
+      "summary": "CodeQL is the static analysis engine behind GitHub code scanning, which finds and remediates security issues in your code. We've recently released CodeQL 2.23.9. There are no user-facing changes to…"
+    },
+    {
+      "date": "2026-01-20",
+      "month": "2026-01",
+      "title": "Strengthen your supply chain with code-to-cloud traceability and SLSA Build Level 3 security",
+      "url": "https://github.blog/changelog/2026-01-20-strengthen-your-supply-chain-with-code-to-cloud-traceability-and-slsa-build-level-3-security/",
+      "category": "Supply chain & runtime",
+      "summary": "You can now link build artifacts like containers and binaries to GitHub and add storage and deployment context, even if the artifacts live outside GitHub. This helps you get code-to-cloud…"
+    },
+    {
+      "date": "2026-01-15",
+      "month": "2026-01",
+      "title": "Secret scanning extended metadata to be automatically enabled for certain repositories",
+      "url": "https://github.blog/changelog/2026-01-15-secret-scanning-extended-metadata-to-be-automatically-enabled-for-certain-repositories/",
+      "category": "Secret protection",
+      "summary": "GitHub secret scanning is adding support for extended metadata checks in security configurations, starting February 18, 2026. Extended metadata checks are a nested feature under validity checks. If you've already…"
+    },
+    {
+      "date": "2026-01-13",
+      "month": "2026-01",
+      "title": "New fine-grained permission for artifact metadata is now generally available",
+      "url": "https://github.blog/changelog/2026-01-13-new-fine-grained-permission-for-artifact-metadata-is-now-generally-available/",
+      "category": "Supply chain & runtime",
+      "summary": "GitHub has introduced a new artifact_metadata permission to give you more precise control over API access to artifact-related metadata. This permission replaces the broader contents:read and contents:write permissions for the…"
+    }
+  ]
+}

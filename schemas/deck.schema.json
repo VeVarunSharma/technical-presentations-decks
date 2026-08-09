@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/deck.schema.json",
+  "title": "Technical presentation deck",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "brand",
+    "theme",
+    "audience",
+    "durationMinutes",
+    "status",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 120
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 300
+    },
+    "brand": {
+      "type": "string",
+      "enum": ["github", "neutral", "microsoft"]
+    },
+    "theme": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "audience": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 80
+    },
+    "durationMinutes": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 240
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "active", "archived"]
+    },
+    "default": {
+      "type": "boolean",
+      "default": false
+    },
+    "sources": {
+      "type": "string",
+      "pattern": "^[^/].*\\.md$"
+    },
+    "learningObjectives": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 6,
+      "items": {
+        "type": "string",
+        "minLength": 5,
+        "maxLength": 180
+      }
+    },
+    "validators": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "command"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "command": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "brand": {
+            "const": "github"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "theme": {
+            "enum": [
+              "default-dark",
+              "default-light",
+              "copilot-dark",
+              "copilot-light",
+              "security-dark",
+              "security-light"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

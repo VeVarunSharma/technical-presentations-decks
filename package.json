@@ -1,0 +1,23 @@
+{
+  "name": "technical-presentations",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run validate && vite build",
+    "preview": "vite preview",
+    "validate": "node scripts/validate-decks.mjs && node scripts/check-links.mjs",
+    "test": "playwright test",
+    "check": "npm run validate && npm run build && npm test",
+    "new:deck": "node scripts/new-deck.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@primer/octicons": "^19.32.0",
+    "@primer/primitives": "^11.10.0",
+    "ajv": "^8.20.0",
+    "axe-core": "^4.12.1",
+    "vite": "^8.1.4"
+  }
+}
