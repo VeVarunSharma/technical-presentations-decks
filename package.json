@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.61.1",
-    "@primer/octicons": "^19.32.0",
+    "@primer/octicons": "^19.33.0",
     "@primer/primitives": "^11.10.0",
     "ajv": "^8.20.0",
     "axe-core": "^4.12.1",
