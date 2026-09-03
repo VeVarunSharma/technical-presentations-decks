@@ -60,14 +60,37 @@ export function initDeck({ onReset } = {}) {
   }
 
   function updateNavigationState() {
-    if (previousButton) previousButton.disabled = currentSlide === 0 && !hasPreviousBuild();
-    if (nextButton) nextButton.disabled = currentSlide === slides.length - 1 && !hasNextBuild();
+    const canHideBuild = hasPreviousBuild();
+    const canRevealBuild = hasNextBuild();
+
+    if (previousButton) {
+      const action = canHideBuild ? "Hide" : "Back";
+      previousButton.disabled = currentSlide === 0 && !canHideBuild;
+      previousButton.innerHTML = `<span aria-hidden="true">←</span><span class="nav-button-label">${action}</span>`;
+      previousButton.setAttribute("aria-label", canHideBuild ? "Hide previous build step" : "Previous slide");
+      previousButton.title = canHideBuild ? "Hide the latest revealed step" : "Go to the previous slide";
+    }
+    if (nextButton) {
+      const action = canRevealBuild ? "Reveal" : "Next";
+      nextButton.disabled = currentSlide === slides.length - 1 && !canRevealBuild;
+      nextButton.innerHTML = `<span class="nav-button-label">${action}</span><span aria-hidden="true">→</span>`;
+      nextButton.setAttribute("aria-label", canRevealBuild ? "Reveal next build step" : "Next slide");
+      nextButton.title = canRevealBuild ? "Reveal the next step on this slide" : "Go to the next slide";
+    }
 
     if (buildCount) {
       const steps = buildSteps[currentSlide];
       const revealed = steps.filter((step) => step <= buildState[currentSlide]).length;
-      buildCount.textContent = steps.length ? `build ${revealed}/${steps.length}` : "";
+      buildCount.textContent = steps.length ? `${revealed}/${steps.length} revealed` : "No builds";
     }
+  }
+
+  function acknowledgeNavigation(button, message) {
+    if (!button) return;
+    button.dataset.feedback = message;
+    button.classList.remove("nav-activated");
+    void button.offsetWidth;
+    button.classList.add("nav-activated");
   }
 
   function revealNextBuild() {
@@ -118,11 +141,23 @@ export function initDeck({ onReset } = {}) {
   }
 
   function advanceForward() {
-    if (!revealNextBuild()) showSlide(currentSlide + 1);
+    if (revealNextBuild()) {
+      acknowledgeNavigation(nextButton, "Step revealed");
+      return;
+    }
+    const previousSlide = currentSlide;
+    showSlide(currentSlide + 1);
+    if (currentSlide !== previousSlide) acknowledgeNavigation(nextButton, "Next slide");
   }
 
   function advanceBackward() {
-    if (!hidePreviousBuild()) showSlide(currentSlide - 1);
+    if (hidePreviousBuild()) {
+      acknowledgeNavigation(previousButton, "Step hidden");
+      return;
+    }
+    const previousSlide = currentSlide;
+    showSlide(currentSlide - 1);
+    if (currentSlide !== previousSlide) acknowledgeNavigation(previousButton, "Previous slide");
   }
 
   function toggleFullscreen() {

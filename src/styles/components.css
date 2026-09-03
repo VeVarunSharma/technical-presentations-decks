@@ -78,14 +78,64 @@
 }
 
 .nav-button {
-  display: grid;
-  width: 38px;
-  height: 38px;
-  place-items: center;
+  position: relative;
+  display: flex;
+  min-width: 92px;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 7px 13px;
   border-radius: 10px;
   font-family: var(--font-mono, monospace);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 800;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.nav-button-label {
+  min-width: 44px;
+  font-size: 11px;
+  text-align: center;
+}
+
+.nav-button:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--color-accent, #0fbf3e) 55%, var(--color-border));
+  background: color-mix(in srgb, var(--color-accent, #0fbf3e) 10%, transparent);
+  color: var(--color-text, #fff);
+}
+
+.nav-button:active:not(:disabled) {
+  transform: translateY(1px) scale(0.97);
+}
+
+.nav-button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-focus-ring, var(--color-accent, #0fbf3e)) 70%, transparent);
+  outline-offset: 3px;
+}
+
+.nav-button.nav-activated {
+  animation: navigation-confirm 460ms ease-out;
+}
+
+.nav-button.nav-activated::after {
+  position: absolute;
+  right: 50%;
+  bottom: calc(100% + 9px);
+  z-index: 5;
+  padding: 5px 8px;
+  border: 1px solid color-mix(in srgb, var(--color-accent, #0fbf3e) 55%, var(--color-border));
+  border-radius: 7px;
+  background: var(--color-panel, #111827);
+  color: var(--color-text, #fff);
+  content: attr(data-feedback);
+  font-family: var(--font-sans, sans-serif);
+  font-size: 10px;
+  font-weight: 700;
+  pointer-events: none;
+  transform: translateX(50%);
+  white-space: nowrap;
 }
 
 .nav-button:disabled {
@@ -129,7 +179,19 @@
 }
 
 .build-count {
-  min-width: 64px;
+  min-width: 76px;
+  text-align: center;
+}
+
+@keyframes navigation-confirm {
+  0% {
+    border-color: var(--color-accent, #0fbf3e);
+    background: color-mix(in srgb, var(--color-accent, #0fbf3e) 24%, transparent);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-accent, #0fbf3e) 30%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 8px transparent;
+  }
 }
 
 .dot-nav {
@@ -210,6 +272,15 @@ dialog::backdrop {
   .topbar,
   .controls {
     padding-inline: 14px;
+  }
+
+  .nav-button {
+    min-width: 46px;
+    padding-inline: 10px;
+  }
+
+  .nav-button-label {
+    display: none;
   }
 
   .slide {

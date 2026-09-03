@@ -1,0 +1,24 @@
+{
+  "allowedMcpServers": [
+    { "serverUrl": "https://mcp.example.com/*" },
+    { "serverCommand": ["npx", "-y", "@playwright/mcp"] }
+  ],
+  "deniedMcpServers": [
+    { "serverCommand": ["npx", "-y", "@modelcontextprotocol/server-filesystem", "/"] }
+  ],
+  "extraKnownMarketplaces": {
+    "company-copilot": {
+      "source": { "source": "github", "repo": "YOUR-OWNER/YOUR-MARKETPLACE" },
+      "autoUpdate": false
+    }
+  },
+  "strictKnownMarketplaces": [
+    { "source": "github", "repo": "YOUR-OWNER/YOUR-MARKETPLACE" },
+    { "source": "github", "repo": "github/copilot-plugins" }
+  ],
+  "sandbox": {
+    "enabled": true,
+    "allowBypass": false,
+    "sandboxMcpServers": true
+  }
+}

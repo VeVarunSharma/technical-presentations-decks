@@ -1,0 +1,12 @@
+{
+  "developers.json": [
+    "application-developers",
+    "platform-developers"
+  ],
+  "ai-pioneers.json": [
+    "ai-pioneers"
+  ],
+  "regulated.json": [
+    "regulated-engineering"
+  ]
+}

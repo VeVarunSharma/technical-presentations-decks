@@ -1,0 +1,35 @@
+{
+  "model": "auto",
+  "permissions": {
+    "disableBypassPermissionsMode": "disable",
+    "deny": [
+      "Shell(rm -rf *)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Edit(//etc/**)",
+      "Edit(/.github/workflows/**)",
+      "Domain(*)"
+    ],
+    "ask": [
+      "Edit(/src/**)"
+    ],
+    "allow": [
+      "Shell(npm test *)",
+      "Read(/src/**)"
+    ]
+  },
+  "allowedMcpServers": [],
+  "deniedMcpServers": [
+    {
+      "serverCommand": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/"
+      ]
+    }
+  ],
+  "enabledPlugins": {
+    "regulated-controls@company-copilot": true
+  }
+}

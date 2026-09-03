@@ -1,0 +1,71 @@
+{
+  "model": "auto",
+  "permissions": {
+    "disableBypassPermissionsMode": "disable",
+    "deny": [
+      "Shell(*)",
+      "Read(~/**)",
+      "Read(//**)",
+      "Edit(/**)",
+      "Domain(*)"
+    ],
+    "ask": [],
+    "allow": [
+      "Read(/approved-context/**)"
+    ]
+  },
+  "enabledPlugins": {
+    "regulated-read-only@company-copilot": true
+  },
+  "extraKnownMarketplaces": {
+    "company-copilot": {
+      "source": {
+        "source": "github",
+        "repo": "YOUR-OWNER/YOUR-MARKETPLACE",
+        "ref": "APPROVED-COMMIT-SHA"
+      },
+      "autoUpdate": false
+    }
+  },
+  "strictKnownMarketplaces": [
+    {
+      "source": "github",
+      "repo": "YOUR-OWNER/YOUR-MARKETPLACE",
+      "ref": "APPROVED-COMMIT-SHA"
+    }
+  ],
+  "telemetry": {
+    "enabled": true,
+    "endpoint": "https://otel.example.com/v1/traces",
+    "protocol": "http/protobuf",
+    "captureContent": false,
+    "lockCaptureContent": true,
+    "serviceName": "github-copilot-regulated",
+    "resourceAttributes": {
+      "control.posture": "hard-lockdown"
+    }
+  },
+  "remoteControl": {
+    "mode": "disabled"
+  },
+  "allowedMcpServers": [],
+  "deniedMcpServers": [
+    {
+      "serverCommand": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/"
+      ]
+    }
+  ],
+  "sandbox": {
+    "enabled": true,
+    "allowBypass": false,
+    "addCurrentWorkingDirectory": false,
+    "sandboxMcpServers": true,
+    "sandboxLspServers": true,
+    "gitAuth": false,
+    "ghAuth": false
+  }
+}

@@ -216,6 +216,29 @@ for (const deck of decks) {
   });
 }
 
+test("navigation buttons expose and confirm their actual action", async ({ page }) => {
+  await page.goto("/decks/copilot-governance/");
+
+  const nextButton = page.locator("#nextButton");
+  const previousButton = page.locator("#previousButton");
+
+  await expect(nextButton).toContainText("Next");
+  await nextButton.click();
+  await expect(page.locator(".slide.active")).toHaveAttribute("data-title", "Govern the action path");
+  await expect(nextButton).toHaveClass(/nav-activated/);
+  await expect(nextButton).toContainText("Reveal");
+
+  await nextButton.click();
+  await expect(page.locator(".slide.active")).toHaveAttribute("data-title", "Govern the action path");
+  await expect(page.locator(".slide.active [data-build-step].build-visible")).toHaveCount(1);
+  await expect(previousButton).toContainText("Hide");
+  await expect(page.locator("#buildCount")).toHaveText("1/5 revealed");
+
+  await previousButton.click();
+  await expect(page.locator(".slide.active [data-build-step].build-visible")).toHaveCount(0);
+  await expect(previousButton).toContainText("Back");
+});
+
 test("GH-AW deck-specific interactions remain available", async ({ page }) => {
   await page.goto("/decks/gh-aw/");
 
@@ -287,6 +310,52 @@ test("GH-AW live-room typography meets the expanded deck thresholds", async ({ p
   });
 
   expect(undersized).toEqual([]);
+});
+
+test("Copilot governance configuration explorers remain available", async ({ page }) => {
+  await page.goto("/decks/copilot-governance/");
+
+  await page.getByRole("button", { name: /Managed settings JSON spotlight/ }).click();
+  await page.locator('[data-settings-focus="mcp"]').click();
+  expect(await page.locator("#managedSettingsCode .is-focus").count()).toBeGreaterThan(0);
+  await expect(page.locator("#settingsFocusTitle")).toContainText("MCP servers");
+
+  await page.getByRole("button", { name: /MCP source priority/ }).click();
+  await page.locator('[data-mcp-source="plugin"]').click();
+  await expect(page.locator("#mcpSourceTitle")).toContainText("package MCP");
+  await expect(page.locator("#mcpSourcePath")).toContainText("plugin.json");
+
+  await page.getByRole("button", { name: /MCP allow and deny evaluation/ }).click();
+  await page.locator('[data-mcp-mode="closed"]').click();
+  await expect(page.locator("#mcpTitle")).toContainText("empty allowlist");
+
+  await page.getByRole("button", { name: /MCP customization lockdown/ }).click();
+  await page.locator('[data-mcp-lockdown="distributed"]').click();
+  await expect(page.locator("#mcpLockdownTitle")).toContainText("Force the plugin");
+  await expect(page.locator("#mcpLockdownEligibility")).toContainText("If matched");
+
+  await page.getByRole("button", { name: /MCP permutation explorer/ }).click();
+  await page.locator('[data-mcp-permutation="plugin"]').click();
+  await expect(page.locator("#mcpPermutationTitle")).toHaveText("Managed plugin distribution");
+  await expect(page.locator("#mcpPathStatus")).toContainText("Managed plugin MCP");
+  await expect(page.locator("#mcpPathStatus")).toContainText("If matched");
+  await expect(page.locator("#mcpPermutationCode")).toContainText('"enabledPlugins"');
+  await expect(page.locator("#mcpPermutationCode")).toContainText('"allowedMcpServers"');
+
+  await page.locator('[data-mcp-permutation="closed"]').click();
+  await expect(page.locator("#mcpPermutationTitle")).toHaveText("No custom MCP");
+  await expect(page.locator("#mcpPathStatus")).toContainText("Trusted first-party");
+
+  await page.getByRole("button", { name: /Posture explorer/ }).click();
+  await page.locator('[data-posture="lockdown"]').click();
+  await expect(page.locator("#postureTitle")).toHaveText("Hard lockdown");
+  await expect(page.locator("#postureCode")).toContainText('"allowedMcpServers": []');
+  await expect(page.locator("#postureCode")).not.toContainText("strictPluginOnlyCustomization");
+
+  await page.getByRole("button", { name: /Team mapping explorer/ }).click();
+  await page.locator('[data-team="pioneers"]').click();
+  await expect(page.locator("#teamEffectiveTitle")).toContainText("Broader experimentation");
+  await expect(page.locator("#teamCode")).toContainText('"model": "unmanaged"');
 });
 
 test("GHAS deck demos and complete release explorer remain available", async ({ page }) => {

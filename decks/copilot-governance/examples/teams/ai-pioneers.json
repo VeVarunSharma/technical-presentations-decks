@@ -1,0 +1,46 @@
+{
+  "model": "unmanaged",
+  "permissions": {
+    "disableBypassPermissionsMode": "unmanaged",
+    "deny": [
+      "Shell(rm -rf *)",
+      "Read(~/.ssh/**)",
+      "Edit(//etc/**)"
+    ],
+    "ask": [
+      "Shell(git push *)"
+    ],
+    "allow": [
+      "Shell(npm test *)",
+      "Shell(git diff *)",
+      "Read(/src/**)",
+      "Edit(/src/**)",
+      "Domain(registry.npmjs.org)",
+      "Domain(api.github.com)"
+    ]
+  },
+  "allowedMcpServers": [
+    {
+      "serverUrl": "https://mcp.example.com/*"
+    },
+    {
+      "serverCommand": [
+        "npx",
+        "-y",
+        "@playwright/mcp"
+      ]
+    }
+  ],
+  "enabledPlugins": {
+    "experimentation-lab@company-copilot": true
+  },
+  "extraKnownMarketplaces": {
+    "approved-labs": {
+      "source": {
+        "source": "github",
+        "repo": "YOUR-OWNER/YOUR-LABS-MARKETPLACE"
+      },
+      "autoUpdate": false
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "model": "auto",
+  "permissions": {
+    "disableBypassPermissionsMode": "disable",
+    "deny": [
+      "Shell(rm -rf *)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Edit(//etc/**)",
+      "Edit(/.github/workflows/**)",
+      "Domain(*)"
+    ],
+    "ask": [
+      "Shell(git push *)",
+      "Shell(gh pr create *)",
+      "Edit(/src/**)"
+    ],
+    "allow": [
+      "Shell(npm test *)",
+      "Shell(git diff *)",
+      "Read(/src/**)"
+    ]
+  },
+  "enabledPlugins": {
+    "secure-development@company-copilot": true
+  },
+  "extraKnownMarketplaces": {
+    "company-copilot": {
+      "source": {
+        "source": "github",
+        "repo": "YOUR-OWNER/YOUR-MARKETPLACE",
+        "ref": "v1.0.0"
+      },
+      "autoUpdate": false
+    }
+  },
+  "strictKnownMarketplaces": [
+    {
+      "source": "github",
+      "repo": "YOUR-OWNER/YOUR-MARKETPLACE",
+      "ref": "v1.0.0"
+    }
+  ],
+  "telemetry": {
+    "enabled": true,
+    "endpoint": "https://otel.example.com/v1/traces",
+    "protocol": "http/protobuf",
+    "captureContent": false,
+    "lockCaptureContent": true,
+    "serviceName": "github-copilot-secure"
+  },
+  "remoteControl": {
+    "mode": "requireSSO",
+    "githubDotComOrganizations": [
+      "YOUR-ORG"
+    ]
+  },
+  "allowedMcpServers": [
+    {
+      "serverUrl": "https://mcp.example.com/read-only/*"
+    }
+  ],
+  "deniedMcpServers": [
+    {
+      "serverCommand": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/"
+      ]
+    }
+  ],
+  "sandbox": {
+    "enabled": true,
+    "allowBypass": false,
+    "addCurrentWorkingDirectory": false,
+    "sandboxMcpServers": true,
+    "sandboxLspServers": true,
+    "gitAuth": false,
+    "ghAuth": false
+  }
+}

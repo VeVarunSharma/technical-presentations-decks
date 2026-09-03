@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en" data-brand="github" data-theme="copilot-dark" data-deck-title="GitHub Copilot Governance: Managed Settings at Scale">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="GitHub Copilot enterprise managed settings, team mappings, plugins, marketplaces, MCP servers, and governance postures">
+  <title>GitHub Copilot Governance: Managed Settings at Scale</title>
+  <link rel="stylesheet" href="../../brands/github/tokens.css">
+  <link rel="stylesheet" href="../../brands/github/themes/copilot-dark.css">
+  <link rel="stylesheet" href="./deck.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">GH</div>
+        <div class="brand-title">Copilot governance / managed settings</div>
+      </div>
+      <div class="top-actions">
+        <span class="shortcut">Space / arrows reveal, then navigate</span>
+        <button class="small-button" id="sourcesButton" type="button">Sources</button>
+        <button class="small-button" id="fullscreenButton" type="button">Full screen</button>
+      </div>
+    </header>
+
+    <main class="stage-shell">
+      <div class="stage" id="stage" aria-live="polite">
+        <section class="slide active title-slide" data-title="Opening">
+          <div class="title-layout">
+            <div>
+              <div class="eyebrow">GitHub Copilot governance · 75-minute deep dive</div>
+              <h1>Managed settings.<br><span class="accent-text">Bounded autonomy.</span></h1>
+              <p class="lede">Turn individual Copilot configuration into an enterprise control plane—then specialize it safely for teams.</p>
+              <div class="title-pills">
+                <span>managed-settings.json</span><span>team mappings</span><span>plugins + MCP</span>
+              </div>
+            </div>
+            <div class="hero-stack" aria-label="Enterprise baseline with team-specific operating envelopes">
+              <div class="hero-layer enterprise">Enterprise baseline</div>
+              <div class="hero-connector"></div>
+              <div class="hero-teams"><span>Developers</span><span>AI pioneers</span><span>Regulated</span></div>
+              <div class="hero-outcome">One control plane · different bounded experiences</div>
+            </div>
+          </div>
+          <div class="source-note">Scenario: enable Copilot broadly without giving every team the same operating envelope.</div>
+        </section>
+
+        <section class="slide" data-title="Govern the action path">
+          <div class="section-heading"><div><div class="eyebrow">01 · Why this matters</div><h2 class="section-title">Govern the complete <span class="accent-text">action path</span></h2><p class="section-subtitle">A model choice is only one part of the risk boundary.</p></div><div class="slide-index">02</div></div>
+          <div class="action-path">
+            <article><span>01</span><b>Identity</b><p>Who is signed in and billed?</p></article>
+            <article data-build-step="1"><span>02</span><b>Context</b><p>What files and data can be read?</p></article>
+            <article data-build-step="2"><span>03</span><b>Tools</b><p>Which commands, plugins, and MCP servers exist?</p></article>
+            <article data-build-step="3"><span>04</span><b>Effects</b><p>What can run, change, or leave the device?</p></article>
+            <article data-build-step="4"><span>05</span><b>Evidence</b><p>What can administrators observe?</p></article>
+          </div>
+          <div class="callout" data-build-step="5">Governance is the operating envelope around the agent—not a single on/off switch.</div>
+        </section>
+
+        <section class="slide" data-title="Managed settings control plane">
+          <div class="section-heading"><div><div class="eyebrow">02 · Control plane</div><h2 class="section-title">One baseline reaches <span class="accent-text">multiple clients</span></h2><p class="section-subtitle">Not every property is supported by every client; label CLI-specific controls explicitly.</p></div><div class="slide-index">03</div></div>
+          <div class="control-plane">
+            <div class="policy-source"><code>copilot/managed-settings.json</code><strong>Enterprise-owned baseline</strong></div>
+            <div class="policy-arrow">↓</div>
+            <div class="client-row">
+              <article><b>Copilot CLI</b><span>Broadest agent controls</span></article>
+              <article><b>VS Code</b><span>Permissions + telemetry</span></article>
+              <article><b>Copilot app</b><span>Agent experience</span></article>
+              <article><b>Cloud agent</b><span>Server-managed reach</span></article>
+              <article><b>JetBrains</b><span>Property coverage varies</span></article>
+            </div>
+          </div>
+          <div class="source-note">Use the current supported-keys matrix before deployment; client coverage evolves.</div>
+        </section>
+
+        <section class="slide" data-title="Delivery and precedence">
+          <div class="section-heading"><div><div class="eyebrow">03 · Delivery</div><h2 class="section-title">Choose delivery by <span class="accent-text">control requirement</span></h2><p class="section-subtitle">Precedence and offline behavior differ across delivery methods.</p></div><div class="slide-index">04</div></div>
+          <div class="delivery-grid">
+            <article><span class="rank">1</span><h3>MDM-managed</h3><p>Device-group targeting on macOS and Windows. Applies before sign-in and survives account switching.</p></article>
+            <article data-build-step="1"><span class="rank">2</span><h3>Server-managed</h3><p>Default for most enterprises. Reviewable in `.github-private`, audited, and supports team specialization.</p></article>
+            <article data-build-step="2"><span class="rank">3</span><h3>File-based</h3><p>Useful for Linux, containers, Codespaces, and environments without server or native MDM delivery.</p></article>
+            <article data-build-step="3"><span class="rank">4</span><h3>User-level</h3><p>Lowest precedence. Remains available only where administrators intentionally leave room.</p></article>
+          </div>
+          <div class="precedence-note" data-build-step="4"><b>Exception:</b> sandbox and managed permission rules compose in the most restrictive direction across sources.</div>
+        </section>
+
+        <section class="slide" data-title="Repository layout">
+          <div class="section-heading"><div><div class="eyebrow">04 · Server-managed layout</div><h2 class="section-title">Policy lives in a <span class="accent-text">private governance repository</span></h2><p class="section-subtitle">The enterprise baseline decides what teams may specialize.</p></div><div class="slide-index">05</div></div>
+          <div class="repo-layout">
+            <pre aria-label="Managed settings repository tree"><code>.github-private/
+└── copilot/
+    ├── <mark>managed-settings.json</mark>
+    ├── <mark>team-mappings.json</mark>
+    └── teams/
+        ├── developers.json
+        ├── ai-pioneers.json
+        └── regulated.json</code></pre>
+            <div class="repo-rules">
+              <article data-build-step="1"><b>Baseline first</b><span>Non-overridable keys remain enterprise decisions.</span></article>
+              <article data-build-step="2"><b>Opt in to variation</b><span>Wrap supported keys with <code>{"overridable": value}</code>.</span></article>
+              <article data-build-step="3"><b>Map by team slug</b><span>One settings file can serve multiple enterprise teams.</span></article>
+              <article data-build-step="4"><b>Refresh deliberately</b><span>Changes apply within about an hour; restart or sign-in refreshes immediately.</span></article>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide spotlight-slide" data-title="Managed settings JSON spotlight">
+          <div class="section-heading compact"><div><div class="eyebrow">05 · Interactive JSON spotlight</div><h2 class="section-title">Review the <span class="accent-text">operating envelope</span> as code</h2><p class="section-subtitle">Select a concern to isolate the settings that govern it.</p></div><div class="slide-index">06</div></div>
+          <div class="spotlight-layout">
+            <div class="code-card">
+              <div class="code-toolbar"><span class="code-filename">copilot/managed-settings.json · generated excerpt</span><div><button class="copy-button" id="copyBaseline" type="button">Copy full file</button><a class="copy-button" href="./examples/flexible/managed-settings.json" download>Download</a></div></div>
+              <div class="code-window"><code class="json-code" id="managedSettingsCode" aria-label="Annotated managed settings JSON"></code></div>
+            </div>
+            <aside class="focus-panel">
+              <div class="focus-menu" id="settingsFocusMenu" aria-label="Managed settings categories"></div>
+              <div class="focus-detail"><span class="micro-label" id="settingsFocusLabel">Complete policy</span><h3 id="settingsFocusTitle">One file defines the enterprise baseline</h3><p id="settingsFocusBody">Model, permissions, extension supply chain, telemetry, remote control, MCP servers, and sandboxing are reviewable together.</p><strong id="settingsFocusTakeaway">Policy becomes versioned infrastructure.</strong></div>
+            </aside>
+          </div>
+          <div class="source-note">Only documented keys are team-overridable; plugins and extra marketplaces compose additively.</div>
+        </section>
+
+        <section class="slide" data-title="Permissions precedence">
+          <div class="section-heading"><div><div class="eyebrow">06 · Permissions</div><h2 class="section-title"><span class="danger-text">deny</span> → ask → allow</h2><p class="section-subtitle">The strongest matching rule wins, and managed approval cannot be bypassed by a remembered grant.</p></div><div class="slide-index">07</div></div>
+          <div class="permission-stack">
+            <article class="deny"><b>deny</b><code>Read(~/.ssh/**)</code><p>Blocked even when another rule would ask or allow.</p></article>
+            <article class="ask" data-build-step="1"><b>ask</b><code>Shell(git push *)</code><p>Requires fresh one-time human approval each time.</p></article>
+            <article class="allow" data-build-step="2"><b>allow</b><code>Shell(npm test *)</code><p>Runs without a prompt when no deny or ask rule matches.</p></article>
+            <article class="default" data-build-step="3"><b>unmatched</b><code>supported operation</code><p>Defaults to approval when managed rules or an allowlist exist.</p></article>
+          </div>
+          <div class="selector-row" data-build-step="4"><span>Shell(...)</span><span>Read(...)</span><span>Edit(...)</span><span>Domain(...)</span></div>
+        </section>
+
+        <section class="slide" data-title="Plugins and marketplaces">
+          <div class="section-heading"><div><div class="eyebrow">07 · Extension supply chain</div><h2 class="section-title">A plugin is a <span class="accent-text">capability bundle</span></h2><p class="section-subtitle">Govern both what is installed and where installable content may originate.</p></div><div class="slide-index">08</div></div>
+          <div class="plugin-flow">
+            <div class="plugin-package"><strong>plugin.json</strong><div><span>agents</span><span>skills</span><span>hooks</span><span>MCP config</span></div></div>
+            <div class="flow-arrow">→</div>
+            <div class="marketplace"><strong>marketplace.json</strong><p>Discovery, source, version, ownership, and distribution.</p></div>
+            <div class="flow-arrow">→</div>
+            <div class="managed-policy"><code>enabledPlugins</code><code>extraKnownMarketplaces</code><code>strictKnownMarketplaces</code></div>
+          </div>
+          <div class="three-facts">
+            <article data-build-step="1"><b>Enable or block</b><span>Force a named plugin on or off by marketplace key.</span></article>
+            <article data-build-step="2"><b>Curate sources</b><span>Add enterprise marketplaces and control automatic updates.</span></article>
+            <article data-build-step="3"><b>Restrict installation</b><span>An empty strict marketplace list is complete marketplace lockdown.</span></article>
+          </div>
+        </section>
+
+        <section class="slide" data-title="MCP control layers">
+          <div class="section-heading compact"><div><div class="eyebrow">08 · MCP control model</div><h2 class="section-title">Three questions—not <span class="accent-text">one allowlist</span></h2><p class="section-subtitle">A server definition must move through discovery, eligibility, and execution approval.</p></div><div class="slide-index">09</div></div>
+          <div class="mcp-gates">
+            <article><span>01 · Definition</span><h3>Where did it come from?</h3><p>Session config, plugin, workspace/repository, user config, managed deployment, or built-in.</p><strong>Discovered</strong></article>
+            <i>→</i>
+            <article data-build-step="1"><span>02 · Eligibility</span><h3>May this identity load?</h3><p>Managed allow/deny lists, customization lockdown, and enterprise MCP policy.</p><strong>Loaded</strong></article>
+            <i>→</i>
+            <article data-build-step="2"><span>03 · Invocation</span><h3>May this tool execute?</h3><p>MCP server/tool approval and normal Copilot permission rules still apply.</p><strong>Approved to act</strong></article>
+          </div>
+          <div class="mcp-thesis" data-build-step="3"><b>Discovered ≠ loaded ≠ approved.</b><span>Plugins package definitions; allowlists decide eligibility.</span></div>
+          <div class="source-note">The “MCP servers in Copilot” product policy must also be enabled for any MCP server to run.</div>
+        </section>
+
+        <section class="slide" data-title="MCP source priority">
+          <div class="section-heading compact"><div><div class="eyebrow">09 · Copilot CLI definition sources</div><h2 class="section-title">All sources can coexist—<span class="accent-text">names resolve first</span></h2><p class="section-subtitle">Select a source to see its scope and CLI collision priority.</p></div><div class="slide-index">10</div></div>
+          <div class="source-priority-layout">
+            <div class="source-priority" id="mcpSourcePriority" role="tablist" aria-label="MCP definition source priority"></div>
+            <div class="source-detail">
+              <span class="micro-label" id="mcpSourceRank">Priority 1</span>
+              <h3 id="mcpSourceTitle"></h3>
+              <p id="mcpSourceBody"></p>
+              <code id="mcpSourcePath"></code>
+            </div>
+            <div class="collision-card">
+              <span class="micro-label">Same-name collision</span>
+              <div class="collision-stack"><span>plugin: design-tools</span><span>workspace: design-tools</span><span>user: design-tools</span></div>
+              <strong>Plugin definition wins</strong>
+              <p>Priority chooses the definition. It does not bypass enterprise eligibility gates.</p>
+            </div>
+          </div>
+          <div class="source-note">Copilot CLI priority: session-only → plugin → workspace/repository → user. Eligibility policy is evaluated afterward.</div>
+        </section>
+
+        <section class="slide" data-title="MCP allow and deny evaluation">
+          <div class="section-heading compact"><div><div class="eyebrow">10 · Eligibility filter</div><h2 class="section-title">Match the <span class="accent-text">server identity</span>, regardless of source</h2><p class="section-subtitle">Direct, session, workspace, and plugin-provided servers use the same documented allow/deny gate.</p></div><div class="slide-index">11</div></div>
+          <div class="mcp-layout">
+            <div class="mcp-modes" id="mcpModes" role="tablist" aria-label="MCP governance modes">
+              <button type="button" data-mcp-mode="open">Omitted allowlist</button>
+              <button type="button" data-mcp-mode="curated">Curated allowlist</button>
+              <button type="button" data-mcp-mode="closed">Empty allowlist</button>
+              <button type="button" data-mcp-mode="denied">Explicit deny</button>
+            </div>
+            <div class="mcp-detail">
+              <span class="micro-label" id="mcpLabel">Open with exceptions</span>
+              <h3 id="mcpTitle">Omitting the allowlist permits servers subject to deny rules</h3>
+              <p id="mcpBody">This maximizes flexibility but gives administrators the least positive control over external tools and data sources.</p>
+              <pre><code id="mcpCode">"deniedMcpServers": [...]</code></pre>
+            </div>
+            <div class="matcher-list">
+              <article><code>serverUrl</code><span>Remote HTTP/SSE server; wildcard patterns supported.</span></article>
+              <article><code>serverCommand</code><span>Exact local stdio command and arguments; no wildcards.</span></article>
+              <article><code>serverName</code><span>Fallback identity; weaker than URL or command matching.</span></article>
+            </div>
+          </div>
+          <div class="source-note">Deny wins. Trusted first-party Copilot MCP servers are exempt. GitHub recommends managed settings over registry-only restriction.</div>
+        </section>
+
+        <section class="slide" data-title="Plugin MCP versus standalone MCP">
+          <div class="section-heading compact"><div><div class="eyebrow">11 · Packaging versus policy</div><h2 class="section-title">Plugin MCP is a <span class="accent-text">distribution choice</span></h2><p class="section-subtitle">It changes lifecycle and supply-chain governance—not the fundamental risk of the server.</p></div><div class="slide-index">12</div></div>
+          <div class="mcp-comparison">
+            <div class="comparison-head"><span>Dimension</span><strong>Standalone MCP</strong><strong>Plugin-bundled MCP</strong></div>
+            <div><b>Definition</b><span>User, workspace, repository, or session file</span><span>Plugin manifest/configuration</span></div>
+            <div><b>Package</b><span>MCP server only</span><span>May bundle agents, skills, hooks, and MCP</span></div>
+            <div><b>Lifecycle</b><span>Managed with local or repository config</span><span>Installed, enabled, updated, or removed with plugin</span></div>
+            <div><b>Supply chain</b><span>Review server identity and configuration</span><span>Review marketplace, plugin identity/version, and server identity</span></div>
+            <div><b>Eligibility</b><span>Managed MCP identity policy applies</span><span>The same managed MCP identity policy applies</span></div>
+          </div>
+          <div class="callout">A trusted marketplace answers “where did the plugin come from?” The MCP allowlist answers “may this server identity connect?” Current documented settings do not make provenance-specific MCP allow rules.</div>
+        </section>
+
+        <section class="slide" data-title="MCP customization lockdown">
+          <div class="section-heading compact"><div><div class="eyebrow">12 · Documented control ladder</div><h2 class="section-title">Tighten <span class="accent-text">eligibility and distribution</span></h2><p class="section-subtitle">Select a level to see what each documented setting controls—and what it does not.</p></div><div class="slide-index">13</div></div>
+          <div class="lockdown-tabs" id="mcpLockdownTabs" role="tablist" aria-label="MCP customization lockdown levels"></div>
+          <div class="lockdown-detail">
+            <div><span class="micro-label" id="mcpLockdownLabel"></span><h3 id="mcpLockdownTitle"></h3><p id="mcpLockdownBody"></p></div>
+            <pre><code id="mcpLockdownCode"></code></pre>
+            <div class="eligibility-row" id="mcpLockdownEligibility"></div>
+          </div>
+          <div class="source-note">Marketplace and enabled-plugin settings govern plugin distribution. MCP allow/deny settings independently govern server identity.</div>
+        </section>
+
+        <section class="slide permutation-slide" data-title="MCP permutation explorer">
+          <div class="section-heading compact"><div><div class="eyebrow">13 · Interactive permutations</div><h2 class="section-title">Choose the <span class="accent-text">operating model</span>, not just a toggle</h2><p class="section-subtitle">Six practical combinations show which MCP paths remain available and why.</p></div><div class="slide-index">14</div></div>
+          <div class="permutation-tabs" id="mcpPermutationTabs" role="tablist" aria-label="MCP governance permutations"></div>
+          <div class="permutation-layout">
+            <div class="code-card"><div class="code-toolbar"><span class="code-filename" id="mcpPermutationFilename"></span><a class="copy-button" id="mcpPermutationDownload" download>Download</a></div><div class="code-window"><code class="json-code" id="mcpPermutationCode"></code></div></div>
+            <aside class="permutation-detail"><span class="micro-label" id="mcpPermutationLabel"></span><h3 id="mcpPermutationTitle"></h3><p id="mcpPermutationBody"></p><div class="path-status" id="mcpPathStatus"></div><dl><div><dt>Use when</dt><dd id="mcpPermutationUse"></dd></div><div><dt>Trade-off</dt><dd id="mcpPermutationTradeoff"></dd></div></dl></aside>
+          </div>
+          <div class="source-note">Recommended general default: curated hybrid. For managed plugin delivery, force-enable the plugin and separately allowlist its MCP server identities.</div>
+        </section>
+
+        <section class="slide" data-title="Sandbox and remote control">
+          <div class="section-heading"><div><div class="eyebrow">14 · Runtime boundaries</div><h2 class="section-title">Enforce a <span class="accent-text">minimum sandbox</span></h2><p class="section-subtitle">Users may tighten managed sandbox restrictions; they cannot loosen enforced minimums.</p></div><div class="slide-index">15</div></div>
+          <div class="boundary-grid">
+            <article><h3>Local execution</h3><code>"enabled": true</code><p>Require the sandbox and prevent disabling it.</p></article>
+            <article data-build-step="1"><h3>Bypass</h3><code>"allowBypass": false</code><p>Prevent commands from escaping the sandbox by request.</p></article>
+            <article data-build-step="2"><h3>Local servers</h3><code>"sandboxMcpServers": true</code><p>Run CLI-started MCP and LSP servers inside the sandbox.</p></article>
+            <article data-build-step="3"><h3>Credentials</h3><code>"gitAuth": false</code><p>Prevent automatic Git and GitHub CLI token injection.</p></article>
+          </div>
+          <div class="remote-row" data-build-step="4"><b>Remote control:</b><span>enabled</span><span>requireSSO + named organizations</span><span>disabled</span></div>
+        </section>
+
+        <section class="slide" data-title="Four governance postures">
+          <div class="section-heading compact"><div><div class="eyebrow">15 · Decision framework</div><h2 class="section-title">Choose a posture by <span class="accent-text">risk and operating context</span></h2><p class="section-subtitle">The strictest policy is not automatically the best policy for every team.</p></div><div class="slide-index">16</div></div>
+          <div class="posture-table" role="table" aria-label="Comparison of four Copilot governance postures">
+            <div class="table-row table-head" role="row"><span>Posture</span><span>Autonomy</span><span>Extensions</span><span>Runtime</span><span>Best fit</span></div>
+            <div class="table-row" role="row"><b>Unmanaged</b><span>High</span><span>User selected</span><span>User selected</span><span>Labs / no central requirement</span></div>
+            <div class="table-row" role="row"><b>Flexible baseline</b><span>High, bounded</span><span>Curated + team additions</span><span>Sandbox on</span><span>Most engineering teams</span></div>
+            <div class="table-row" role="row"><b>Very secure</b><span>Approval-led</span><span>Approved pinned source</span><span>Narrow access</span><span>Sensitive production work</span></div>
+            <div class="table-row" role="row"><b>Hard lockdown</b><span>Minimal</span><span>Single approved source</span><span>Read-only envelope</span><span>Regulated / exceptional zones</span></div>
+          </div>
+          <div class="callout">Start with the least restrictive posture that satisfies the control objective—then measure and tighten.</div>
+        </section>
+
+        <section class="slide posture-slide" data-title="Posture explorer">
+          <div class="section-heading compact"><div><div class="eyebrow">16 · Interactive posture explorer</div><h2 class="section-title">Compare the actual <span class="accent-text">configuration</span></h2><p class="section-subtitle">Switch posture to inspect policy, trade-offs, and intended use.</p></div><div class="slide-index">17</div></div>
+          <div class="posture-tabs" id="postureTabs" role="tablist" aria-label="Governance posture examples"></div>
+          <div class="posture-layout">
+            <div class="code-card">
+              <div class="code-toolbar"><span class="code-filename" id="postureFilename">No managed-settings.json</span><a class="copy-button" id="postureDownload" href="./examples/unmanaged/README.md" download>Download note</a></div>
+              <div class="code-window"><code class="json-code" id="postureCode"></code></div>
+            </div>
+            <aside class="posture-detail">
+              <span class="micro-label" id="postureLabel">No central policy</span>
+              <h3 id="postureTitle">Unmanaged</h3>
+              <p id="postureBody"></p>
+              <div class="meter"><span>Developer autonomy</span><i><b id="autonomyMeter"></b></i></div>
+              <div class="meter"><span>Administrative assurance</span><i><b id="assuranceMeter"></b></i></div>
+              <dl><div><dt>Use when</dt><dd id="postureUse"></dd></div><div><dt>Trade-off</dt><dd id="postureTradeoff"></dd></div></dl>
+            </aside>
+          </div>
+        </section>
+
+        <section class="slide" data-title="Flexible baseline">
+          <div class="section-heading"><div><div class="eyebrow">17 · Flexible baseline</div><h2 class="section-title">Protect the dangerous edges; <span class="accent-text">keep flow</span></h2><p class="section-subtitle">A practical default for broad engineering adoption.</p></div><div class="slide-index">18</div></div>
+          <div class="scenario-grid">
+            <article><b>Always blocked</b><p>Destructive shell, sensitive credentials, system edits, and unapproved domains.</p></article>
+            <article><b>Fresh approval</b><p>Pushes, workflow changes, and consequential API access.</p></article>
+            <article><b>Fast path</b><p>Tests, diffs, source reads/edits, and approved package registries.</p></article>
+            <article><b>Extension policy</b><p>Company baseline plugin plus approved marketplaces and team additions.</p></article>
+            <article><b>Runtime</b><p>Sandbox required; local MCP and LSP servers contained.</p></article>
+            <article><b>Evidence</b><p>OTLP enabled without prompt or response content.</p></article>
+          </div>
+          <div class="source-note"><a href="./examples/flexible/managed-settings.json" download>Download flexible managed-settings.json</a></div>
+        </section>
+
+        <section class="slide" data-title="Very secure">
+          <div class="section-heading"><div><div class="eyebrow">18 · Very secure</div><h2 class="section-title">Narrow capability; <span class="accent-text">require intent</span></h2><p class="section-subtitle">Designed for sensitive production code where controlled progress is still expected.</p></div><div class="slide-index">19</div></div>
+          <div class="secure-path">
+            <article><span>1</span><b>Read approved source</b></article><i>→</i>
+            <article><span>2</span><b>Run bounded tests</b></article><i>→</i>
+            <article><span>3</span><b>Ask before edits</b></article><i>→</i>
+            <article><span>4</span><b>Use one read-only MCP</b></article><i>→</i>
+            <article><span>5</span><b>Human-controlled delivery</b></article>
+          </div>
+          <div class="two-callouts"><div><b>Supply chain</b><span>One pinned enterprise marketplace; automatic updates disabled.</span></div><div><b>Credentials</b><span>No automatic Git or GitHub CLI token injection inside the sandbox.</span></div></div>
+          <div class="source-note"><a href="./examples/very-secure/managed-settings.json" download>Download very-secure managed-settings.json</a></div>
+        </section>
+
+        <section class="slide" data-title="Hard lockdown">
+          <div class="section-heading"><div><div class="eyebrow">19 · Hard lockdown</div><h2 class="section-title">A deliberately <span class="danger-text">small operating envelope</span></h2><p class="section-subtitle">Use for exceptional zones—not as an unexamined enterprise default.</p></div><div class="slide-index">20</div></div>
+          <div class="lockdown-layout">
+            <div class="lock-icon" aria-hidden="true">LOCK</div>
+            <div class="lockdown-rules">
+              <article><b>Shell</b><span>Denied</span></article>
+              <article><b>Writes</b><span>Denied</span></article>
+              <article><b>Network</b><span>Denied</span></article>
+              <article><b>MCP</b><span>All custom blocked</span></article>
+              <article><b>Marketplace</b><span>One pinned source</span></article>
+              <article><b>Remote control</b><span>Disabled</span></article>
+            </div>
+          </div>
+          <div class="callout">The approved plugin may still deliver agents, skills, hooks, and instructions, but its non-default MCP servers do not pass an empty <code>allowedMcpServers</code> list.</div>
+          <div class="source-note"><a href="./examples/hard-lockdown/managed-settings.json" download>Download hard-lockdown managed-settings.json</a></div>
+        </section>
+
+        <section class="slide team-slide" data-title="Team mapping explorer">
+          <div class="section-heading compact"><div><div class="eyebrow">20 · Interactive team mapping</div><h2 class="section-title">Specialize only the keys the <span class="accent-text">enterprise permits</span></h2><p class="section-subtitle">Choose a team to see its mapped overlay and effective operating intent.</p></div><div class="slide-index">21</div></div>
+          <div class="team-tabs" id="teamTabs" role="tablist" aria-label="Enterprise team examples"></div>
+          <div class="team-layout">
+            <div class="mapping-card"><span class="micro-label">team-mappings.json</span><pre><code id="teamMappingCode"></code></pre></div>
+            <div class="code-card"><div class="code-toolbar"><span class="code-filename" id="teamFilename">teams/developers.json</span><a class="copy-button" id="teamDownload" download>Download</a></div><div class="code-window"><code class="json-code" id="teamCode"></code></div></div>
+            <aside class="effective-card"><span class="micro-label">Effective intent</span><h3 id="teamEffectiveTitle"></h3><p id="teamEffectiveBody"></p><div id="teamEffectiveFacts"></div></aside>
+          </div>
+          <div class="source-note">The enterprise defines every setting; team membership only selects approved specialization.</div>
+        </section>
+
+        <section class="slide" data-title="Overlapping teams">
+          <div class="section-heading"><div><div class="eyebrow">21 · Resolution model</div><h2 class="section-title">Overlapping teams can create the <span class="danger-text">least-restrictive result</span></h2><p class="section-subtitle">Treat enterprise team membership as a policy input.</p></div><div class="slide-index">22</div></div>
+          <div class="overlap-layout">
+            <div class="venn" aria-label="User belongs to regulated and AI pioneer teams"><span class="regulated">Regulated</span><span class="pioneer">AI pioneers</span><strong>User</strong></div>
+            <div class="resolution">
+              <article><b>Overridable values</b><span>Matching team files combine using the least restrictive value.</span></article>
+              <article data-build-step="1"><b>Plugins + marketplaces</b><span>Team additions accumulate on top of the enterprise baseline.</span></article>
+              <article data-build-step="2"><b>Enterprise decisions</b><span>Non-overridable keys and platform decisions still win.</span></article>
+              <article data-build-step="3"><b>Design response</b><span>Use mutually exclusive entitlement teams, membership review, and expiring exceptions.</span></article>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" data-title="Adoption path">
+          <div class="section-heading"><div><div class="eyebrow">22 · Adoption</div><h2 class="section-title">Pilot, observe, tighten, <span class="accent-text">repeat</span></h2><p class="section-subtitle">Governance becomes credible when it improves through evidence.</p></div><div class="slide-index">23</div></div>
+          <div class="adoption-path">
+            <article><span>01</span><b>Inventory</b><p>Clients, workflows, plugins, MCP servers, and sensitive zones.</p></article>
+            <article data-build-step="1"><span>02</span><b>Pilot</b><p>Small device group and one representative engineering team.</p></article>
+            <article data-build-step="2"><span>03</span><b>Observe</b><p>Approval friction, blocked work, extension use, and telemetry.</p></article>
+            <article data-build-step="3"><span>04</span><b>Specialize</b><p>Use team overlays only for explicit operating differences.</p></article>
+            <article data-build-step="4"><span>05</span><b>Review</b><p>Owners, exceptions, memberships, sources, and product changes.</p></article>
+          </div>
+          <div class="closing-question">What is the least restrictive policy that still gives us the assurance we need?</div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="controls">
+      <button class="nav-button" id="previousButton" type="button" aria-label="Previous slide">&lt;</button>
+      <div class="progress-wrap"><div class="dot-nav" id="dotNav" aria-label="Slide navigation"></div><div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div><div class="slide-count" id="slideCount">01 / 23</div><div class="build-count" id="buildCount"></div></div>
+      <button class="nav-button" id="nextButton" type="button" aria-label="Next slide">&gt;</button>
+    </footer>
+  </div>
+
+  <dialog id="sourcesDialog"><div class="card sources-dialog"><h2>Sources and reusable examples</h2><p>Technical claims are documented in <a href="./sources.md">sources.md</a>.</p><p>Download the example policies from the <a href="./examples/">examples directory</a>.</p><button class="small-button" id="closeSources" type="button">Close</button></div></dialog>
+  <script type="module" src="./deck.js"></script>
+</body>
+</html>

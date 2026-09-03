@@ -1,0 +1,25 @@
+{
+  "id": "copilot-governance",
+  "title": "GitHub Copilot Governance: Managed Settings at Scale",
+  "description": "A technical deep dive on enterprise-managed Copilot settings, MCP source and eligibility controls, team specialization, plugins, marketplaces, and graduated governance postures.",
+  "brand": "github",
+  "theme": "copilot-dark",
+  "audience": "platform, security, enterprise administrators, and developers",
+  "durationMinutes": 75,
+  "status": "draft",
+  "default": false,
+  "sources": "sources.md",
+  "learningObjectives": [
+    "Explain how managed settings delivery, precedence, and team specialization combine into an enterprise Copilot control plane.",
+    "Distinguish MCP definition sources, eligibility gates, plugin packaging, customization lockdown, and per-tool execution approval.",
+    "Compare unmanaged, flexible, very secure, and hard-lockdown postures and select an appropriate starting point for a workload.",
+    "Design team mappings that preserve enterprise guardrails without creating accidental exceptions through overlapping membership.",
+    "Adopt managed settings through a pilot, evidence review, documented exceptions, and iterative tightening."
+  ],
+  "validators": [
+    {
+      "name": "Copilot governance example validator",
+      "command": "node validate-examples.mjs"
+    }
+  ]
+}
