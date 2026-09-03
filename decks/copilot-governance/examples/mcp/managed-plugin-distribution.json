@@ -1,0 +1,22 @@
+{
+  "allowedMcpServers": [
+    { "serverUrl": "https://plugins.example.com/secure-development/*" }
+  ],
+  "enabledPlugins": {
+    "secure-development@company-copilot": true
+  },
+  "extraKnownMarketplaces": {
+    "company-copilot": {
+      "source": { "source": "github", "repo": "YOUR-OWNER/YOUR-MARKETPLACE", "ref": "v1.0.0" },
+      "autoUpdate": false
+    }
+  },
+  "strictKnownMarketplaces": [
+    { "source": "github", "repo": "YOUR-OWNER/YOUR-MARKETPLACE", "ref": "v1.0.0" }
+  ],
+  "sandbox": {
+    "enabled": true,
+    "allowBypass": false,
+    "sandboxMcpServers": true
+  }
+}

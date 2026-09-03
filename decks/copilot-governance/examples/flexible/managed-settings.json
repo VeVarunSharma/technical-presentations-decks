@@ -1,0 +1,102 @@
+{
+  "model": {
+    "overridable": "auto"
+  },
+  "permissions": {
+    "disableBypassPermissionsMode": {
+      "overridable": "disable"
+    },
+    "deny": {
+      "overridable": [
+        "Shell(rm -rf *)",
+        "Read(~/.ssh/**)",
+        "Edit(//etc/**)",
+        "Domain(*.unapproved.example)"
+      ]
+    },
+    "ask": {
+      "overridable": [
+        "Shell(git push *)",
+        "Edit(/.github/workflows/**)",
+        "Domain(api.github.com)"
+      ]
+    },
+    "allow": {
+      "overridable": [
+        "Shell(npm test *)",
+        "Shell(git diff *)",
+        "Read(/src/**)",
+        "Edit(/src/**)",
+        "Domain(registry.npmjs.org)"
+      ]
+    }
+  },
+  "enabledPlugins": {
+    "engineering-baseline@company-copilot": true
+  },
+  "extraKnownMarketplaces": {
+    "company-copilot": {
+      "source": {
+        "source": "github",
+        "repo": "YOUR-OWNER/YOUR-MARKETPLACE"
+      },
+      "autoUpdate": true
+    }
+  },
+  "strictKnownMarketplaces": [
+    {
+      "source": "github",
+      "repo": "YOUR-OWNER/YOUR-MARKETPLACE"
+    },
+    {
+      "source": "github",
+      "repo": "github/copilot-plugins"
+    },
+    {
+      "source": "github",
+      "repo": "YOUR-OWNER/YOUR-LABS-MARKETPLACE"
+    }
+  ],
+  "telemetry": {
+    "enabled": true,
+    "endpoint": "https://otel.example.com/v1/traces",
+    "protocol": "http/protobuf",
+    "captureContent": false,
+    "lockCaptureContent": true,
+    "serviceName": "github-copilot",
+    "resourceAttributes": {
+      "deployment.environment": "enterprise"
+    }
+  },
+  "remoteControl": {
+    "mode": "requireSSO",
+    "githubDotComOrganizations": [
+      "YOUR-ORG"
+    ]
+  },
+  "allowedMcpServers": {
+    "overridable": [
+      {
+        "serverUrl": "https://mcp.example.com/*"
+      }
+    ]
+  },
+  "deniedMcpServers": {
+    "overridable": [
+      {
+        "serverCommand": [
+          "npx",
+          "-y",
+          "@modelcontextprotocol/server-filesystem",
+          "/"
+        ]
+      }
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "allowBypass": false,
+    "sandboxMcpServers": true,
+    "sandboxLspServers": true
+  }
+}

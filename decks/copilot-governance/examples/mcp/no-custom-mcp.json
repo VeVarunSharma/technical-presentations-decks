@@ -1,0 +1,10 @@
+{
+  "allowedMcpServers": [],
+  "deniedMcpServers": [],
+  "strictKnownMarketplaces": [],
+  "sandbox": {
+    "enabled": true,
+    "allowBypass": false,
+    "sandboxMcpServers": true
+  }
+}

@@ -8,6 +8,7 @@ The repository uses Vite as a multi-page static build. Each deck lives at an ind
 
 - [GitHub Agentic Workflows](decks/gh-aw/)
 - [GitHub Advanced Security in the AI SDLC](decks/ghas-ai-sdlc/)
+- [GitHub Copilot Governance: Managed Settings at Scale](decks/copilot-governance/)
 - [Govern GitHub Copilot at Scale](decks/governance-at-scale/)
 
 ## Repository principles
@@ -41,6 +42,7 @@ Open the presentation catalog at <http://localhost:5173/> or browse a deck direc
 ```text
 http://localhost:5173/decks/gh-aw/
 http://localhost:5173/decks/ghas-ai-sdlc/
+http://localhost:5173/decks/copilot-governance/
 http://localhost:5173/decks/governance-at-scale/
 ```
 

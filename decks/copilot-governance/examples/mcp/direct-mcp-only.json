@@ -1,0 +1,12 @@
+{
+  "allowedMcpServers": [
+    { "serverUrl": "https://mcp.example.com/read-only/*" },
+    { "serverCommand": ["npx", "-y", "@playwright/mcp"] }
+  ],
+  "strictKnownMarketplaces": [],
+  "sandbox": {
+    "enabled": true,
+    "allowBypass": false,
+    "sandboxMcpServers": true
+  }
+}

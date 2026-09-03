@@ -1,0 +1,25 @@
+{
+  "model": "auto",
+  "permissions": {
+    "disableBypassPermissionsMode": "disable",
+    "deny": [
+      "Shell(rm -rf *)",
+      "Read(~/.ssh/**)",
+      "Edit(//etc/**)"
+    ],
+    "ask": [
+      "Shell(git push *)",
+      "Edit(/.github/workflows/**)"
+    ],
+    "allow": [
+      "Shell(npm test *)",
+      "Shell(git diff *)",
+      "Read(/src/**)",
+      "Edit(/src/**)",
+      "Domain(registry.npmjs.org)"
+    ]
+  },
+  "enabledPlugins": {
+    "frontend-toolkit@company-copilot": true
+  }
+}

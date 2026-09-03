@@ -1,0 +1,11 @@
+{
+  "deniedMcpServers": [
+    { "serverUrl": "https://unapproved.example.com/*" },
+    { "serverCommand": ["npx", "-y", "@modelcontextprotocol/server-filesystem", "/"] }
+  ],
+  "sandbox": {
+    "enabled": true,
+    "allowBypass": false,
+    "sandboxMcpServers": true
+  }
+}
