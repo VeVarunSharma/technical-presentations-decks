@@ -6,7 +6,7 @@
   "theme": "copilot-dark",
   "audience": "platform, security, enterprise administrators, and developers",
   "durationMinutes": 75,
-  "status": "draft",
+  "status": "active",
   "default": false,
   "sources": "sources.md",
   "learningObjectives": [
