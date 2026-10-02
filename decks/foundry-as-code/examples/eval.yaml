@@ -1,0 +1,17 @@
+name: repository-agent-smoke
+
+agent:
+  name: repository-agent
+  kind: hosted
+
+dataset:
+  local_uri: tests/queries.jsonl
+
+evaluators:
+  - builtin.intent_resolution
+  - builtin.task_adherence
+
+options:
+  eval_model: ${FOUNDRY_MODEL_NAME}
+
+max_samples: 15

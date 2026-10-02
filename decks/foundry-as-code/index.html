@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en" data-brand="neutral" data-theme="neutral-dark" data-deck-title="Microsoft Foundry as Code">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A technical briefing on managing Microsoft Foundry agents as versioned code with azure.yaml, GitHub Actions, and evaluation gates.">
+  <title>Microsoft Foundry as Code</title>
+  <link rel="stylesheet" href="../../brands/neutral/tokens.css">
+  <link rel="stylesheet" href="../../brands/neutral/themes/neutral-dark.css">
+  <link rel="stylesheet" href="./deck.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">FaC</div>
+        <div class="brand-title">Microsoft Foundry as Code</div>
+      </div>
+      <div class="scenario-rail" aria-label="Presentation scenario">
+        <span>Scenario</span>
+        <strong>Repository support agent</strong>
+        <em id="scenarioStage">Frame the decision</em>
+      </div>
+      <div class="top-actions">
+        <a class="small-button link-button" href="./examples/README.md" target="_blank" rel="noopener">Examples</a>
+        <button class="small-button" id="sourcesButton" type="button">Sources</button>
+        <button class="small-button" id="fullscreenButton" type="button">Full screen</button>
+      </div>
+    </header>
+
+    <main class="stage-shell">
+      <div class="stage" id="stage" aria-live="polite">
+        <section class="slide active title-slide" data-title="Foundry as Code" data-scenario-stage="Frame the decision">
+          <div class="title-grid">
+            <div>
+              <div class="eyebrow">Microsoft Foundry · developer lifecycle</div>
+              <h1>Make the agent a <span>versioned product</span>, not portal state</h1>
+              <p class="lede">Declare the topology. Review the change. Deploy a candidate. Evaluate behavior. Promote with evidence.</p>
+              <div class="title-meta">
+                <span>30-minute technical briefing</span>
+                <span>Developers + technical decision makers</span>
+              </div>
+            </div>
+            <div class="repo-hero" aria-label="Repository to production flow">
+              <div class="repo-card">
+                <span class="file-name">azure.yaml</span>
+                <code>services:<br>&nbsp;&nbsp;ai-project:<br>&nbsp;&nbsp;repository-agent:</code>
+              </div>
+              <div class="hero-arrow" aria-hidden="true">→</div>
+              <div class="repo-card">
+                <span class="file-name">GitHub Actions</span>
+                <code>deploy → invoke<br>evaluate → compare<br>approve → promote</code>
+              </div>
+            </div>
+          </div>
+          <div class="source-note">
+            <span>Current model: unified <code>azure.yaml</code> for hosted-agent projects</span>
+            <a href="https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/azure-yaml-reference" target="_blank" rel="noopener">Microsoft Learn</a>
+          </div>
+        </section>
+
+        <section class="slide" data-title="Portal state is not a delivery system" data-scenario-stage="Name the risk">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">Why change the operating model?</div>
+              <h2 class="section-title">Portal state is useful. It is not a <span class="accent">delivery system.</span></h2>
+              <p class="section-subtitle">The problem is not clicking. The problem is configuration that cannot be reviewed, reproduced, tested, or promoted consistently.</p>
+            </div>
+            <div class="slide-index">02</div>
+          </div>
+          <div class="risk-grid">
+            <article class="card risk-card"><span>01</span><h3>Drift</h3><p>Dev, staging, and production silently stop matching.</p></article>
+            <article class="card risk-card" data-build-step="1"><span>02</span><h3>Hidden decisions</h3><p>Models, tools, identity, protocols, and resources live outside review.</p></article>
+            <article class="card risk-card" data-build-step="2"><span>03</span><h3>Behavior without a contract</h3><p>Agent changes ship without a versioned use-case dataset or acceptance criteria.</p></article>
+            <article class="card risk-card" data-build-step="3"><span>04</span><h3>Weak release evidence</h3><p>A successful deployment says the agent started—not that it still works.</p></article>
+          </div>
+          <div class="statement-strip" data-build-step="4"><strong>Decision:</strong> manage agent topology, code, evaluation assets, and release policy together in Git.</div>
+        </section>
+
+        <section class="slide" data-title="The agent delivery loop" data-scenario-stage="Establish the lifecycle">
+          <div class="section-heading compact">
+            <div>
+              <div class="eyebrow">The operating model</div>
+              <h2 class="section-title">A pull request becomes a <span class="accent">quality-controlled release candidate</span></h2>
+            </div>
+            <div class="slide-index">03</div>
+          </div>
+          <div class="lifecycle">
+            <article><span>01</span><h3>Declare</h3><p>Topology, model, tools, agent, runtime.</p></article>
+            <article data-build-step="1"><span>02</span><h3>Review</h3><p>Code owners inspect behavior and capability changes.</p></article>
+            <article data-build-step="2"><span>03</span><h3>Deploy candidate</h3><p><code>azd deploy</code> creates a new agent version.</p></article>
+            <article data-build-step="3"><span>04</span><h3>Evaluate</h3><p>Run use-case, quality, and safety checks.</p></article>
+            <article data-build-step="4"><span>05</span><h3>Promote</h3><p>Apply policy and approval to the evidence.</p></article>
+            <article data-build-step="5"><span>06</span><h3>Observe</h3><p>Trace production behavior and refresh evals.</p></article>
+          </div>
+          <div class="loop-note">The repository is the change record. Foundry is the runtime. Evaluation is the release evidence.</div>
+        </section>
+
+        <section class="slide" data-title="Repository anatomy" data-scenario-stage="Map the artifacts">
+          <div class="section-heading compact">
+            <div>
+              <div class="eyebrow">Repository anatomy</div>
+              <h2 class="section-title">Keep the <span class="accent">product contract</span> beside the product code</h2>
+              <p class="section-subtitle">Each file answers a different release question.</p>
+            </div>
+            <div class="slide-index">04</div>
+          </div>
+          <div class="anatomy-layout">
+            <div class="file-tree" aria-label="Example repository file tree">
+              <code>repository-agent/<br>
+├── <b>azure.yaml</b><br>
+├── src/repository-agent/<br>
+│&nbsp;&nbsp; ├── main.py<br>
+│&nbsp;&nbsp; ├── Dockerfile<br>
+│&nbsp;&nbsp; ├── <b>eval.yaml</b><br>
+│&nbsp;&nbsp; └── tests/queries.jsonl<br>
+├── evals/<b>repository-assistant.json</b><br>
+├── .github/workflows/<b>agent-ci.yml</b><br>
+└── infra/ <i># optional Bicep or Terraform</i></code>
+            </div>
+            <div class="artifact-questions">
+              <article><code>azure.yaml</code><span>What exists, depends on what, and how is it deployed?</span></article>
+              <article><code>src/</code><span>What behavior executes inside the hosted runtime?</span></article>
+              <article><code>eval.yaml + data</code><span>What must remain true for the product use case?</span></article>
+              <article><code>workflow</code><span>When do we deploy, evaluate, compare, and promote?</span></article>
+              <article><code>infra/</code><span>Which infrastructure controls need explicit customization?</span></article>
+            </div>
+          </div>
+          <div class="source-note">
+            <span>Examples are downloadable from this deck and intentionally contain placeholders rather than credentials.</span>
+            <a href="./examples/README.md" target="_blank" rel="noopener">Open examples</a>
+          </div>
+        </section>
+
+        <section class="slide" data-title="agent.yaml migration context" data-scenario-stage="Use the current schema">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">Schema evolution</div>
+              <h2 class="section-title"><code>agent.yaml</code> is now <span class="warning">migration context</span></h2>
+              <p class="section-subtitle">Current Foundry azd extensions consolidate hosted-agent configuration into a single project-level <code>azure.yaml</code>.</p>
+            </div>
+            <div class="slide-index">05</div>
+          </div>
+          <div class="migration-grid">
+            <article class="legacy-card">
+              <span class="status-chip deprecated">Deprecated</span>
+              <h3>Earlier two-file model</h3>
+              <code>agent.manifest.yaml<br>agent.yaml</code>
+              <ul><li>Template plus concrete definition</li><li>AgentSchema retained for reference</li><li>Useful when reading older samples</li></ul>
+            </article>
+            <div class="migration-arrow" aria-hidden="true">→</div>
+            <article class="current-card">
+              <span class="status-chip current">Current</span>
+              <h3>Unified project model</h3>
+              <code>azure.yaml</code>
+              <ul><li>Project, models, connections, toolboxes</li><li>Agents, skills, routines, dependencies</li><li>Provision and deploy intent together</li></ul>
+            </article>
+          </div>
+          <div class="statement-strip"><strong>Teaching rule:</strong> explain the old schema so teams can migrate—but write new examples against the current unified model.</div>
+          <div class="source-note">
+            <span>Microsoft marks standalone agent definitions and manifests as deprecated.</span>
+            <a href="https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/agent-yaml-reference" target="_blank" rel="noopener">Legacy schema reference</a>
+          </div>
+        </section>
+
+        <section class="slide yaml-slide" data-title="Review azure.yaml by concern" data-scenario-stage="Review the declaration">
+          <div class="section-heading compact">
+            <div>
+              <div class="eyebrow">Interactive YAML spotlight</div>
+              <h2 class="section-title">Review the agent's <span class="accent">operating topology</span> as code</h2>
+              <p class="section-subtitle">Select a concern to isolate the fields reviewers should discuss.</p>
+            </div>
+            <div class="slide-index">06</div>
+          </div>
+          <div class="yaml-layout">
+            <div class="code-card">
+              <div class="code-toolbar">
+                <span id="yamlFilename">azure.yaml · complete view</span>
+                <a href="./examples/azure.yaml" download>Download</a>
+              </div>
+              <pre class="code-window"><code id="yamlCode"></code></pre>
+            </div>
+            <aside class="focus-panel">
+              <div class="tab-list" id="yamlFocusMenu" role="tablist" aria-label="azure.yaml concerns"></div>
+              <div class="focus-detail">
+                <span id="yamlFocusLabel">Complete declaration</span>
+                <h3 id="yamlFocusTitle">One graph carries the deployment intent</h3>
+                <p id="yamlFocusBody">Project, model, connection, toolbox, agent, runtime, resources, and environment references are reviewed together.</p>
+                <strong id="yamlFocusTakeaway">Topology travels with the code.</strong>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="slide" data-title="services form a dependency graph" data-scenario-stage="Understand the graph">
+          <div class="section-heading compact">
+            <div>
+              <div class="eyebrow">Split-service model</div>
+              <h2 class="section-title"><code>host</code> names the resource. <code>uses</code> <span class="accent">orders the graph.</span></h2>
+            </div>
+            <div class="slide-index">07</div>
+          </div>
+          <div class="dependency-graph" aria-label="Foundry service dependency graph">
+            <article class="service project"><code>azure.ai.project</code><h3>ai-project</h3><p>Project + model deployment</p></article>
+            <div class="graph-link one" aria-hidden="true"></div>
+            <article class="service connection"><code>azure.ai.connection</code><h3>github-conn</h3><p>External MCP endpoint</p></article>
+            <div class="graph-link two" aria-hidden="true"></div>
+            <article class="service toolbox"><code>azure.ai.toolbox</code><h3>agent-tools</h3><p>Web search + MCP tools</p></article>
+            <div class="graph-link three" aria-hidden="true"></div>
+            <article class="service agent"><code>azure.ai.agent</code><h3>repository-agent</h3><p>Source, protocol, env, compute</p></article>
+          </div>
+          <div class="graph-facts">
+            <article data-build-step="1"><strong>Provision phase</strong><span>Project and connection providers apply infrastructure configuration.</span></article>
+            <article data-build-step="2"><strong>Deploy phase</strong><span>Toolbox, skill, routine, and agent providers apply data-plane configuration.</span></article>
+            <article data-build-step="3"><strong>Review question</strong><span>Does every capability in <code>uses</code> have a justified product requirement?</span></article>
+          </div>
+          <div class="source-note">
+            <span>The service graph lets azd resolve provision and deployment order.</span>
+            <a href="https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/azure-yaml-reference#the-split-service-model" target="_blank" rel="noopener">Split-service reference</a>
+          </div>
+        </section>
+
+        <section class="slide runtime-slide" data-title="Agent kinds and deploy modes" data-scenario-stage="Select the runtime">
+          <div class="section-heading compact">
+            <div>
+              <div class="eyebrow">Runtime decisions</div>
+              <h2 class="section-title">Choose the agent kind—then make the <span class="accent">deployment trade-off explicit</span></h2>
+            </div>
+            <div class="slide-index">08</div>
+          </div>
+          <div class="runtime-tabs" role="tablist" aria-label="Foundry agent kinds">
+            <button type="button" class="active" data-runtime="hosted" aria-selected="true">Hosted</button>
+            <button type="button" data-runtime="prompt" aria-selected="false">Prompt</button>
+            <button type="button" data-runtime="voice" aria-selected="false">Voice</button>
+          </div>
+          <div class="runtime-layout">
+            <div class="code-card">
+              <div class="code-toolbar"><span id="runtimeFilename">kind: hosted</span></div>
+              <pre class="code-window"><code id="runtimeCode"></code></pre>
+            </div>
+            <aside class="runtime-detail">
+              <span id="runtimeKicker">Custom code in a managed agent runtime</span>
+              <h3 id="runtimeTitle">Hosted agent</h3>
+              <p id="runtimeBody">Best when the product needs custom orchestration, libraries, protocols, or runtime behavior.</p>
+              <div class="runtime-facts">
+                <div><strong>Source of behavior</strong><span id="runtimeSource">Repository code + startup command</span></div>
+                <div><strong>Deploy choices</strong><span id="runtimeDeploy">Code upload or container image</span></div>
+                <div><strong>Key review</strong><span id="runtimeReview">Protocol, image/build path, env, CPU, memory</span></div>
+              </div>
+            </aside>
+          </div>
+          <div class="source-note">
+            <span>Hosted code mode avoids local Docker; container mode supports Dockerfile or prebuilt-image control.</span>
+            <a href="https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/author-azure-yaml#choose-a-deploy-mode" target="_blank" rel="noopener">Deploy modes</a>
+          </div>
+        </section>
+
+        <section class="slide" data-title="Environments identity and secrets" data-scenario-stage="Separate environments">
+          <div class="section-heading compact">
+            <div>
+              <div class="eyebrow">Environment contract</div>
+              <h2 class="section-title">Commit references. Keep <span class="accent">credentials and environment values</span> out of Git.</h2>
+            </div>
+            <div class="slide-index">09</div>
+          </div>
+          <div class="environment-layout">
+            <div class="environment-lanes">
+              <article><span>dev</span><code>.azure/dev/.env</code><p>Fast iteration, low-cost model, local invocation.</p></article>
+              <article><span>staging</span><code>GitHub environment</code><p>Candidate versions, shared eval dataset, approval evidence.</p></article>
+              <article><span>prod</span><code>protected environment</code><p>Explicit promotion, least privilege, monitored versions.</p></article>
+            </div>
+            <div class="security-contract">
+              <article><strong>${VAR_NAME}</strong><span>Resolve non-secret and secret environment values at deploy time.</span></article>
+              <article><strong>GitHub OIDC</strong><span>Federated identity avoids long-lived Azure credentials.</span></article>
+              <article><strong>RBAC</strong><span>Grant deployment and evaluation roles at the narrowest practical scope.</span></article>
+              <article><strong>Platform injection</strong><span>Do not redeclare <code>FOUNDRY_PROJECT_ENDPOINT</code> in hosted container env.</span></article>
+            </div>
+          </div>
+          <div class="source-note">
+            <span>Private networking and approved outbound controls belong in the project service when required.</span>
+            <a href="https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/azure-yaml-reference#private-network-configuration" target="_blank" rel="noopener">Network configuration</a>
+          </div>
+        </section>
+
+        <section class="slide" data-title="The developer loop" data-scenario-stage="Run the developer loop">
+          <div class="section-heading compact">
+            <div>
+              <div class="eyebrow">Inner loop to release</div>
+              <h2 class="section-title">Use one project definition across <span class="accent">local, staging, and production</span></h2>
+            </div>
+            <div class="slide-index">10</div>
+          </div>
+          <div class="command-flow">
+            <article><span>Scaffold</span><code>azd ai agent init</code><p>Generate the project and unified declaration.</p></article>
+            <article data-build-step="1"><span>Run</span><code>azd ai agent run --no-client</code><p>Exercise the hosted-agent contract locally.</p></article>
+            <article data-build-step="2"><span>Provision</span><code>azd provision</code><p>Create or connect project infrastructure.</p></article>
+            <article data-build-step="3"><span>Deploy</span><code>azd deploy</code><p>Create a candidate agent version.</p></article>
+            <article data-build-step="4"><span>Invoke</span><code>azd ai agent invoke</code><p>Smoke-test the deployed endpoint.</p></article>
+            <article data-build-step="5"><span>Evaluate</span><code>azd ai agent eval run</code><p>Apply the versioned evaluation contract.</p></article>
+          </div>
+          <div class="statement-strip"><strong>Optional enterprise control:</strong> eject Bicep or Terraform when generated infrastructure is not sufficiently explicit or customizable.</div>
+          <div class="source-note">
+            <span>Some Foundry agent and evaluation CLI experiences are preview; pin compatible extension versions.</span>
+            <a href="https://learn.microsoft.com/en-us/azure/foundry/observability/quickstarts/quickstart-evaluate-hosted-agent" target="_blank" rel="noopener">Hosted-agent evaluation quickstart</a>
+          </div>
+        </section>
+
+        <section class="slide" data-title="Evaluation is a product test" data-scenario-stage="Define the quality contract">
+          <div class="section-heading compact">
+            <div>
+              <div class="eyebrow">Evaluation contract</div>
+              <h2 class="section-title">Test the agent against the <span class="accent">job users hired it to do</span></h2>
+              <p class="section-subtitle">The repository support agent must answer accurately, use tools appropriately, resist unsafe requests, and remain useful across versions.</p>
+            </div>
+            <div class="slide-index">11</div>
+          </div>
+          <div class="eval-contract">
+            <div class="dataset-card">
+              <span>Versioned dataset</span>
+              <code>{"query":"Why did CI fail?"}<br>{"query":"Summarize this PR."}<br>{"query":"Change branch protection."}<br>{"query":"Cite the source file."}</code>
+              <a href="./examples/repository-assistant-evals.json" download>Download example dataset</a>
+            </div>
+            <div class="evaluator-stack">
+              <article><strong>Task adherence</strong><span>Did it follow the requested repository task?</span></article>
+              <article><strong>Intent resolution</strong><span>Did it actually solve the user's need?</span></article>
+              <article><strong>Tool-call accuracy</strong><span>Did it choose and use tools correctly?</span></article>
+              <article><strong>Safety</strong><span>Did it avoid harmful or unauthorized behavior?</span></article>
+              <article><strong>Custom rubric</strong><span>Did it cite repository evidence and respect read-only boundaries?</span></article>
+            </div>
+          </div>
+          <div class="statement-strip"><strong>Start small:</strong> a smoke suite on pull requests; broader regression and coverage suites on promotion or schedule.</div>
+        </section>
+
+        <section class="slide pipeline-slide" data-title="Trigger evals on meaningful changes" data-scenario-stage="Automate on GitHub">
+          <div class="section-heading compact">
+            <div>
+              <div class="eyebrow">GitHub Actions trigger</div>
+              <h2 class="section-title">Run the expensive path only when <span class="accent">agent behavior can change</span></h2>
+            </div>
+            <div class="slide-index">12</div>
+          </div>
+          <div class="trigger-layout">
+            <div class="code-card">
+              <div class="code-toolbar">
+                <span>.github/workflows/foundry-agent-ci.yml</span>
+                <a href="./examples/foundry-agent-ci.yml" download>Download</a>
+              </div>
+              <pre class="code-window"><code>on:
+  pull_request:
+    paths:
+      - "azure.yaml"
+      - "src/repository-agent/**"
+      - "evals/**"
+      - ".github/workflows/foundry-agent-ci.yml"
+  push:
+    branches: [main]
+    paths:
+      - "azure.yaml"
+      - "src/repository-agent/**"
+      - "evals/**"</code></pre>
+            </div>
+            <div class="trigger-policy">
+              <article><strong>Pull request</strong><span>Deploy a staging candidate, smoke test, run the fast evaluation suite.</span></article>
+              <article><strong>Main / promotion</strong><span>Run broader evaluation, compare baseline, collect release evidence.</span></article>
+              <article><strong>Schedule</strong><span>Catch model, data, upstream tool, and user-pattern drift.</span></article>
+              <article class="cost-note"><strong>Cost control</strong><span>Microsoft explicitly recommends avoiding evaluation on every commit.</span></article>
+            </div>
+          </div>
+          <div class="source-note">
+            <span>Path filters align evaluation spend with files that can change agent behavior.</span>
+            <a href="https://learn.microsoft.com/en-us/azure/foundry/how-to/evaluation-github-action" target="_blank" rel="noopener">Evaluation GitHub Action</a>
+          </div>
+        </section>
+
+        <section class="slide pipeline-slide" data-title="Deploy smoke evaluate compare" data-scenario-stage="Build the release evidence">
+          <div class="section-heading compact">
+            <div>
+              <div class="eyebrow">Interactive pipeline</div>
+              <h2 class="section-title">Deployment success is the start of the gate—<span class="accent">not the end</span></h2>
+              <p class="section-subtitle">Select a stage to see its evidence and failure boundary.</p>
+            </div>
+            <div class="slide-index">13</div>
+          </div>
+          <div class="pipeline-buttons" id="pipelineMenu" role="tablist" aria-label="CI/CD pipeline stages"></div>
+          <div class="pipeline-layout">
+            <div class="pipeline-map" id="pipelineMap" aria-label="Foundry CI/CD pipeline"></div>
+            <aside class="pipeline-detail">
+              <span id="pipelineKicker">Identity</span>
+              <h3 id="pipelineTitle">Authenticate without a stored cloud secret</h3>
+              <p id="pipelineBody">GitHub OIDC exchanges the workflow identity for an Azure token scoped through RBAC.</p>
+              <div><strong>Evidence</strong><span id="pipelineEvidence">Federated login and scoped permissions</span></div>
+              <div><strong>Fail when</strong><span id="pipelineFailure">Identity or required role assignment is invalid</span></div>
+            </aside>
+          </div>
+          <div class="source-note">
+            <span>The official hosted-agent CI/CD quickstart deploys, shows status, and invokes the agent before evaluation is layered in.</span>
+            <a href="https://learn.microsoft.com/en-us/azure/foundry/agents/quickstarts/set-up-cicd-hosted-agent" target="_blank" rel="noopener">Hosted-agent CI/CD</a>
+          </div>
+        </section>
+
+        <section class="slide eval-slide" data-title="Candidate versus baseline" data-scenario-stage="Apply the promotion policy">
+          <div class="section-heading compact">
+            <div>
+              <div class="eyebrow">Release decision</div>
+              <h2 class="section-title">Compare the candidate to a <span class="accent">known baseline</span>, not to optimism</h2>
+            </div>
+            <div class="slide-index">14</div>
+          </div>
+          <div class="eval-tabs" role="tablist" aria-label="Evaluation result scenarios">
+            <button type="button" class="active" data-eval-view="pass" aria-selected="true">Promote</button>
+            <button type="button" data-eval-view="review" aria-selected="false">Review</button>
+            <button type="button" data-eval-view="fail" aria-selected="false">Block</button>
+          </div>
+          <div class="comparison-table" id="evalComparison"></div>
+          <div class="decision-panel">
+            <span id="evalDecisionLabel">Policy satisfied</span>
+            <h3 id="evalDecisionTitle">Promote the candidate with recorded evidence</h3>
+            <p id="evalDecisionBody">Required metrics meet their floors, no protected dimension regresses beyond tolerance, and the smoke test passed.</p>
+          </div>
+          <div class="eval-caveat">
+            <strong>Important:</strong> the preview GitHub Action produces scores, confidence intervals, and statistical comparisons. Your release policy still defines thresholds, protected metrics, approvals, and rollback behavior.
+          </div>
+          <div class="source-note">
+            <span>Use rubric evaluators for product-specific requirements and built-ins for broad quality and safety coverage.</span>
+            <a href="https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/evaluate-agent" target="_blank" rel="noopener">Evaluate agents</a>
+          </div>
+        </section>
+
+        <section class="slide" data-title="Production closes the loop" data-scenario-stage="Operate the product">
+          <div class="section-heading compact">
+            <div>
+              <div class="eyebrow">Production lifecycle</div>
+              <h2 class="section-title">A release gate protects today. <span class="accent">Observability protects tomorrow.</span></h2>
+            </div>
+            <div class="slide-index">15</div>
+          </div>
+          <div class="ops-loop">
+            <article><span>Trace</span><p>Capture responses, tool calls, latency, errors, and version identity.</p></article>
+            <article data-build-step="1"><span>Detect</span><p>Use continuous or scheduled evaluation to identify quality drift.</p></article>
+            <article data-build-step="2"><span>Curate</span><p>Turn production failures and edge cases into versioned datasets.</p></article>
+            <article data-build-step="3"><span>Improve</span><p>Change instructions, tools, code, model, or resource bounds.</p></article>
+            <article data-build-step="4"><span>Compare</span><p>Re-run the same evaluation contract against a candidate version.</p></article>
+            <article data-build-step="5"><span>Rollback</span><p>Keep the last known-good version and promotion evidence available.</p></article>
+          </div>
+          <div class="ownership-row">
+            <div><strong>Product owner</strong><span>Use-case acceptance</span></div>
+            <div><strong>Engineering</strong><span>Code, topology, reliability</span></div>
+            <div><strong>Security/platform</strong><span>Identity, tools, network, policy</span></div>
+            <div><strong>Operations</strong><span>Telemetry, incidents, rollback</span></div>
+          </div>
+        </section>
+
+        <section class="slide summary-slide" data-title="Adoption checklist" data-scenario-stage="Choose the next action">
+          <div class="summary-grid">
+            <div>
+              <div class="eyebrow">Adoption checklist</div>
+              <h2>Ship the first agent change with a <span class="accent">repeatable contract</span></h2>
+              <p>Start with one repository support use case and make these decisions explicit before broadening the platform.</p>
+            </div>
+            <div class="checklist">
+              <article data-build-step="1"><span>01</span><strong>Source of truth</strong><p>Unified <code>azure.yaml</code> and agent source in Git.</p></article>
+              <article data-build-step="2"><span>02</span><strong>Environment model</strong><p>Dev, staging, production, OIDC, RBAC, secrets.</p></article>
+              <article data-build-step="3"><span>03</span><strong>Evaluation contract</strong><p>Use-case dataset, evaluators, baselines, thresholds.</p></article>
+              <article data-build-step="4"><span>04</span><strong>Promotion policy</strong><p>Who approves, what blocks, how rollback works.</p></article>
+              <article data-build-step="5"><span>05</span><strong>Production loop</strong><p>Traces, continuous evaluation, dataset curation, ownership.</p></article>
+            </div>
+          </div>
+          <div class="final-action">
+            <span>Recommended pilot</span>
+            <strong>Commit one agent, one smoke suite, one regression suite, and one protected staging workflow.</strong>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="controls">
+      <button class="nav-button" id="previousButton" type="button" aria-label="Previous slide">&lt;</button>
+      <div class="progress-wrap">
+        <div class="dot-nav" id="dotNav" aria-label="Slide navigation"></div>
+        <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="slide-count" id="slideCount">01 / 16</div>
+        <div class="build-count" id="buildCount"></div>
+      </div>
+      <button class="nav-button" id="nextButton" type="button" aria-label="Next slide">&gt;</button>
+    </footer>
+  </div>
+
+  <dialog id="sourcesDialog">
+    <div class="sources-card">
+      <div>
+        <div class="eyebrow">Source discipline</div>
+        <h2>Current Microsoft guidance, with preview boundaries visible</h2>
+        <p>The complete bibliography, review date, deprecation note, and example provenance are maintained in <a href="./sources.md" target="_blank" rel="noopener">sources.md</a>.</p>
+      </div>
+      <div class="source-links">
+        <a href="https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/azure-yaml-reference" target="_blank" rel="noopener">Unified azure.yaml reference</a>
+        <a href="https://learn.microsoft.com/en-us/azure/foundry/how-to/evaluation-github-action" target="_blank" rel="noopener">Evaluation GitHub Action</a>
+        <a href="https://github.com/microsoft/ai-agent-evals" target="_blank" rel="noopener">Official action repository</a>
+      </div>
+      <button class="small-button" id="closeSources" type="button">Close</button>
+    </div>
+  </dialog>
+
+  <script type="module" src="./deck.js"></script>
+</body>
+</html>

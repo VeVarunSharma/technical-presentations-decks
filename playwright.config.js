@@ -1,6 +1,7 @@
 import { defineConfig } from "@playwright/test";
 
 const testBuiltOutput = process.env.PLAYWRIGHT_SERVER === "preview";
+const chromiumExecutablePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH;
 
 export default defineConfig({
   testDir: "./tests",
@@ -9,6 +10,7 @@ export default defineConfig({
   use: {
     baseURL: "http://127.0.0.1:4175",
     browserName: "chromium",
+    launchOptions: chromiumExecutablePath ? { executablePath: chromiumExecutablePath } : undefined,
     trace: "retain-on-failure",
   },
   projects: [

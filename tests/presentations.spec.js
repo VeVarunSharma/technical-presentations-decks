@@ -312,6 +312,29 @@ test("GH-AW live-room typography meets the expanded deck thresholds", async ({ p
   expect(undersized).toEqual([]);
 });
 
+test("Foundry as Code interactive examples remain available", async ({ page }) => {
+  await page.goto("/decks/foundry-as-code/");
+
+  await page.getByRole("button", { name: /Go to slide 6: Review azure.yaml by concern/ }).click();
+  await page.locator('[data-yaml-focus="tools"]').click();
+  await expect(page.locator("#yamlFocusTitle")).toContainText("Separate external access");
+  await expect(page.locator("#yamlCode")).toContainText("azure.ai.toolbox");
+
+  await page.getByRole("button", { name: /Go to slide 8: Agent kinds and deploy modes/ }).click();
+  await page.locator('[data-runtime="voice"]').click();
+  await expect(page.locator("#runtimeTitle")).toHaveText("Voice agent");
+  await expect(page.locator("#runtimeCode")).toContainText("conversationEngine");
+
+  await page.getByRole("button", { name: /Go to slide 13: Deploy smoke evaluate compare/ }).click();
+  await page.locator('[data-pipeline-stage="evaluate"]').click();
+  await expect(page.locator("#pipelineTitle")).toContainText("Run the use-case dataset");
+
+  await page.getByRole("button", { name: /Go to slide 14: Candidate versus baseline/ }).click();
+  await page.locator('[data-eval-view="fail"]').click();
+  await expect(page.locator("#evalDecisionTitle")).toContainText("regressed");
+  await expect(page.locator(".comparison-row.fail")).toHaveCount(3);
+});
+
 test("Copilot governance configuration explorers remain available", async ({ page }) => {
   await page.goto("/decks/copilot-governance/");
 

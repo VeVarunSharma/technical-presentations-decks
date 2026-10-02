@@ -1,0 +1,19 @@
+{
+  "id": "foundry-as-code",
+  "title": "Microsoft Foundry as Code",
+  "description": "A technical briefing on managing Foundry agents as versioned code with unified azure.yaml, GitHub Actions, evaluation gates, and production feedback loops.",
+  "brand": "neutral",
+  "theme": "neutral-dark",
+  "audience": "developers, platform engineers, architects, and technical decision makers",
+  "durationMinutes": 30,
+  "status": "active",
+  "default": false,
+  "sources": "sources.md",
+  "learningObjectives": [
+    "Explain why portal configuration alone is insufficient for reproducible, governed agent delivery.",
+    "Identify the project, model, connection, toolbox, agent, environment, and deployment controls in the unified azure.yaml model.",
+    "Design a GitHub Actions flow that deploys, smoke-tests, evaluates, compares, and promotes a Foundry agent candidate.",
+    "Define a versioned evaluation contract for a product use case using datasets, evaluators, baselines, and release policy.",
+    "Recognize production requirements for identity, environment separation, network controls, observability, rollback, and ownership."
+  ]
+}

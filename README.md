@@ -7,6 +7,7 @@ The repository uses Vite as a multi-page static build. Each deck lives at an ind
 ## Current decks
 
 - [GitHub Agentic Workflows](decks/gh-aw/)
+- [Microsoft Foundry as Code](decks/foundry-as-code/)
 - [GitHub Advanced Security in the AI SDLC](decks/ghas-ai-sdlc/)
 - [GitHub Copilot Governance: Managed Settings at Scale](decks/copilot-governance/)
 - [Govern GitHub Copilot at Scale](decks/governance-at-scale/)
@@ -41,6 +42,7 @@ Open the presentation catalog at <http://localhost:5173/> or browse a deck direc
 
 ```text
 http://localhost:5173/decks/gh-aw/
+http://localhost:5173/decks/foundry-as-code/
 http://localhost:5173/decks/ghas-ai-sdlc/
 http://localhost:5173/decks/copilot-governance/
 http://localhost:5173/decks/governance-at-scale/
@@ -116,6 +118,7 @@ Individual decks retain direct URLs:
 
 ```text
 https://vevarunsharma.github.io/technical-presentations-decks/decks/gh-aw/
+https://vevarunsharma.github.io/technical-presentations-decks/decks/foundry-as-code/
 https://vevarunsharma.github.io/technical-presentations-decks/decks/ghas-ai-sdlc/
 https://vevarunsharma.github.io/technical-presentations-decks/decks/governance-at-scale/
 ```
