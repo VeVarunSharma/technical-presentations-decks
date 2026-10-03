@@ -1,0 +1,99 @@
+name: Foundry agent CI
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "azure.yaml"
+      - "src/repository-agent/**"
+      - "evals/**"
+      - ".github/workflows/foundry-agent-ci.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "azure.yaml"
+      - "src/repository-agent/**"
+      - "evals/**"
+      - ".github/workflows/foundry-agent-ci.yml"
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: foundry-staging-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  AGENT_PROJECT_DIR: .
+  AZD_ENV_NAME: staging
+  AGENT_TEST_PROMPT: "Identify yourself as the repository support agent and confirm that you can answer a repository question."
+
+jobs:
+  deploy-smoke-evaluate:
+    runs-on: ubuntu-latest
+    environment: foundry-staging
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Azure Developer CLI
+        uses: Azure/setup-azd@v2
+
+      - name: Install Foundry extensions
+        run: azd ext install microsoft.foundry
+
+      - name: Azure login with OIDC
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Configure azd authentication
+        run: |
+          azd config set auth.useAzCliAuth true
+          azd config set defaults.subscription "${{ vars.AZURE_SUBSCRIPTION_ID }}"
+
+      - name: Configure staging environment
+        working-directory: ${{ env.AGENT_PROJECT_DIR }}
+        run: |
+          set -euo pipefail
+          azd env select "$AZD_ENV_NAME" || azd env new "$AZD_ENV_NAME" --no-prompt
+          azd env set AZURE_SUBSCRIPTION_ID "${{ vars.AZURE_SUBSCRIPTION_ID }}"
+          azd env set AZURE_TENANT_ID "${{ vars.AZURE_TENANT_ID }}"
+          azd env set AZURE_LOCATION "${{ vars.AZURE_LOCATION }}"
+          azd env set FOUNDRY_PROJECT_ENDPOINT "${{ vars.FOUNDRY_PROJECT_ENDPOINT }}"
+          azd env set AZURE_AI_PROJECT_ID "${{ vars.AZURE_AI_PROJECT_ID }}"
+          azd env set MICROSOFT_FOUNDRY_MODEL_DEPLOYMENT_NAME "${{ vars.FOUNDRY_MODEL_NAME }}"
+
+      - name: Deploy candidate
+        working-directory: ${{ env.AGENT_PROJECT_DIR }}
+        run: azd deploy --no-prompt
+
+      - name: Show candidate status
+        working-directory: ${{ env.AGENT_PROJECT_DIR }}
+        run: azd ai agent show --no-prompt
+
+      - name: Smoke-test candidate
+        working-directory: ${{ env.AGENT_PROJECT_DIR }}
+        run: |
+          set -euo pipefail
+          azd ai agent invoke "$AGENT_TEST_PROMPT" > /tmp/agent-response.txt 2>&1
+          cat /tmp/agent-response.txt
+          test -s /tmp/agent-response.txt
+
+      - name: Evaluate baseline and candidate
+        uses: microsoft/ai-agent-evals@v3-beta
+        with:
+          azure-ai-project-endpoint: ${{ vars.FOUNDRY_PROJECT_ENDPOINT }}
+          deployment-name: ${{ vars.FOUNDRY_MODEL_NAME }}
+          agent-ids: ${{ vars.FOUNDRY_BASELINE_AGENT_ID }},${{ vars.FOUNDRY_CANDIDATE_AGENT_ID }}
+          baseline-agent-id: ${{ vars.FOUNDRY_BASELINE_AGENT_ID }}
+          data-path: ${{ github.workspace }}/evals/repository-assistant-evals.json
+
+      # The preview evaluation action writes comparative evidence to the
+      # workflow summary. Add an SDK-based policy step or protected-environment
+      # approval to enforce required score floors and regression tolerances.
