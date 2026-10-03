@@ -88,6 +88,19 @@ body {
   letter-spacing: 0.01em;
 }
 
+.foundry-brand-logo {
+  width: 58px;
+  height: 38px;
+  flex: 0 0 auto;
+  border: 1px solid color-mix(in srgb, var(--foundry-violet-bright) 34%, transparent);
+  border-radius: 8px;
+  background: #060713;
+  box-shadow:
+    0 0 18px rgb(130 108 255 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 8%);
+  object-fit: contain;
+}
+
 .small-button,
 .nav-button {
   border-color: color-mix(in srgb, var(--foundry-violet) 24%, var(--color-border));
@@ -1159,6 +1172,11 @@ a:focus-visible {
 }
 
 @media (max-width: 1100px) {
+  .foundry-brand-logo {
+    width: 50px;
+    height: 33px;
+  }
+
   .scenario-rail {
     display: none;
   }

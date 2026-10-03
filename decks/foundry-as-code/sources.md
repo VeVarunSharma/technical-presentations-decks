@@ -15,6 +15,7 @@ Last reviewed: 2026-10-02
 | <https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/cloud-evaluation> | Cloud evaluation concepts and SDK-based evaluation workflow for scalable automation. |
 | <https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure-openid-connect> | GitHub Actions authentication to Azure with OpenID Connect and federated identity. |
 | <https://microsoft.github.io/AgentSchema/> | Open AgentSchema specification referenced by the legacy Foundry agent schema documentation. |
+| User-provided local image attachment (`assets/microsoft-foundry-lockup.png`) | Microsoft Foundry lockup supplied and explicitly approved by the user for use in the deck top bar. Added 2026-10-03. |
 
 ## Preview and version context
 
@@ -22,6 +23,7 @@ Last reviewed: 2026-10-02
 - Microsoft Foundry hosted agents, some azd agent commands, azd evaluation commands, voice capabilities, and the `microsoft/ai-agent-evals@v3-beta` GitHub Action may be preview experiences. Preview status and required extension versions can change; verify current Microsoft Learn guidance before production adoption.
 - The model names, versions, SKU, and capacity in the downloadable `azure.yaml` are illustrative. Teams must resolve supported models, quota, region, and responsible AI requirements for their environment.
 - The evaluation score examples in the presentation are illustrative policy scenarios, not measured product benchmarks.
+- The Microsoft Foundry lockup is displayed unchanged and proportionally from the user-approved source. The surrounding indigo/purple presentation palette remains a deck-specific visual treatment, not an official Microsoft design-token system.
 
 ## Example provenance
 
