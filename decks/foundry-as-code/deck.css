@@ -1,17 +1,106 @@
 :root {
-  --ink-blue: var(--color-accent, #82a7ff);
-  --ink-blue-strong: var(--color-accent-secondary, #b7ccff);
-  --ink-green: var(--brand-status-success, #32a852);
-  --ink-orange: #f4a261;
-  --ink-red: #ff7b72;
-  --ink-cyan: #79d4e8;
+  --foundry-night: #060713;
+  --foundry-canvas: #0a0d20;
+  --foundry-panel: #11162f;
+  --foundry-panel-raised: #171d3d;
+  --foundry-violet: #9585ff;
+  --foundry-violet-bright: #c3baff;
+  --foundry-blue: #6e9dff;
+  --foundry-cyan: #79dbea;
+  --foundry-line: #30375e;
+  --foundry-line-strong: #626da3;
+
+  --brand-bg-canvas: var(--foundry-night);
+  --brand-bg-surface: var(--foundry-canvas);
+  --brand-bg-raised: var(--foundry-panel);
+  --brand-text-primary: #f7f7ff;
+  --brand-text-secondary: #b8bfdc;
+  --brand-border-subtle: var(--foundry-line);
+  --brand-border-strong: var(--foundry-line-strong);
+  --brand-accent: var(--foundry-violet);
+  --brand-accent-strong: var(--foundry-violet-bright);
+  --brand-accent-soft: #211d4f;
+  --brand-hero: var(--foundry-violet);
+  --brand-link: #d1cbff;
+  --brand-focus-ring: #c6bcff;
+  --brand-code-bg: #050611;
+  --brand-code-text: #eef0ff;
+  --brand-selection-bg: #4a3f9a;
+  --brand-selection-text: #ffffff;
+  --brand-chart-primary: var(--foundry-violet);
+  --brand-chart-secondary: var(--foundry-blue);
+  --brand-chart-highlight: var(--foundry-cyan);
+  --brand-status-success: #59d7a0;
+  --brand-status-warning: #f2b86b;
+  --brand-status-danger: #ff8295;
+  --brand-shadow-raised: 0 18px 42px rgb(0 0 0 / 38%);
+  --brand-shadow-stage: 0 32px 100px rgb(0 0 0 / 64%);
+
+  --color-page: var(--brand-bg-canvas);
+  --color-canvas: var(--brand-bg-surface);
+  --color-panel: var(--brand-bg-raised);
+  --color-panel-strong: var(--foundry-panel-raised);
+  --color-border: var(--brand-border-subtle);
+  --color-border-strong: var(--brand-border-strong);
+  --color-text: var(--brand-text-primary);
+  --color-text-muted: var(--brand-text-secondary);
+  --color-text-subtle: #929abd;
+  --color-accent: var(--brand-hero);
+  --color-accent-secondary: var(--brand-accent-strong);
+  --color-link: var(--brand-link);
+
+  --ink-blue: var(--foundry-violet);
+  --ink-blue-strong: var(--foundry-violet-bright);
+  --ink-green: var(--brand-status-success);
+  --ink-orange: var(--brand-status-warning);
+  --ink-red: var(--brand-status-danger);
+  --ink-cyan: var(--foundry-cyan);
 }
 
 body {
   background:
-    radial-gradient(circle at 14% 8%, color-mix(in srgb, var(--ink-blue) 12%, transparent), transparent 28%),
-    radial-gradient(circle at 86% 88%, color-mix(in srgb, var(--ink-cyan) 8%, transparent), transparent 30%),
+    radial-gradient(circle at 18% 0%, rgb(91 70 215 / 28%), transparent 35%),
+    radial-gradient(circle at 88% 92%, rgb(56 91 186 / 18%), transparent 34%),
     var(--color-page);
+}
+
+.topbar,
+.controls {
+  border-color: color-mix(in srgb, var(--foundry-violet) 24%, var(--color-border));
+  background: color-mix(in srgb, var(--foundry-night) 88%, transparent);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 3%) inset;
+}
+
+.brand-mark {
+  border-color: color-mix(in srgb, var(--foundry-violet-bright) 58%, transparent);
+  border-radius: 10px 4px 10px 4px;
+  background:
+    linear-gradient(145deg, rgb(172 155 255 / 34%), rgb(73 64 168 / 14%)),
+    var(--foundry-panel);
+  box-shadow:
+    0 0 22px rgb(130 108 255 / 22%),
+    inset 0 1px 0 rgb(255 255 255 / 18%);
+  color: #f4f1ff;
+}
+
+.brand-title {
+  color: #e7e4ff;
+  letter-spacing: 0.01em;
+}
+
+.small-button,
+.nav-button {
+  border-color: color-mix(in srgb, var(--foundry-violet) 24%, var(--color-border));
+  background: color-mix(in srgb, var(--foundry-violet) 6%, transparent);
+}
+
+.small-button:hover,
+.small-button:focus-visible,
+.nav-button:hover:not(:disabled),
+.nav-button:focus-visible {
+  border-color: color-mix(in srgb, var(--foundry-violet-bright) 62%, var(--color-border));
+  background: color-mix(in srgb, var(--foundry-violet) 14%, transparent);
+  color: var(--color-text);
 }
 
 .link-button {
@@ -54,22 +143,26 @@ body {
 }
 
 .stage {
-  background: var(--color-canvas);
+  background:
+    radial-gradient(circle at 50% -24%, rgb(125 99 255 / 15%), transparent 42%),
+    var(--color-canvas);
 }
 
 .slide {
   background:
-    radial-gradient(circle at 86% 12%, color-mix(in srgb, var(--accent) 11%, transparent), transparent 28%),
-    linear-gradient(125deg, color-mix(in srgb, var(--color-canvas) 97%, var(--ink-blue)), var(--color-canvas));
+    radial-gradient(circle at 88% 7%, rgb(139 116 255 / 18%), transparent 29%),
+    radial-gradient(circle at 8% 94%, rgb(69 111 215 / 10%), transparent 31%),
+    linear-gradient(135deg, #0c1025 0%, #080b1b 58%, #0a0d21 100%);
 }
 
 .slide::after {
   position: absolute;
   top: 22px;
   right: 32px;
-  width: 72px;
+  width: 92px;
   height: 2px;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--foundry-violet-bright), var(--foundry-blue), transparent);
+  box-shadow: 0 0 16px rgb(149 133 255 / 48%);
   content: "";
 }
 
@@ -101,6 +194,7 @@ h1,
 
 h1 span {
   color: var(--ink-blue-strong);
+  text-shadow: 0 0 34px rgb(149 133 255 / 24%);
 }
 
 h2,
@@ -154,8 +248,12 @@ p {
   padding: 24px;
   border: 1px solid var(--color-border-strong);
   border-radius: 18px;
-  background: color-mix(in srgb, var(--color-panel) 92%, transparent);
-  box-shadow: var(--brand-shadow-raised);
+  background:
+    linear-gradient(145deg, rgb(149 133 255 / 12%), transparent 45%),
+    color-mix(in srgb, var(--color-panel) 94%, transparent);
+  box-shadow:
+    var(--brand-shadow-raised),
+    inset 0 1px 0 rgb(255 255 255 / 7%);
 }
 
 .repo-card .file-name {
@@ -539,7 +637,10 @@ p {
   padding: 20px;
   border: 1px solid var(--color-border-strong);
   border-radius: 16px;
-  background: var(--color-panel);
+  background:
+    linear-gradient(145deg, rgb(149 133 255 / 7%), transparent 54%),
+    var(--color-panel);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 5%);
 }
 
 .service code {
@@ -561,7 +662,8 @@ p {
   z-index: 1;
   width: calc(25% - 38px);
   height: 2px;
-  background: var(--ink-blue);
+  background: linear-gradient(90deg, var(--foundry-violet), var(--foundry-blue));
+  box-shadow: 0 0 12px rgb(149 133 255 / 30%);
 }
 
 .graph-link::after {
@@ -645,7 +747,9 @@ p {
   padding: 20px;
   border: 1px solid var(--color-border);
   border-radius: 14px;
-  background: var(--color-panel);
+  background:
+    linear-gradient(160deg, rgb(110 157 255 / 7%), transparent 48%),
+    var(--color-panel);
 }
 
 .environment-lanes span {
@@ -680,7 +784,9 @@ p {
   padding: 18px;
   border: 1px solid var(--color-border);
   border-radius: 14px;
-  background: var(--color-panel);
+  background:
+    linear-gradient(155deg, rgb(149 133 255 / 7%), transparent 50%),
+    var(--color-panel);
 }
 
 .command-flow span,
@@ -731,13 +837,16 @@ p {
   padding: 16px;
   border: 1px solid var(--color-border);
   border-radius: 14px;
-  background: var(--color-panel);
+  background: color-mix(in srgb, var(--color-panel) 94%, transparent);
   opacity: 0.55;
 }
 
 .pipeline-map article.active {
   border-color: var(--ink-blue);
-  background: color-mix(in srgb, var(--ink-blue) 14%, var(--color-panel));
+  background:
+    linear-gradient(145deg, rgb(149 133 255 / 18%), transparent 58%),
+    var(--color-panel);
+  box-shadow: 0 0 22px rgb(149 133 255 / 12%);
   opacity: 1;
 }
 
@@ -781,7 +890,7 @@ p {
 
 .comparison-row {
   border: 1px solid var(--color-border);
-  background: var(--color-panel);
+  background: color-mix(in srgb, var(--color-panel) 96%, transparent);
   font-family: var(--font-mono);
   font-size: 12px;
 }
@@ -820,7 +929,9 @@ p {
   padding: 18px 14px;
   border: 1px solid var(--color-border);
   border-radius: 14px;
-  background: var(--color-panel);
+  background:
+    linear-gradient(160deg, rgb(110 157 255 / 6%), transparent 46%),
+    var(--color-panel);
 }
 
 .ops-loop span {
@@ -846,6 +957,7 @@ p {
   padding: 10px 12px;
   border-top: 2px solid var(--ink-blue);
   background: color-mix(in srgb, var(--color-panel) 75%, transparent);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 4%);
 }
 
 .ownership-row strong,
@@ -888,7 +1000,9 @@ p {
   padding: 12px 14px;
   border: 1px solid var(--color-border);
   border-radius: 12px;
-  background: var(--color-panel);
+  background:
+    linear-gradient(145deg, rgb(149 133 255 / 7%), transparent 52%),
+    var(--color-panel);
 }
 
 .checklist p {
@@ -919,6 +1033,11 @@ p {
   display: grid;
   gap: 18px;
   padding: 28px;
+  border: 1px solid color-mix(in srgb, var(--foundry-violet) 34%, var(--color-border));
+  background:
+    radial-gradient(circle at 100% 0%, rgb(149 133 255 / 16%), transparent 34%),
+    var(--foundry-panel);
+  box-shadow: var(--brand-shadow-stage);
 }
 
 .sources-card h2 {
@@ -939,6 +1058,104 @@ p {
   border: 1px solid var(--color-border);
   border-radius: 9px;
   text-decoration: none;
+}
+
+.card,
+.lifecycle article,
+.artifact-questions article,
+.security-contract article,
+.trigger-policy article,
+.evaluator-stack article,
+.legacy-card,
+.current-card,
+.focus-panel,
+.runtime-detail,
+.pipeline-detail,
+.decision-panel,
+.graph-facts article {
+  border-color: color-mix(in srgb, var(--foundry-violet) 18%, var(--color-border));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 4%);
+}
+
+.current-card,
+.focus-panel,
+.runtime-detail,
+.pipeline-detail,
+.decision-panel {
+  background:
+    linear-gradient(150deg, rgb(149 133 255 / 8%), transparent 52%),
+    var(--color-panel);
+}
+
+.file-tree,
+.dataset-card,
+.code-card {
+  border-color: color-mix(in srgb, var(--foundry-violet) 38%, var(--color-border));
+  background:
+    radial-gradient(circle at 100% 0%, rgb(87 72 190 / 18%), transparent 35%),
+    var(--brand-code-bg);
+  box-shadow:
+    0 16px 38px rgb(0 0 0 / 28%),
+    inset 0 1px 0 rgb(255 255 255 / 5%);
+}
+
+.code-toolbar {
+  border-bottom-color: color-mix(in srgb, var(--foundry-violet) 26%, var(--color-border));
+  background: rgb(149 133 255 / 5%);
+}
+
+.tab-list button,
+.runtime-tabs button,
+.pipeline-buttons button,
+.eval-tabs button {
+  border-color: color-mix(in srgb, var(--foundry-violet) 18%, var(--color-border));
+  background: rgb(149 133 255 / 4%);
+}
+
+.tab-list button:hover,
+.runtime-tabs button:hover,
+.pipeline-buttons button:hover,
+.eval-tabs button:hover {
+  border-color: color-mix(in srgb, var(--foundry-violet-bright) 52%, var(--color-border));
+  color: var(--color-text);
+}
+
+.tab-list button.active,
+.runtime-tabs button.active,
+.pipeline-buttons button.active,
+.eval-tabs button.active {
+  border-color: color-mix(in srgb, var(--foundry-violet-bright) 72%, var(--color-border));
+  background: linear-gradient(135deg, rgb(149 133 255 / 24%), rgb(110 157 255 / 10%));
+  box-shadow: 0 0 18px rgb(149 133 255 / 12%);
+}
+
+.statement-strip,
+.loop-note,
+.eval-caveat,
+.final-action {
+  border-color: color-mix(in srgb, var(--foundry-violet) 42%, var(--color-border));
+  background:
+    linear-gradient(90deg, rgb(149 133 255 / 11%), rgb(110 157 255 / 4%)),
+    color-mix(in srgb, var(--color-panel) 92%, transparent);
+}
+
+.source-note {
+  color: #9ba3c8;
+}
+
+a {
+  text-underline-offset: 3px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--brand-focus-ring);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--brand-selection-bg);
+  color: var(--brand-selection-text);
 }
 
 @media (max-width: 1100px) {
@@ -978,7 +1195,7 @@ p {
 
 @media print {
   .slide {
-    background: #111827 !important;
+    background: #0a0d20 !important;
     color: #fff;
   }
 
