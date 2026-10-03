@@ -16,15 +16,12 @@ services:
   ai-project:
     host: azure.ai.project
     deployments: [ ... ]
-
   github-conn:
     host: azure.ai.connection
     uses: [ai-project]
-
   agent-tools:
     host: azure.ai.toolbox
     uses: [ai-project, github-conn]
-
   repository-agent:
     host: azure.ai.agent
     uses: [ai-project, github-conn, agent-tools]
