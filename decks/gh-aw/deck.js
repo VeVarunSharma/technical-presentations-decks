@@ -575,7 +575,7 @@ function renderPlatformThreats() {
     button.type = "button";
     button.className = "platform-threat-button";
     button.dataset.threat = mapping.threat;
-    button.setAttribute("aria-selected", index === 0 ? "true" : "false");
+    button.setAttribute("aria-pressed", index === 0 ? "true" : "false");
     button.textContent = mapping.threat;
     button.addEventListener("click", () => setPlatformThreat(mapping.threat));
     container.appendChild(button);
@@ -606,7 +606,7 @@ function setPlatformThreat(threat) {
   document.querySelectorAll(".platform-threat-button").forEach((button) => {
     const active = button.dataset.threat === threat;
     button.classList.toggle("active", active);
-    button.setAttribute("aria-selected", active ? "true" : "false");
+    button.setAttribute("aria-pressed", active ? "true" : "false");
   });
   const activeRows = platformThreatRowMap[threat] || [];
   document.querySelectorAll(".comparison-cell").forEach((cell) => {
@@ -626,7 +626,7 @@ function renderSpecView(viewId) {
   document.querySelectorAll("[data-spec-view]").forEach((button) => {
     const active = button.dataset.specView === viewId;
     button.classList.toggle("active", active);
-    button.setAttribute("aria-selected", active ? "true" : "false");
+    button.setAttribute("aria-pressed", active ? "true" : "false");
   });
   document.getElementById("specView").innerHTML = `
     <div class="spec-document">
@@ -643,7 +643,7 @@ function renderDeterministicScenarios() {
     button.type = "button";
     button.className = "scenario-button";
     button.dataset.scenario = id;
-    button.setAttribute("aria-selected", index === 0 ? "true" : "false");
+    button.setAttribute("aria-pressed", index === 0 ? "true" : "false");
     button.textContent = scenario.label;
     button.addEventListener("click", () => setDeterministicScenario(id));
     container.appendChild(button);
@@ -656,7 +656,7 @@ function setDeterministicScenario(id) {
   document.querySelectorAll(".scenario-button").forEach((button) => {
     const active = button.dataset.scenario === id;
     button.classList.toggle("active", active);
-    button.setAttribute("aria-selected", active ? "true" : "false");
+    button.setAttribute("aria-pressed", active ? "true" : "false");
   });
   document.querySelectorAll("[data-det-stage]").forEach((stage) => {
     stage.classList.toggle("active", scenario.active.includes(stage.dataset.detStage));
@@ -709,7 +709,7 @@ function setEngine(engineId) {
   document.querySelectorAll("[data-engine]").forEach((button) => {
     const active = button.dataset.engine === engineId;
     button.classList.toggle("active", active);
-    button.setAttribute("aria-selected", active ? "true" : "false");
+    button.setAttribute("aria-pressed", active ? "true" : "false");
   });
   document.getElementById("engineFilename").textContent = config.filename;
   document.getElementById("engineKicker").textContent = config.kicker;
@@ -771,7 +771,7 @@ function renderCostLayers() {
     button.type = "button";
     button.className = "governance-layer";
     button.dataset.costLayer = category.id;
-    button.setAttribute("aria-selected", index === 0 ? "true" : "false");
+    button.setAttribute("aria-pressed", index === 0 ? "true" : "false");
     button.textContent = category.label;
     button.addEventListener("click", () => setCostLayer(category.id));
     container.appendChild(button);
@@ -784,7 +784,7 @@ function setCostLayer(id) {
   document.querySelectorAll("[data-cost-layer]").forEach((button) => {
     const active = button.dataset.costLayer === id;
     button.classList.toggle("active", active);
-    button.setAttribute("aria-selected", active ? "true" : "false");
+    button.setAttribute("aria-pressed", active ? "true" : "false");
   });
   document.getElementById("costKicker").textContent = category.label;
   document.getElementById("costTitle").textContent = category.principle;
@@ -810,7 +810,7 @@ function renderConcurrencyScenarios() {
     button.type = "button";
     button.className = "concurrency-button";
     button.dataset.concurrencyScenario = id;
-    button.setAttribute("aria-selected", index === 0 ? "true" : "false");
+    button.setAttribute("aria-pressed", index === 0 ? "true" : "false");
     button.textContent = scenario.label;
     button.addEventListener("click", () => setConcurrencyScenario(id));
     container.appendChild(button);
@@ -823,7 +823,7 @@ function setConcurrencyScenario(id) {
   document.querySelectorAll("[data-concurrency-scenario]").forEach((button) => {
     const active = button.dataset.concurrencyScenario === id;
     button.classList.toggle("active", active);
-    button.setAttribute("aria-selected", active ? "true" : "false");
+    button.setAttribute("aria-pressed", active ? "true" : "false");
   });
   document.querySelectorAll("[data-concurrency-layer]").forEach((lane) => {
     lane.classList.toggle("active", scenario.layers.includes(lane.dataset.concurrencyLayer));
@@ -860,7 +860,7 @@ function renderObservabilityTabs() {
     button.type = "button";
     button.className = "observability-tab";
     button.dataset.observability = id;
-    button.setAttribute("aria-selected", index === 0 ? "true" : "false");
+    button.setAttribute("aria-pressed", index === 0 ? "true" : "false");
     button.textContent = view.label;
     button.addEventListener("click", () => setObservabilityView(id));
     container.appendChild(button);
@@ -873,7 +873,7 @@ function setObservabilityView(id) {
   document.querySelectorAll("[data-observability]").forEach((button) => {
     const active = button.dataset.observability === id;
     button.classList.toggle("active", active);
-    button.setAttribute("aria-selected", active ? "true" : "false");
+    button.setAttribute("aria-pressed", active ? "true" : "false");
   });
   document.getElementById("observabilityKicker").textContent = view.kicker;
   document.getElementById("observabilityTitle").textContent = view.title;

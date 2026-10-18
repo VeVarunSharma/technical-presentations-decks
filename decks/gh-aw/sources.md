@@ -2,6 +2,26 @@
 
 Last reviewed: 2026-07-16
 
+## Accelerator teaching package
+
+Added 2026-10-18. `accelerator/fixtures.json` and the replay's inputs,
+decisions, architecture, and pilot prompts are original, hand-authored
+synthetic teaching material, not recorded agent execution or measured
+customer outcomes. The operating-envelope summary refers to
+`examples/repo-care.md`; existing official GH-AW sources below explain the
+underlying features. The handoff guide separates static hosting from optional
+execution and does not assert production readiness.
+
+Screenshots and the silent captioned walkthrough are generated from this
+repository's synthetic replay and existing catalog. Capture provenance and
+limitations are in `accelerator/media/manifest.json`. No external brand
+artwork was added for the accelerator package.
+
+Catalog reference: <https://github.com/mcaps-microsoft/accelerators-catalog>.
+The repository lookup returned HTTP 404 on 2026-10-18; access and the current
+schema could not be verified. Root `accelerator.yaml` is a provisional
+authoring draft, not a validated catalog submission.
+
 | Source | Purpose |
 |---|---|
 | <https://www.microsoft.com/en-us/security/blog/2026/06/05/securing-ci-cd-in-agentic-world-claude-code-github-action-case/?msockid=2d5ff4b38a6f64cc0049e38c8bec65b6> | Microsoft Threat Intelligence case study: prompt injection plus runner secret and tool access can create an exfiltration path. The reported issue was fixed in Claude Code 2.1.128; the case does not establish that the Claude Code CLI is inherently insecure. |

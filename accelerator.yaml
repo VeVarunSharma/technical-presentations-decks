@@ -1,0 +1,65 @@
+# Provisional authoring metadata, NOT a verified Accelerator Catalog schema.
+# Catalog lookup returned HTTP 404 on 2026-10-18; confirm access and requirements.
+id: governed-agentic-delivery
+name: Governed Agentic Delivery — Briefing and Pilot Starter
+summary: >-
+  A reusable briefing and synthetic Repo Care replay for selecting a bounded,
+  review-first repository maintenance pilot.
+repository: https://github.com/VeVarunSharma/technical-presentations-decks
+demo_url: https://vevarunsharma.github.io/technical-presentations-decks/decks/gh-aw/accelerator/replay.html
+documentation_url: https://vevarunsharma.github.io/technical-presentations-decks/decks/gh-aw/accelerator/guide.html
+type: enablement-and-pilot-starter
+customer_scope: reusable-cross-industry
+industries: [cross-industry-software-delivery]
+personas:
+  - platform-engineering-lead
+  - security-lead
+  - engineering-leader
+  - solution-engineer
+  - cloud-solution-architect
+readiness:
+  current: demo-ready-candidate
+  target: catalog-ready
+  catalog_schema_verified: false
+  independent_handoff_verified: false
+  release_evidence: decks/gh-aw/accelerator/media/manifest.json
+  blockers:
+    - Confirm catalog access, current metadata schema, and submission checks.
+    - Confirm an accountable maintainer and maintenance expectations.
+    - Complete an independent SE/CSA clean-checkout rehearsal.
+    - Validate optional authenticated sandbox execution before claiming a live pilot.
+customer_problem: >-
+  Platform teams need repository maintenance help without unrestricted
+  automation or unclear review responsibilities.
+intended_outcome: >-
+  Select one task, inspect its operating envelope and expected staged
+  recommendation, and agree a scoped pilot with accountable owners.
+technologies: [GitHub, GitHub Actions, GitHub Pages, GitHub Agentic Workflows, GitHub Copilot, Vite, Playwright]
+prerequisites:
+  presentation: [Node.js 24, npm, Chromium for browser validation]
+  optional_execution:
+    - Disposable repository and reviewed synthetic seed
+    - Compatible GH-AW CLI and supported engine entitlement
+    - Operator-managed authentication, approvals, labels, permissions, and budget
+security:
+  sample_data: synthetic-only
+  output_mode: staged
+  production_deployment_included: false
+  human_review_required_before_applying_changes: true
+  security_review_status: release-review-required
+assets:
+  manifest: decks/gh-aw/accelerator/media/manifest.json
+  walkthrough_video: decks/gh-aw/accelerator/media/walkthrough.webm
+  captions: decks/gh-aw/accelerator/media/walkthrough.vtt
+  transcript: decks/gh-aw/accelerator/transcript.html
+  independent_rehearsal_evidence: null
+ownership:
+  maintainer: null
+  support_url: https://github.com/VeVarunSharma/technical-presentations-decks/issues
+  support_sla: none
+license: MIT
+third_party_notices: [NOTICE.md]
+release:
+  version: null
+  source_commit: null
+  last_validated: null

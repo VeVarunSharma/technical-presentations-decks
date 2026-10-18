@@ -55,7 +55,7 @@
             </div>
           </div>
           <div class="source-note">
-            <span>30-minute technical session</span>
+            <span>30-minute technical session · <a href="./accelerator/guide.html">Pilot starter and synthetic replay</a></span>
             <span><a href="https://github.github.com/gh-aw/" target="_blank" rel="noopener">GitHub Agentic Workflows overview</a></span>
           </div>
         </section>
@@ -128,7 +128,7 @@
             <div class="slide-index">04</div>
           </div>
           <div class="platform-layout">
-            <div class="platform-threats" id="platformThreats" role="tablist" aria-label="Agent workflow failure modes"></div>
+            <div class="platform-threats" id="platformThreats" role="group" aria-label="Agent workflow failure modes"></div>
             <div class="platform-comparison">
               <div class="comparison-heading diy-heading"><span>DIY agent action</span><strong id="diyTitle">Workflow author owns the boundary</strong></div>
               <div class="comparison-heading platform-heading"><span>GitHub Agentic Workflows</span><strong id="platformTitle">Platform compiles and enforces the boundary</strong></div>
@@ -194,10 +194,10 @@
             </div>
             <div class="slide-index">06</div>
           </div>
-          <div class="spec-tabs" role="tablist" aria-label="Workflow specification views">
-            <button type="button" data-spec-view="controls" aria-selected="false">Controls</button>
-            <button class="active" type="button" data-spec-view="intent" aria-selected="true">Written intent</button>
-            <button type="button" data-spec-view="compiled" aria-selected="false">Compiled plan</button>
+          <div class="spec-tabs" role="group" aria-label="Workflow specification views">
+            <button type="button" data-spec-view="controls" aria-pressed="false">Controls</button>
+            <button class="active" type="button" data-spec-view="intent" aria-pressed="true">Written intent</button>
+            <button type="button" data-spec-view="compiled" aria-pressed="false">Compiled plan</button>
           </div>
           <div class="spec-view" id="specView"></div>
           <div class="spec-note" data-build-step="1">
@@ -219,7 +219,7 @@
             <div class="slide-index">07</div>
           </div>
           <div class="deterministic-layout">
-            <div class="deterministic-scenarios" id="deterministicScenarios" role="tablist" aria-label="Deterministic operations scenarios"></div>
+            <div class="deterministic-scenarios" id="deterministicScenarios" role="group" aria-label="Deterministic operations scenarios"></div>
             <div class="deterministic-flow">
               <article data-det-stage="filter"><span>01</span><h3>Filter trigger</h3><p>Search query, role, bot, or event conditions.</p></article>
               <article data-det-stage="compute"><span>02</span><h3>Compute</h3><p>Custom jobs and steps fetch structured data.</p></article>
@@ -260,7 +260,7 @@
               <div class="code-window"><code class="yaml-code" id="annotatedYaml" aria-label="Annotated workflow frontmatter"></code></div>
             </div>
             <aside class="focus-panel">
-              <div class="focus-menu" id="focusMenu" aria-label="YAML control categories"></div>
+              <div class="focus-menu" id="focusMenu" role="group" aria-label="YAML control categories"></div>
               <div class="focus-detail">
                 <span class="micro-label" id="yamlFocusLabel">Complete specification</span>
                 <h3 id="yamlFocusTitle">One file declares the operating envelope</h3>
@@ -284,11 +284,11 @@
             </div>
             <div class="slide-index">09</div>
           </div>
-          <div class="engine-tabs" role="tablist" aria-label="Engine examples">
-            <button class="engine-tab active" type="button" aria-selected="true" data-engine="copilot">Copilot</button>
-            <button class="engine-tab" type="button" aria-selected="false" data-engine="claude">Claude</button>
-            <button class="engine-tab" type="button" aria-selected="false" data-engine="codex">Codex</button>
-            <button class="engine-tab" type="button" aria-selected="false" data-engine="gemini">Gemini</button>
+          <div class="engine-tabs" role="group" aria-label="Engine examples">
+            <button class="engine-tab active" type="button" aria-pressed="true" data-engine="copilot">Copilot</button>
+            <button class="engine-tab" type="button" aria-pressed="false" data-engine="claude">Claude</button>
+            <button class="engine-tab" type="button" aria-pressed="false" data-engine="codex">Codex</button>
+            <button class="engine-tab" type="button" aria-pressed="false" data-engine="gemini">Gemini</button>
           </div>
           <div class="engine-main">
             <div class="code-card">
@@ -330,7 +330,7 @@
             <article data-security-stage="6"><span>06</span><h3>Scoped write job</h3><p>Approved structured effects only.</p></article>
           </div>
           <div class="security-bottom">
-            <div class="threat-options" id="threatOptions" aria-label="Threat scenarios"></div>
+            <div class="threat-options" id="threatOptions" role="group" aria-label="Threat scenarios"></div>
             <div class="threat-verdict" aria-live="polite">
               <span class="detail-kicker">Threat simulator</span>
               <h3 id="threatTitle">Choose a threat scenario</h3>
@@ -357,7 +357,7 @@
             <div class="slide-index">11</div>
           </div>
           <div class="governance-layout">
-            <div class="governance-layers" id="costLayers" role="tablist" aria-label="Cost governance layers"></div>
+            <div class="governance-layers" id="costLayers" role="group" aria-label="Cost governance layers"></div>
             <div class="governance-detail">
               <span class="detail-kicker" id="costKicker">Avoid the agent</span>
               <h3 id="costTitle">The cheapest inference call is the one that never starts</h3>
@@ -384,7 +384,7 @@
             <div class="slide-index">12</div>
           </div>
           <div class="concurrency-layout">
-            <div class="concurrency-scenarios" id="concurrencyScenarios" role="tablist" aria-label="Concurrency scenarios"></div>
+            <div class="concurrency-scenarios" id="concurrencyScenarios" role="group" aria-label="Concurrency scenarios"></div>
             <div class="concurrency-diagram">
               <div class="queue-lane" data-concurrency-layer="workflow"><span>Workflow</span><div id="workflowQueue"></div></div>
               <div class="queue-lane" data-concurrency-layer="engine"><span>Engine</span><div id="engineQueue"></div></div>
@@ -413,7 +413,7 @@
             </div>
             <div class="slide-index">13</div>
           </div>
-          <div class="observability-tabs" id="observabilityTabs" role="tablist" aria-label="Observability views"></div>
+          <div class="observability-tabs" id="observabilityTabs" role="group" aria-label="Observability views"></div>
           <div class="observability-layout">
             <div class="telemetry-flow">
               <article><span>Run</span><strong>Duration · turns · tokens · AIC</strong></article>
