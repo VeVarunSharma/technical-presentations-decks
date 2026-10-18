@@ -28,7 +28,6 @@ readiness:
     - Confirm an accountable maintainer and maintenance expectations.
     - Complete an independent SE/CSA clean-checkout rehearsal.
     - Validate optional authenticated sandbox execution before claiming a live pilot.
-    - Review outstanding dependency advisories before release.
 customer_problem: >-
   Platform teams need repository maintenance help without unrestricted
   automation or unclear review responsibilities.

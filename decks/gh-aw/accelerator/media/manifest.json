@@ -1,0 +1,89 @@
+{
+  "classification": "Captured synthetic teaching material; not live agent execution or customer evidence.",
+  "captured_on": "2026-10-18",
+  "source_baseline_commit": "149f9de929261e87cc3608eda89dab79e3dfa4f2",
+  "capture_environment": "Local Vite development server, system Chromium, Playwright, reduced motion enabled. No GitHub credentials or model calls.",
+  "source_provenance": {
+    "note": "Replay and fixtures match the baseline commit. Guide source-only links were corrected in the working tree before its screenshot; its exact content fingerprint is recorded below. Transitive tool security patches were installed during capture without changing presentation content.",
+    "replay_html_sha256": "9a3d29ca14ca431032c9fbb087cfbaf2dcd37fb3560eb0440d7d081fad036bd3",
+    "fixtures_json_sha256": "cb8c497bac1020dcc38ca3ac175ac63c3254fe45e82ad44050f1e3a21b5dfa3b",
+    "guide_html_sha256": "56222844a40153638f0b6f841dfb67386d50c1ecc19f1bc0800ac1c2c5a49f01"
+  },
+  "seed": "repo-care-synthetic-v1",
+  "viewports": [
+    { "width": 1366, "height": 768 },
+    { "width": 1200, "height": 796 },
+    { "width": 1920, "height": 1080 }
+  ],
+  "screenshots": [
+    { "subject": "Catalog; featured GitHub Agentic Workflows card", "state": "Existing static catalog, no customer environment", "files": ["01-catalog-1366.png", "01-catalog-1200.png", "01-catalog-1920.png"] },
+    { "subject": "Customer problem and outcome", "state": "Synthetic replay introduction", "files": ["02-customer-story-1366.png", "02-customer-story-1200.png", "02-customer-story-1920.png"] },
+    { "subject": "Presentation versus optional execution architecture", "state": "Illustrative reference model, not a deployed topology", "files": ["03-architecture-1366.png", "03-architecture-1200.png", "03-architecture-1920.png"] },
+    { "subject": "Annotated operating envelope", "state": "Summary of repo-care.md; staged output, configured not measured limits", "files": ["04-operating-envelope-1366.png", "04-operating-envelope-1200.png", "04-operating-envelope-1920.png"] },
+    { "subject": "Synthetic issue and repository context", "state": "Useful fixture, expected result not yet previewed", "files": ["05-synthetic-context-1366.png", "05-synthetic-context-1200.png", "05-synthetic-context-1920.png"] },
+    { "subject": "Expected proposal and human checkpoint", "state": "Useful fixture preview, zero applied changes", "files": ["06-staged-review-1366.png", "06-staged-review-1200.png", "06-staged-review-1920.png"] },
+    { "subject": "No-action result", "state": "Duplicate fixture preview, existing synthetic PR 102 addresses issue 101", "files": ["07-no-action-1366.png", "07-no-action-1200.png", "07-no-action-1920.png"] },
+    { "subject": "Pilot scorecard and review decision", "state": "Blank facilitator worksheet, no claimed customer results", "files": ["08-pilot-scorecard-1366.png", "08-pilot-scorecard-1200.png", "08-pilot-scorecard-1920.png"] },
+    { "subject": "Complete synthetic inputs", "state": "Uncropped element capture at 1366 viewport width; useful fixture before preview", "files": ["09-context-detail.png"] },
+    { "subject": "Complete expected decision and review checkpoint", "state": "Uncropped element capture at 1366 viewport width; useful fixture after preview", "files": ["10-review-detail.png"] }
+  ],
+  "recording": {
+    "file": "walkthrough.webm",
+    "mode": "Silent screen recording of hand-authored synthetic replay; also the fallback for the execution segment",
+    "nominal_duration_seconds": 300,
+    "viewport": { "width": 1366, "height": 768 },
+    "captions": "walkthrough.vtt",
+    "transcript": "../transcript.html",
+    "sequence": [
+      { "seconds": 0, "state": "Customer story and synthetic disclaimer" },
+      { "seconds": 40, "state": "Architecture and separate execution boundary" },
+      { "seconds": 80, "state": "Intent, limits, staged output" },
+      { "seconds": 120, "state": "Useful synthetic inputs" },
+      { "seconds": 140, "state": "Useful expected proposal and human review" },
+      { "seconds": 180, "state": "Duplicate synthetic inputs" },
+      { "seconds": 200, "state": "Duplicate no-action decision" },
+      { "seconds": 220, "state": "Insufficient-evidence inputs" },
+      { "seconds": 240, "state": "Insufficient-evidence no-action decision" },
+      { "seconds": 260, "state": "Pilot measures, owner, and next action" }
+    ]
+  },
+  "refresh_instructions": [
+    "Use Node.js 24, npm ci, and the repository dev server. Open the catalog and replay in Chromium with reduced motion.",
+    "Use the listed three viewports and seed. Capture the same eight states; preview useful and duplicate cases only after capturing their inputs.",
+    "Record the replay at 1366x768 using the timestamped sequence. Keep the captions and transcript synchronized; do not substitute a live run without changing the classification.",
+    "Inspect every image and the complete captioned recording. Recheck all published media paths in production preview.",
+    "Update the baseline revision, source fingerprints, capture date, validation evidence, and any limitations. Do not imply human rehearsal or approval from generated assets."
+  ],
+  "validation": {
+    "status": "Local release gates passed; external readiness gates remain blocked",
+    "local_release_results": {
+      "date": "2026-10-18",
+      "environment": "Node.js 24.21.0; system Chromium via PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+      "manifest_and_link_validation": "Passed for five decks and accelerator support pages",
+      "production_build": "Passed; nine HTML entry points including catalog and three accelerator support pages",
+      "production_browser_tests": "117 passed across 1366x768, 1200x796, and 1920x1080, including every flagship slide with builds revealed, synthetic cases, media delivery, and recording metadata",
+      "copilot_governance_validator": "13 examples passed",
+      "dependency_audit": "Zero reported vulnerabilities after compatible transitive patches",
+      "patch_hygiene": "git diff --check passed",
+      "visual_review": "Operating-envelope screenshot inspected at 1366x768; additional human visual review of the full screenshot pack and complete captioned playback remains a release-owner gate. Automated layout/accessibility checks cover all three target viewports.",
+      "scope": "Local working tree derived from source_baseline_commit, plus documented guide-link corrections, media, tests, and four transitive package patches; not a hosted-site or authenticated execution certification"
+    },
+    "completed_before_capture": [
+      "npm ci succeeded after replacing three unreachable package tarball URLs with the public npm registry, retaining versions and integrity.",
+      "All 12 initial replay and flagship all-slide accessibility tests passed across three target viewports using system Chromium.",
+      "Copilot governance validator passed for 13 examples.",
+      "npm audit fix applied four compatible transitive patches; npm ci and npm audit then reported zero vulnerabilities."
+    ],
+    "blocked": [
+      "GH-AW CLI installation/release lookup: HTTP 403; authenticated release lookup reports organization SAML enforcement. Compiler validation and live execution not verified.",
+      "Accelerator Catalog repository lookup: HTTP 404. Current schema and submission checks not verified."
+    ],
+    "external_gates": [
+      "Independent SE/CSA clean-checkout rehearsal",
+      "Maintainer confirmation and support expectations",
+      "Asset/licensing approval and customer-specific security review",
+      "Catalog schema conformance and acceptance",
+      "Optional authenticated sandbox execution approval and evidence"
+    ]
+  }
+}

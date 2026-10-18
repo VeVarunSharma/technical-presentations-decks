@@ -190,7 +190,7 @@ WRITE ENABLEMENT: outside this staged demo; requires a new approval decision</pr
     <section id="setup" aria-labelledby="setup-title">
       <h2 id="setup-title">Presentation setup, deployment, and rollback</h2>
       <h3>1. Prepare a clean local checkout</h3>
-      <p>Use an approved checkout of this repository, Node.js 24, npm, and a supported browser. No GitHub/model credentials are needed for presentation or replay. Review <a href="../../../README.md">README</a>, <a href="../../../design.md">design contract</a>, <a href="../../../CONTRIBUTING.md">contribution checklist</a>, <a href="../deck.json">deck metadata</a>, and <a href="../sources.md">sources</a>.</p>
+      <p>Use an approved checkout of this repository, Node.js 24, npm, and a supported browser. No GitHub/model credentials are needed for presentation or replay. Review <a href="https://github.com/VeVarunSharma/technical-presentations-decks/blob/main/README.md">README</a>, <a href="https://github.com/VeVarunSharma/technical-presentations-decks/blob/main/design.md">design contract</a>, <a href="https://github.com/VeVarunSharma/technical-presentations-decks/blob/main/CONTRIBUTING.md">contribution checklist</a>, <a href="../deck.json">deck metadata</a>, and <a href="../sources.md">sources</a>.</p>
       <pre><code>nvm use
 npm ci
 npx playwright install chromium
@@ -206,7 +206,7 @@ npm run preview</code></pre>
       <h3>3. Publish only reviewed material</h3>
       <ol>
         <li>Obtain source, rights, security, and hosting-owner review. Confirm the intended audience and actual hosting access policy; source-repository privacy alone is insufficient.</li>
-        <li>In repository Settings → Pages, choose GitHub Actions as the source if authorized. Use the existing <a href="../../../.github/workflows/deploy-pages.yml">Pages workflow</a>, not a separate ad hoc deployment script.</li>
+        <li>In repository Settings → Pages, choose GitHub Actions as the source if authorized. Use the existing <a href="https://github.com/VeVarunSharma/technical-presentations-decks/blob/main/.github/workflows/deploy-pages.yml">Pages workflow</a>, not a separate ad hoc deployment script.</li>
         <li>Merge the approved revision to <code>main</code> or dispatch the workflow for the approved branch. The workflow builds, tests built output, validates the GH-AW example, and deploys <code>dist/</code>. Do not bypass a failed gate.</li>
         <li>Verify the published catalog and direct paths, including <code>decks/gh-aw/</code> and <code>decks/gh-aw/accelerator/guide.html</code>. Test nested CSS/fonts, replay, fixtures, and media from the deployed URL, not only local preview.</li>
         <li>Record the deployment URL, revision, approver, and timestamp. The existing site is <a href="https://vevarunsharma.github.io/technical-presentations-decks/">the repository's Pages catalog</a>; a fork has its own configured address.</li>
@@ -258,7 +258,7 @@ gh aw compile examples/repo-care.md \
         <li>Who owns the go/no-go decision, support escalation, retention, and rollback, and when will they review evidence?</li>
       </ol>
       <h3>Workshop proposal</h3>
-      <p><strong>Proposed 60 minutes, not a purchased service commitment:</strong> 10 minutes discovery, 15 minutes the technical demo, 15 minutes source and trust-boundary review, 15 minutes scorecard and pilot design, and 5 minutes owner/date confirmation. Invite a repository maintainer, platform engineer, security reviewer, and cost owner. Deliver a scoped decision record, not an activated workflow.</p>
+      <p>Propose a workshop covering discovery, the technical demo, source and trust-boundary review, scorecard and pilot design, and owner/date confirmation. Agree the agenda and duration with the customer; this is not a purchased service commitment. Invite a repository maintainer, platform engineer, security reviewer, and cost owner. Deliver a scoped decision record, not an activated workflow.</p>
       <h3>Pilot proposal</h3>
       <p>Propose one approved sandbox repository, one low-risk repository-care task family, staged outputs only, and an agreed time-box (for example, two weeks). Establish baselines before execution; record every eligible case, skip, proposal, reviewer disposition, validation result, and cost observation. Use a named human reviewer and customer-defined sample/thresholds. Stop on sensitive-data exposure, unauthorized capability, uncontrolled execution, budget breach, or inability to review safely. Expansion requires a new security/operational review; a small pilot does not establish production readiness.</p>
     </section>
@@ -334,7 +334,7 @@ gh aw compile examples/repo-care.md \
       </div>
       <h3>Anonymization, licensing, and asset review</h3>
       <p>Prefer invented fixture records. Before any recording or publication, replace repository names, issue text, identities, URLs, timestamps, paths, logs, and identifiers that could reveal a customer or correlate to private work. Inspect screen content, audio, captions, transcript, JSON, and manifest metadata together. Redaction is not approval; obtain an authorized review of the final artifact.</p>
-      <p>Review <a href="../../../LICENSE">LICENSE</a> and <a href="../../../NOTICE.md">NOTICE.md</a>. Repository-authored material uses MIT terms; fonts have their own notices, and trademarks/third-party references do not inherit a blanket redistribution permission. Record asset provenance and approval evidence before external reuse. Do not download or copy protected logos, templates, mascots, internal guides, or customer assets. No customer consent, trademark approval, or completed licensing review is asserted here.</p>
+      <p>Review <a href="https://github.com/VeVarunSharma/technical-presentations-decks/blob/main/LICENSE">LICENSE</a> and <a href="https://github.com/VeVarunSharma/technical-presentations-decks/blob/main/NOTICE.md">NOTICE.md</a>. Repository-authored material uses MIT terms; fonts have their own notices, and trademarks/third-party references do not inherit a blanket redistribution permission. Record asset provenance and approval evidence before external reuse. Do not download or copy protected logos, templates, mascots, internal guides, or customer assets. No customer consent, trademark approval, or completed licensing review is asserted here.</p>
       <p><strong>Maintainer confirmation pending:</strong> confirm a named maintainer/contact, supported delivery scope, review cadence, licensing disposition, and ownership of future updates before promising a maintained accelerator or support commitment.</p>
     </section>
 
@@ -367,9 +367,10 @@ gh aw compile examples/repo-care.md \
         <li><a href="../sources.md">GH-AW source register</a> — authoritative references and caveats for deck claims, architecture, staged mode, permissions, costs, and outcomes.</li>
         <li><a href="../examples/repo-care.md">Supplied workflow source</a> — actual triggers, roles, approval, labels, intent, and output controls.</li>
         <li><a href="../deck.json">Deck metadata</a> — audience, objectives, theme, and exact compiler validator.</li>
+        <li><a href="https://github.com/VeVarunSharma/technical-presentations-decks/blob/main/accelerator.yaml">Accelerator metadata</a> — root handoff metadata in the source repository.</li>
         <li><a href="fixtures.json">Synthetic fixtures</a> and <a href="replay.html">raw source display in replay</a> — demonstration inputs and outcomes, not customer/run evidence.</li>
         <li><a href="media/manifest.json">Media manifest</a>, <a href="media/walkthrough.webm">recording</a>, <a href="media/walkthrough.vtt">captions</a>, and <a href="transcript.html">transcript</a> — verify consistency before handoff.</li>
-        <li><a href="../../../design.md">Design contract</a>, <a href="../../../CONTRIBUTING.md">contribution requirements</a>, and <a href="../../../README.md">repository overview</a> — authoring and release responsibilities.</li>
+        <li><a href="https://github.com/VeVarunSharma/technical-presentations-decks/blob/main/design.md">Design contract</a>, <a href="https://github.com/VeVarunSharma/technical-presentations-decks/blob/main/CONTRIBUTING.md">contribution requirements</a>, and <a href="https://github.com/VeVarunSharma/technical-presentations-decks/blob/main/README.md">repository overview</a> — authoring and release responsibilities.</li>
       </ul>
     </section>
   </main>

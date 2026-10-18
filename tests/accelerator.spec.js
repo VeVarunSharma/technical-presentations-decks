@@ -65,6 +65,26 @@ test("replay fails safely when local fixtures are unavailable", async ({ page })
   await expect(page.locator("#outcome")).toBeHidden();
 });
 
+test("recording, captions, and screenshot fallbacks are published", async ({ page, request }) => {
+  await page.goto("/decks/gh-aw/accelerator/transcript.html");
+  const video = page.locator("video");
+  await expect.poll(() => video.evaluate((element) => element.duration)).toBeGreaterThanOrEqual(300);
+  expect(await video.evaluate((element) => element.duration)).toBeLessThan(310);
+  await expect(page.locator('track[kind="captions"]')).toHaveAttribute("default", "");
+  const captions = await request.get("/decks/gh-aw/accelerator/media/walkthrough.vtt");
+  expect(await captions.text()).toContain("04:40.000 --> 05:00.000");
+  const manifest = await request.get("/decks/gh-aw/accelerator/media/manifest.json");
+  expect(manifest.ok()).toBe(true);
+  expect((await manifest.json()).classification).toContain("synthetic");
+  const links = await page.locator('a[href$=".png"]').evaluateAll((elements) => elements.map((element) => element.href));
+  expect(links).toHaveLength(26);
+  for (const link of links) {
+    const response = await request.get(link);
+    expect(response.ok(), link).toBe(true);
+    expect(response.headers()["content-type"]).toContain("image/png");
+  }
+});
+
 test("flagship accessibility covers every slide with builds revealed", async ({ page }) => {
   await page.goto("/decks/gh-aw/");
   await page.addScriptTag({ path: axePath });
