@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" data-brand="github" data-theme="copilot-dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Repo Care — captioned walkthrough and transcript</title>
+  <link rel="stylesheet" href="../../../brands/github/tokens.css">
+  <link rel="stylesheet" href="../../../brands/github/themes/copilot-dark.css">
+  <style>
+    body { margin: auto; max-width: 1050px; padding: 24px; font: 18px/1.6 var(--brand-font-body); background: var(--brand-bg-canvas); color: var(--brand-text-primary); }
+    a { color: var(--brand-link); }
+    video { width: 100%; border: 1px solid var(--brand-border-subtle); }
+    li { margin: 16px 0; }
+    :focus-visible { outline: 3px solid var(--brand-focus-ring); outline-offset: 4px; }
+  </style>
+</head>
+<body>
+  <nav aria-label="Resources"><a href="guide.html">Presenter guide</a> · <a href="replay.html">Interactive synthetic replay</a> · <a href="media/manifest.json">Asset provenance</a></nav>
+  <main>
+    <h1>Five-minute Repo Care walkthrough</h1>
+    <p><strong>Silent, captioned screen recording of synthetic teaching data.</strong> No narration or live agent execution. Captions and this transcript convey the meaningful visual sequence. This is also the recorded fallback for the execution segment; do not describe it as an operational run.</p>
+    <video controls preload="metadata" aria-label="Five-minute synthetic Repo Care walkthrough">
+      <source src="media/walkthrough.webm" type="video/webm">
+      <track kind="captions" src="media/walkthrough.vtt" srclang="en" label="English" default>
+      <p><a href="media/walkthrough.webm">Download the silent recording</a>.</p>
+    </video>
+    <p><a href="media/walkthrough.vtt">Download timed captions</a>. The same captions are transcribed below.</p>
+    <h2>Transcript and visual descriptions</h2>
+    <ol>
+      <li><strong>0:00 — Customer story.</strong> Governed Agentic Delivery: a briefing and pilot starter. This silent walkthrough uses synthetic data, not a live agent.</li>
+      <li><strong>0:20 — Customer story.</strong> Platform teams need maintenance help without unrestricted access. The goal is one useful, reviewable next action.</li>
+      <li><strong>0:40 — Architecture.</strong> The static website only presents HTML and local teaching fixtures. It has no credentials, model calls, or repository writes.</li>
+      <li><strong>1:00 — Separate execution boundary.</strong> Real execution is separate: an approved trigger gathers bounded context. The optional agent operates within configured tools and permissions.</li>
+      <li><strong>1:20 — Operating envelope.</strong> Repo Care asks for one low-risk maintenance improvement. Untrusted repository text must not expand that written intent.</li>
+      <li><strong>1:40 — Staged output.</strong> Outputs remain staged. The example bounds turns, time, and AI Credits. These limits are configuration, not measured usage or a price quote.</li>
+      <li><strong>2:00 — Useful case inputs.</strong> Synthetic issue 101 asks for missing contributor test guidance. The fixture's package.json supplies the existing test command.</li>
+      <li><strong>2:20 — Useful case output.</strong> Preview the hand-authored expected decision. The proposed documentation change is not applied.</li>
+      <li><strong>2:40 — Review checkpoint.</strong> A maintainer must review scope, evidence, and real validation. This replay has executed no tests or agent workflow.</li>
+      <li><strong>3:00 — Duplicate case inputs.</strong> Now inspect the duplicate-work case. Synthetic open PR 102 already addresses issue 101.</li>
+      <li><strong>3:20 — Duplicate case outcome.</strong> The expected decision is no new proposal. Review existing work rather than creating a duplicate.</li>
+      <li><strong>3:40 — Insufficient-evidence inputs.</strong> The insufficient-evidence case contains no supporting facts. The expected result is no change: ask for a narrow reproduction.</li>
+      <li><strong>4:00 — Insufficient-evidence outcome.</strong> No-action results can be useful. Never invent evidence to force a patch. All three cases are illustrative, not operational proof.</li>
+      <li><strong>4:20 — Pilot action.</strong> Agree one pilot task, a repository owner, and a security reviewer. Measure usefulness, reviewer effort, duplicates, usage, and cost.</li>
+      <li><strong>4:40 — Decision.</strong> Confirm boundaries and stop conditions before optional execution. Next step: complete the guide's scorecard and a go/no-go decision.</li>
+    </ol>
+  </main>
+</body>
+</html>

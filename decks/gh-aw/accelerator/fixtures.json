@@ -1,0 +1,59 @@
+{
+  "seed": "repo-care-synthetic-v1",
+  "classification": "Synthetic, hand-authored teaching fixtures; not agent execution evidence.",
+  "repository": "demo/repo-care-sandbox",
+  "cases": [
+    {
+      "id": "useful",
+      "title": "Useful documentation proposal",
+      "request": "Help new contributors find the existing test command.",
+      "context": {
+        "issues": [{ "number": 101, "title": "Contributor guide omits test command", "labels": ["documentation"], "updatedAt": "2026-10-01T09:00:00Z" }],
+        "pullRequests": [],
+        "recentFailures": [],
+        "files": { "package.json": { "scripts": { "test": "node --test" } }, "CONTRIBUTING.md": "Install dependencies before contributing." }
+      },
+      "expected": {
+        "decision": "Preview a documentation-only proposal",
+        "evidence": "Synthetic issue #101 and package.json scripts.test establish the missing guidance.",
+        "proposal": "Add `npm test` to the synthetic contributor guide after dependency installation.",
+        "validation": "No command was executed. A real run must validate the proposed change in its sandbox.",
+        "nextAction": "A maintainer reviews the proposed wording and validation evidence before any application.",
+        "appliedChanges": 0
+      }
+    },
+    {
+      "id": "duplicate",
+      "title": "Existing work: do not duplicate",
+      "request": "Find one contributor documentation improvement.",
+      "context": {
+        "issues": [{ "number": 101, "title": "Contributor guide omits test command", "labels": ["documentation"], "updatedAt": "2026-10-01T09:00:00Z" }],
+        "pullRequests": [{ "number": 102, "title": "Document contributor test command", "state": "OPEN", "addresses": 101 }],
+        "recentFailures": [],
+        "files": { "package.json": { "scripts": { "test": "node --test" } } }
+      },
+      "expected": {
+        "decision": "No new proposal: existing work covers the request",
+        "evidence": "Synthetic open PR #102 already addresses issue #101.",
+        "proposal": "None. Do not create duplicate work.",
+        "validation": "Hand-authored expected result; no live duplicate search or agent run occurred.",
+        "nextAction": "Review the existing PR instead of opening another.",
+        "appliedChanges": 0
+      }
+    },
+    {
+      "id": "insufficient",
+      "title": "Insufficient evidence: do not guess",
+      "request": "Improve reliability of the repository.",
+      "context": { "issues": [], "pullRequests": [], "recentFailures": [], "files": {} },
+      "expected": {
+        "decision": "No change: evidence is insufficient",
+        "evidence": "No specific issue, failure, test, or repository file supports a safe patch.",
+        "proposal": "None. Request a narrow reproduction and affected file.",
+        "validation": "Hand-authored expected result; no repository inspection occurred.",
+        "nextAction": "Ask the repository owner for a concrete problem and evidence before proceeding.",
+        "appliedChanges": 0
+      }
+    }
+  ]
+}

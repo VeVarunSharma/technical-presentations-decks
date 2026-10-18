@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en" data-brand="github" data-theme="copilot-dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Repo Care — synthetic replay</title>
+  <link rel="stylesheet" href="../../../brands/github/tokens.css">
+  <link rel="stylesheet" href="../../../brands/github/themes/copilot-dark.css">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--brand-bg-canvas); color: var(--brand-text-primary); font: 18px/1.6 var(--brand-font-body); }
+    main, header, footer { max-width: 1120px; margin: auto; padding: 24px; }
+    header { border-bottom: 1px solid var(--brand-border-subtle); }
+    a { color: var(--brand-link); }
+    h1 { font-size: clamp(30px, 4vw, 48px); line-height: 1.1; margin: 16px 0; }
+    h2 { font-size: 25px; line-height: 1.25; }
+    h3 { font-size: 20px; }
+    .eyebrow { color: var(--brand-hero); font-weight: 700; }
+    .notice { border-left: 4px solid var(--brand-hero); padding: 12px 20px; background: var(--brand-bg-surface); }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+    section { padding: 16px 0; scroll-margin-top: 16px; }
+    article { background: var(--brand-bg-surface); border: 1px solid var(--brand-border-subtle); padding: 20px; border-radius: 12px; min-width: 0; }
+    button, select { color: var(--brand-text-primary); background: var(--brand-bg-surface); border: 2px solid var(--brand-border-strong); padding: 10px 16px; font: inherit; border-radius: 6px; }
+    button { cursor: pointer; }
+    :focus-visible { outline: 3px solid var(--brand-focus-ring); outline-offset: 4px; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; font: 15px/1.5 var(--font-mono); }
+    label { display: block; margin-bottom: 8px; font-weight: 700; }
+    nav { display: flex; gap: 16px; flex-wrap: wrap; }
+    [hidden] { display: none !important; }
+    #status { min-height: 2em; }
+    @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } select { max-width: 100%; } }
+    @media print { button, select, nav { display: none; } body { font-size: 12pt; } article { break-inside: avoid; } }
+  </style>
+</head>
+<body>
+  <header>
+    <nav aria-label="Resources"><a href="../../../index.html">Catalog</a><a href="../index.html">Technical briefing</a><a href="guide.html">Presenter guide</a><a href="transcript.html">Captioned walkthrough</a></nav>
+    <p class="eyebrow">Governed Agentic Delivery · Demo-ready candidate</p>
+    <h1>Less maintenance toil.<br>Review stays with people.</h1>
+    <p class="notice"><strong>Synthetic replay — not a live agent.</strong> Hand-authored fixtures demonstrate expected decisions. No GitHub connection, model call, workflow execution, repository write, or measured productivity result.</p>
+  </header>
+  <main>
+    <section id="story" aria-labelledby="story-title">
+      <h2 id="story-title">1. Customer request → useful next action</h2>
+      <p>Platform teams need maintenance help without unrestricted automation. Select a bounded task, inspect its evidence, preview a proposal, and ask a maintainer to decide what happens next.</p>
+      <label for="case">Choose a synthetic scenario</label>
+      <select id="case" disabled><option>Loading synthetic fixtures…</option></select>
+      <p id="status" role="status">Loading local teaching data. If unavailable, use the linked fixture file below.</p>
+    </section>
+    <section id="architecture" aria-labelledby="architecture-title">
+      <h2 id="architecture-title">2. Two separate environments</h2>
+      <div class="grid">
+        <article><h3>Presentation / replay</h3><p>Browser → static HTML + local JSON → human discussion</p><p>No credentials or operational permissions. All results on this page are prewritten.</p></article>
+        <article><h3>Optional sandbox execution</h3><p>Approved trigger → bounded context → read-scoped agent → threat checks → staged output → human review</p><p>Separately configured Actions environment, credentials, entitlements, tool/network controls, budget, and approval required.</p></article>
+      </div>
+    </section>
+    <section id="envelope" aria-labelledby="envelope-title">
+      <h2 id="envelope-title">3. Inspect the operating envelope</h2>
+      <div class="grid">
+        <article><h3>Bound the work</h3><ul><li>One low-risk maintenance improvement.</li><li>Prepare bounded issue, PR, and failure context first.</li><li>Treat repository content as untrusted data.</li><li>Do not modify authentication, dependencies, or workflow files.</li></ul></article>
+        <article><h3>Keep outputs staged</h3><ul><li><code>safe-outputs.staged: true</code> previews requested writes.</li><li>Example bounds: 12 turns, 30 minutes, 500 AI Credits per run.</li><li>Configured limits are not measured usage or a monetary quote.</li><li>No application or merge is demonstrated here.</li></ul></article>
+      </div>
+      <p><a href="../examples/repo-care.md">Read the authoritative example</a> · <a href="../sources.md">Product sources and qualifications</a></p>
+    </section>
+    <section id="context" aria-labelledby="context-title">
+      <h2 id="context-title">4. Inspect synthetic inputs</h2>
+      <h3 id="request">Request pending</h3>
+      <pre id="input">No fixture loaded.</pre>
+      <p><a href="fixtures.json">Download all synthetic fixtures</a> · Seed: <code>repo-care-synthetic-v1</code></p>
+      <button id="preview" type="button" disabled>Preview expected decision</button>
+    </section>
+    <section id="outcome" aria-labelledby="outcome-title" hidden>
+      <h2 id="outcome-title">5. Expected decision — not applied</h2>
+      <div class="grid">
+        <article><h3 id="decision"></h3><p id="evidence"></p><p id="proposal"></p></article>
+        <article><h3>Human review checkpoint</h3><p id="validation"></p><p id="next-action"></p><p><strong>Applied changes: <span id="applied">0</span></strong></p></article>
+      </div>
+    </section>
+    <section id="pilot" aria-labelledby="pilot-title">
+      <h2 id="pilot-title">6. Agree a pilot, not a promise</h2>
+      <p>Nominate a repository owner and a security reviewer. Choose one maintenance task, define boundaries, and compare useful recommendations and reviewer effort against the current process.</p>
+      <p>No measured cost, acceptance rate, or time savings are supplied by these fixtures.</p>
+      <a href="guide.html#scorecard">Complete the workshop scorecard and go/no-go decision</a>
+      <p><button id="reset" type="button">Reset replay</button></p>
+    </section>
+    <noscript><p>This replay requires JavaScript to select fixtures. Read <a href="fixtures.json">the complete inputs and expected outcomes</a> or use the <a href="transcript.html">walkthrough transcript</a>.</p></noscript>
+  </main>
+  <footer><p>Public synthetic teaching content · No support SLA · <a href="https://github.com/VeVarunSharma/technical-presentations-decks/issues">Report a sanitized issue</a></p></footer>
+  <script type="module">
+    const select = document.querySelector("#case");
+    const status = document.querySelector("#status");
+    const preview = document.querySelector("#preview");
+    const outcome = document.querySelector("#outcome");
+    let cases = [];
+    function loadCase() {
+      const selected = cases.find((item) => item.id === select.value);
+      outcome.hidden = true;
+      document.querySelector("#request").textContent = selected.request;
+      document.querySelector("#input").textContent = JSON.stringify(selected.context, null, 2);
+      status.textContent = `${selected.title}. Synthetic inputs loaded; no execution occurred.`;
+    }
+    try {
+      const response = await fetch("./fixtures.json");
+      if (!response.ok) throw new Error("Fixture request failed");
+      ({ cases } = await response.json());
+      select.replaceChildren(...cases.map((item) => {
+        const option = document.createElement("option");
+        option.value = item.id;
+        option.textContent = item.title;
+        return option;
+      }));
+      select.disabled = false;
+      preview.disabled = false;
+      loadCase();
+    } catch {
+      status.textContent = "Local fixtures could not be loaded. Open fixtures.json or the transcript; no execution occurred.";
+    }
+    select.addEventListener("change", loadCase);
+    preview.addEventListener("click", () => {
+      const { expected } = cases.find((item) => item.id === select.value);
+      for (const [id, key] of Object.entries({ decision: "decision", evidence: "evidence", proposal: "proposal", validation: "validation", "next-action": "nextAction", applied: "appliedChanges" })) {
+        document.getElementById(id).textContent = expected[key];
+      }
+      outcome.hidden = false;
+      status.textContent = "Expected decision previewed. No changes applied; human review required.";
+      outcome.scrollIntoView({ block: "start" });
+    });
+    document.querySelector("#reset").addEventListener("click", () => {
+      if (!cases.length) return;
+      select.value = cases[0].id;
+      loadCase();
+      document.querySelector("#story").scrollIntoView();
+      select.focus({ preventScroll: true });
+    });
+  </script>
+</body>
+</html>

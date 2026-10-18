@@ -23,7 +23,7 @@ function validateHtmlLinks(label, htmlPath) {
 
     const target = resolve(dirname(htmlPath), value);
     if (!existsSync(target)) {
-      errors.push(`${label}: ${match[1]} does not resolve from index.html`);
+      errors.push(`${label}: ${match[1]} does not resolve from ${htmlPath}`);
     }
   }
 }
@@ -32,6 +32,13 @@ validateHtmlLinks("root", resolve(root, "index.html"));
 
 for (const entry of readdirSync(decksDirectory, { withFileTypes: true }).filter((item) => item.isDirectory())) {
   validateHtmlLinks(entry.name, resolve(decksDirectory, entry.name, "index.html"));
+}
+
+const acceleratorDirectory = resolve(decksDirectory, "gh-aw", "accelerator");
+if (existsSync(acceleratorDirectory)) {
+  for (const entry of readdirSync(acceleratorDirectory).filter((name) => name.endsWith(".html"))) {
+    validateHtmlLinks(`accelerator/${entry}`, resolve(acceleratorDirectory, entry));
+  }
 }
 
 if (errors.length) {

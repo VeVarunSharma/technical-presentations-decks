@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en" data-brand="github" data-theme="copilot-dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Review-first GitHub Agentic Workflows handoff: synthetic demo, setup, safeguards, pilot planning, and release gates.">
+  <title>GH-AW accelerator handoff guide</title>
+  <link rel="stylesheet" href="../../../brands/github/tokens.css">
+  <link rel="stylesheet" href="../../../brands/github/themes/copilot-dark.css">
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-padding-top: 1rem; }
+    body { margin: 0; background: var(--color-page); color: var(--color-text); font: 1rem/1.65 var(--font-sans); }
+    header, main, footer { width: min(76rem, 100%); margin-inline: auto; padding: 1.5rem; }
+    header { padding-block: 3rem 1rem; border-bottom: 2px solid var(--color-accent); }
+    h1, h2, h3 { font-family: var(--brand-font-heading); line-height: 1.2; }
+    h1 { font-size: clamp(2rem, 5vw, 3.4rem); max-width: 24ch; }
+    h2 { margin-top: 0; font-size: 1.7rem; }
+    h3 { font-size: 1.2rem; }
+    p, li, dd { max-width: 85ch; }
+    a { color: var(--color-link); text-underline-offset: .2em; overflow-wrap: anywhere; }
+    a:hover { text-decoration-thickness: .15em; }
+    :focus-visible { outline: 3px solid var(--brand-focus-ring); outline-offset: 4px; }
+    .skip { position: absolute; left: 1rem; top: -6rem; padding: .75rem; background: var(--color-panel); }
+    .skip:focus { top: .5rem; }
+    .eyebrow { color: var(--color-accent); font: .9rem var(--font-mono); }
+    nav ul { display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; list-style: none; padding: 0; }
+    section { margin-block: 2.5rem; padding-top: .5rem; }
+    .notice, fieldset { background: var(--color-canvas); border: 1px solid var(--color-border); border-radius: var(--radius-card); padding: 1.25rem; }
+    .notice { border-inline-start: 4px solid var(--color-accent); }
+    .muted, figcaption { color: var(--color-text-muted); }
+    .table-wrap { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; min-width: 34rem; margin-block: 1rem; }
+    caption { text-align: left; font-weight: 700; padding-bottom: .5rem; }
+    th, td { border-bottom: 1px solid var(--color-border); text-align: left; vertical-align: top; padding: .8rem; }
+    th { background: var(--color-canvas); }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--brand-code-bg); color: var(--brand-code-text); border: 1px solid var(--color-border); padding: 1rem; font: .9rem/1.6 var(--font-mono); }
+    code { font-family: var(--font-mono); overflow-wrap: anywhere; }
+    figure { margin: 1.5rem 0; }
+    dt { font-weight: 700; margin-top: 1rem; }
+    dd { margin-inline-start: 0; }
+    fieldset { margin-block: 1.25rem; min-width: 0; }
+    legend { font-weight: 700; padding-inline: .5rem; }
+    label { display: block; margin-top: 1rem; }
+    input:not([type="checkbox"]):not([type="radio"]), textarea, select { display: block; width: 100%; margin-top: .35rem; padding: .65rem; background: var(--color-page); color: var(--color-text); border: 1px solid var(--color-border-strong); border-radius: var(--brand-radius-small); font: inherit; }
+    textarea { min-height: 5rem; resize: vertical; }
+    input[type="checkbox"], input[type="radio"] { accent-color: var(--color-accent); margin-inline-end: .6rem; }
+    .checks { list-style: none; padding-left: 0; }
+    .checks li { margin-block: .7rem; }
+    footer { border-top: 1px solid var(--color-border); }
+    @media (max-width: 40rem) {
+      header, main, footer { padding-inline: 1rem; }
+      th, td { padding: .6rem; }
+      nav ul { display: block; }
+      nav li { margin-block: .6rem; }
+    }
+    @media print {
+      body { background: var(--brand-bg-inverse); color: var(--brand-text-inverse); font-size: 10pt; }
+      a, .muted, figcaption, .eyebrow { color: inherit; }
+      nav, .skip { display: none; }
+      header, main, footer { width: 100%; padding: .5rem; }
+      section { margin-block: 1.5rem; }
+      h2, h3, legend { break-after: avoid; }
+      tr, fieldset, figure { break-inside: avoid; }
+      table { min-width: 0; }
+      .table-wrap { overflow: visible; }
+      th, pre, .notice, fieldset, input:not([type="checkbox"]):not([type="radio"]), textarea, select { background: var(--brand-bg-inverse); color: var(--brand-text-inverse); border-color: var(--brand-border-strong); }
+      textarea { min-height: 5rem; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to handoff guide</a>
+  <header>
+    <p class="eyebrow">GitHub Agentic Workflows · handoff candidate</p>
+    <h1>Rehearse the boundary. Then decide the pilot.</h1>
+    <p>A self-contained field guide for a customer conversation about review-first repository care. Static replay is the default; real execution is an optional, separately approved activity.</p>
+    <nav aria-label="Package">
+      <ul>
+        <li><a href="../index.html">Presentation</a></li>
+        <li><a href="replay.html">Synthetic replay</a></li>
+        <li><a href="media/walkthrough.webm">Walkthrough video</a></li>
+        <li><a href="media/walkthrough.vtt">WebVTT captions</a></li>
+        <li><a href="transcript.html">Readable transcript</a></li>
+        <li><a href="media/manifest.json">Media manifest</a></li>
+        <li><a href="../../../index.html">All decks</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Guide sections">
+      <ul>
+        <li><a href="#readiness">Readiness</a></li>
+        <li><a href="#journey">Demo journey</a></li>
+        <li><a href="#setup">Setup and deployment</a></li>
+        <li><a href="#execution">Optional execution</a></li>
+        <li><a href="#discovery">Discovery</a></li>
+        <li><a href="#scorecard">Pilot scorecard</a></li>
+        <li><a href="#release">Release gates</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main id="main">
+    <section id="readiness" aria-labelledby="readiness-title">
+      <h2 id="readiness-title">Readiness summary</h2>
+      <div class="notice">
+        <p><strong>Use for evaluation and rehearsal; do not describe this package as production certified or catalog accepted.</strong> This guide documents the intended handoff, not evidence that every gate has passed.</p>
+        <p>The replay uses synthetic fixtures, not GitHub API calls or a model. A staged proposal is neither an applied repository change nor an accepted business outcome. The walkthrough records a demonstration, not a live GH-AW execution.</p>
+      </div>
+      <dl>
+        <dt>Included evaluation material</dt>
+        <dd>The existing 16-slide GH-AW briefing, source workflow, sources, synthetic replay and fixtures, recording/captions/transcript references, and this operator guide. Confirm all linked artifacts resolve in the built package before delivery.</dd>
+        <dt>Technical release gate</dt>
+        <dd>Repository validation, build, browser tests, compiler validation, and three-viewport/manual accessibility inspection must pass on the actual release revision. No current test result is asserted by this document.</dd>
+        <dt>People and rights gate</dt>
+        <dd>Independent presenter rehearsal, maintainer confirmation, and licensing/asset approval remain pending. Assign owners and retain evidence rather than inferring approval from a committed file.</dd>
+        <dt>Execution gate</dt>
+        <dd>Authentication, product entitlements, billing, repository policy, environment approvals, and live workflow behavior require an authorized operator. They have not been established by the static demo or this guide.</dd>
+        <dt>Catalog gate: blocked</dt>
+        <dd>The <a href="https://github.com/mcaps-microsoft/accelerators-catalog">mcaps-microsoft/accelerators-catalog</a> lookup returned HTTP 404 through an authenticated tool. Access, current schema, required metadata, submission procedure, and acceptance are unverified. Obtain owner guidance before preparing a conforming submission; do not claim acceptance.</dd>
+      </dl>
+      <h3>Customer story (illustrative)</h3>
+      <p>A platform team has a maintenance queue but little confidence that another automated suggestion will deserve review. A maintainer wants evidence and duplicate checks before an agent proposes any work. The team first rehearses three synthetic cases: useful work, work already tracked, and insufficient evidence. Security and engineering then agree the boundary for a small staged pilot, with a named reviewer and an explicit stop rule. This is a scenario, not a customer testimonial or measured result.</p>
+    </section>
+
+    <section id="journey" aria-labelledby="journey-title">
+      <h2 id="journey-title">Numbered customer journey</h2>
+      <ol>
+        <li><strong>Discover:</strong> identify one repository-care decision and its human owner. Complete the eight questions below before suggesting execution.</li>
+        <li><strong>Explain:</strong> open the deck at <a href="../index.html#1">“Governed automation for the agentic software factory”</a>; state the difference between static replay and optional execution.</li>
+        <li><strong>Inspect:</strong> use <a href="../index.html#6">“The agent's job is written as an operating procedure”</a> and <a href="../examples/repo-care.md">repo-care.md</a> to inspect intent, triggers, and bounds.</li>
+        <li><strong>Rehearse:</strong> open <a href="replay.html">replay</a> and compare the useful, duplicate, and insufficient-evidence fixture cases. Show their raw source in replay; do not represent fixture text as model reasoning or a run log.</li>
+        <li><strong>Decide:</strong> use <a href="../index.html#15">“Earn the right to scale the process”</a> to choose no-go, further discovery, or an approved sandbox pilot.</li>
+        <li><strong>Hand off:</strong> assign the operator, reviewer, cost owner, security approver, maintainer contact, and next review date in the decision record.</li>
+      </ol>
+      <div class="table-wrap" role="region" aria-label="Five-minute demo plan" tabindex="0">
+        <table>
+          <caption>Five-minute briefing: one boundary, three cases, one decision</caption>
+          <thead><tr><th scope="col">Time</th><th scope="col">Show</th><th scope="col">Say or ask</th></tr></thead>
+          <tbody>
+            <tr><td>0:00–1:00</td><td>Slide 1: “Governed automation for the agentic software factory”</td><td>“This is synthetic replay. Who owns the maintenance decision?”</td></tr>
+            <tr><td>1:00–2:00</td><td>Slide 8: “Review the workflow's operating envelope as code”</td><td>Locate <code>staged: true</code>, role restrictions, schedule, and <code>manual-approval: production</code>.</td></tr>
+            <tr><td>2:00–4:00</td><td>Replay: useful, duplicate, insufficient cases; raw source</td><td>Contrast a proposed improvement with duplicate avoidance and withholding a speculative patch. None of these applies a write.</td></tr>
+            <tr><td>4:00–5:00</td><td>Slide 15: “Earn the right to scale the process”; decision record</td><td>Agree the next evidence needed, owner, and stop criteria—not a production deployment.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-wrap" role="region" aria-label="Fifteen-minute demo plan" tabindex="0">
+        <table>
+          <caption>Fifteen-minute technical walkthrough</caption>
+          <thead><tr><th scope="col">Time</th><th scope="col">Actual slide or artifact</th><th scope="col">Inspection and question</th></tr></thead>
+          <tbody>
+            <tr><td>0:00–2:00</td><td>Slide 3: “A CLI in a privileged runner is not a security architecture”</td><td>Separate untrusted content, secrets, tools, and communication/write capabilities. Which boundary is missing today?</td></tr>
+            <tr><td>2:00–4:00</td><td>Slide 5: “Deterministic CI or agentic workflow?”; slide 7: “Precompute facts before paying for reasoning”</td><td>Which decisions can deterministic collection or skip rules settle without a model?</td></tr>
+            <tr><td>4:00–6:00</td><td>Slide 6: “The agent's job is written as an operating procedure”; slide 8: “Review the workflow's operating envelope as code”</td><td>Use Written intent, Controls, and Compiled plan tabs; inspect the source separately. Compiled-plan display is explanatory, not execution evidence.</td></tr>
+            <tr><td>6:00–9:00</td><td>Replay and <a href="fixtures.json">fixtures.json</a></td><td>Compare all three cases and raw input/output. Ask the reviewer to explain why a duplicate or uncertain proposal must not become a speculative patch.</td></tr>
+            <tr><td>9:00–11:00</td><td>Slide 10: “Assume the agent can be manipulated”; slide 12: “Control overlap, queueing, fan-out, and duplicate effects”</td><td>Inspect scenario controls. Discuss prompt injection, duplicate effects, and the limits of the reference model.</td></tr>
+            <tr><td>11:00–13:00</td><td>Slide 13: “Measure what the workflow spent — and what the repository accepted”</td><td>Distinguish cost, proposals, reviewer acceptance, and validated outcomes. Do not cite fixture counts as pilot results.</td></tr>
+            <tr><td>13:00–15:00</td><td>Slide 15: “Earn the right to scale the process”; scorecard</td><td>Choose a bounded pilot or defer it; assign approvals, baselines, and a review date.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Presenter controls and fallback</h3>
+      <p>In the deck, Space, Right Arrow, or Page Down reveals the next build before advancing. Left Arrow or Page Up reverses a build before moving back. Home resets builds and returns to slide 1; numbered dot navigation jumps directly to a slide. Use the visible Back/Hide and Next/Reveal buttons, Full screen (or <kbd>f</kbd> outside a control), and Sources. Touch navigation and print are provided by the shared runtime; browser print reveals build content. Do not install a second navigation implementation.</p>
+      <p>Rehearse in the delivery browser, including keyboard focus and reduced-motion settings. Use the labeled fixture controls in replay and inspect its raw source display. If replay or the network fails, open the <a href="transcript.html">transcript</a>, <a href="fixtures.json">fixture file</a>, and local <a href="media/walkthrough.webm">recording</a> with <a href="media/walkthrough.vtt">captions</a>. If media cannot play, narrate the transcript and source files. Never replace a failed replay with an unapproved live workflow run.</p>
+    </section>
+
+    <section id="architecture" aria-labelledby="architecture-title">
+      <h2 id="architecture-title">Architecture: two separate trust boundaries</h2>
+      <figure>
+        <pre aria-label="Static presentation and optional execution architecture">STATIC PRESENTATION BOUNDARY — no GitHub token or model required
+Reviewed HTML / CSS / JS + synthetic fixtures + approved media
+  → Vite build → dist/ → static host → attendee browser
+                                      → local synthetic replay
+                                      → no workflow execution
+
+OPTIONAL EXECUTION BOUNDARY — separate operator approval required
+Reviewed repo-care.md → GH-AW compile → reviewed workflow configuration
+  → approved sandbox Actions runner + approved engine authentication
+  → bounded context / tools / network → staged safe-output proposal
+  → named human review
+
+UNTRUSTED INPUT: repository text, issues, comments, tool/model output
+SEPARATE AUTHORITY: runner access, engine billing, repository permissions,
+                   production-named approval environment, reviewers
+WRITE ENABLEMENT: outside this staged demo; requires a new approval decision</pre>
+        <figcaption>Package-specific reference model based on the supplied workflow and <a href="../sources.md">documented GH-AW architecture sources</a>. Not a deployed topology, verified isolation boundary, or production architecture guarantee.</figcaption>
+      </figure>
+      <p>The static host publishes files; it cannot establish execution permissions or prove controls in a customer's environment. Even staged execution can consume compute/model credits and process sensitive input. Inspect generated jobs, logs, artifacts, network destinations, and credential scope with the operator before any live run. Staging previews requested writes; it does not remove every execution or disclosure risk.</p>
+    </section>
+
+    <section id="setup" aria-labelledby="setup-title">
+      <h2 id="setup-title">Presentation setup, deployment, and rollback</h2>
+      <h3>1. Prepare a clean local checkout</h3>
+      <p>Use an approved checkout of this repository, Node.js 24, npm, and a supported browser. No GitHub/model credentials are needed for presentation or replay. Review <a href="../../../README.md">README</a>, <a href="../../../design.md">design contract</a>, <a href="../../../CONTRIBUTING.md">contribution checklist</a>, <a href="../deck.json">deck metadata</a>, and <a href="../sources.md">sources</a>.</p>
+      <pre><code>nvm use
+npm ci
+npx playwright install chromium
+npm run dev</code></pre>
+      <p>If nvm is unavailable, obtain Node.js 24 through an approved installer. Linux Chromium system dependencies may require <code>npx playwright install --with-deps chromium</code>; request administrator approval if necessary. Open <code>http://localhost:5173/decks/gh-aw/accelerator/guide.html</code>, then follow Presentation and Replay. Keep the server local rather than exposing private draft material on a network interface.</p>
+      <h3>2. Validate the release candidate</h3>
+      <pre><code>npm run validate
+npm run build
+npm test
+PLAYWRIGHT_SERVER=preview npm test
+npm run preview</code></pre>
+      <p>Open <code>http://localhost:4173/decks/gh-aw/accelerator/guide.html</code> and verify every nested link, replay case, source display, video, captions, and transcript. Run the GH-AW compiler validator below as well. Inspect 1366×768, 1200×796, and 1920×1080, keyboard-only use, reduced motion, contrast, print, console errors, and layout overflow. Retain the revision and command results as evidence; commands printed here are not a passing test report.</p>
+      <h3>3. Publish only reviewed material</h3>
+      <ol>
+        <li>Obtain source, rights, security, and hosting-owner review. Confirm the intended audience and actual hosting access policy; source-repository privacy alone is insufficient.</li>
+        <li>In repository Settings → Pages, choose GitHub Actions as the source if authorized. Use the existing <a href="../../../.github/workflows/deploy-pages.yml">Pages workflow</a>, not a separate ad hoc deployment script.</li>
+        <li>Merge the approved revision to <code>main</code> or dispatch the workflow for the approved branch. The workflow builds, tests built output, validates the GH-AW example, and deploys <code>dist/</code>. Do not bypass a failed gate.</li>
+        <li>Verify the published catalog and direct paths, including <code>decks/gh-aw/</code> and <code>decks/gh-aw/accelerator/guide.html</code>. Test nested CSS/fonts, replay, fixtures, and media from the deployed URL, not only local preview.</li>
+        <li>Record the deployment URL, revision, approver, and timestamp. The existing site is <a href="https://vevarunsharma.github.io/technical-presentations-decks/">the repository's Pages catalog</a>; a fork has its own configured address.</li>
+      </ol>
+      <div class="notice"><p><strong>Publication warning:</strong> support files, examples, JSON, raw sources, recordings, captions, and transcripts may all be served publicly. Remove secrets, customer identifiers, internal URLs, private repository content, and unapproved assets before publishing. The replay source display intentionally exposes its fixtures; only sanitized synthetic content belongs there.</p></div>
+      <h3>4. Roll back a presentation release</h3>
+      <p>Pause further publication with the hosting owner. Identify the last approved revision, submit a reviewed source revert through the normal pull request process, and redeploy through the same gates. Verify the restored catalog, deck, guide, replay, captions, and transcript; record the new deployment revision. Do not use force pushes, branch resets, or destructive cleanup to recover a presentation. If sensitive material was disclosed, follow incident response and credential revocation procedures: a rollback does not erase caches, copies, or exposure.</p>
+      <h3>5. Reset and clean up after a demo</h3>
+      <p>Press Home in the deck; reload replay to restore its default fixture and repeat all three cases if needed. Reloading this guide clears unsaved worksheet entries; print a reviewed copy first if required. Stop the local Vite server with Ctrl+C, close demo browser tabs, and retain only approved evidence under the agreed retention policy. This runbook requires no deletion commands, repository writes, production cleanup, or customer-resource changes.</p>
+    </section>
+
+    <section id="execution" aria-labelledby="execution-title">
+      <h2 id="execution-title">Optional execution sandbox: operator-owned, not the default demo</h2>
+      <p><strong>Do not enable or run the workflow in a production repository as part of this handoff.</strong> Use an isolated, organization-approved sandbox with synthetic issues and no production secrets, customers, deployment integrations, or sensitive data. The steps below are planning and source validation, not a claim of authenticated, entitled, approved, or live-validated execution.</p>
+      <ol>
+        <li><strong>Assign authority:</strong> identify a repository administrator, security approver, engine/billing owner, and human reviewer. Verify current GH-AW documentation and organizational policy. Record explicit sandbox approval and stop conditions.</li>
+        <li><strong>Prepare tools:</strong> obtain GitHub CLI and a policy-approved version of the <a href="https://github.github.com/gh-aw/setup/cli/">GH-AW extension</a>. Use <code>gh --version</code>, <code>gh extension list</code>, and <code>gh auth status</code> to verify local prerequisites without displaying tokens. Authentication setup and entitlements are the operator's responsibility; never paste credentials into source, fixtures, recordings, or slides.</li>
+        <li><strong>Inspect the exact source:</strong> review <a href="../examples/repo-care.md">repo-care.md</a>, its tool allowlist, read permissions, Copilot request permission, network rules, strict mode, concurrency, budgets, and output limits. Do not assume the read-only agent permissions mean every generated job has the same authority.</li>
+        <li><strong>Verify prerequisites:</strong> the source permits roles <code>admin</code>, <code>maintainer</code>, and <code>write</code>; ensure the intended operator satisfies policy. Confirm the <code>automation</code> and <code>needs-review</code> labels exist in the sandbox or obtain approved configuration changes. Confirm the <code>production</code>-named approval environment has the intended reviewers and protections; the name alone creates no approval guarantee.</li>
+        <li><strong>Review triggers before installation:</strong> the supplied source contains both a daily schedule between 09:00 and 17:00 and <code>workflow_dispatch</code>, with <code>manual-approval: production</code>. It is <em>not</em> manual-only. Do not copy it into an enabled workflow location until the operator has reviewed schedule behavior, environment approval semantics, engine access, billing, and a way to stop further runs. Keep it in <code>examples/</code> for the static demo.</li>
+        <li><strong>Compile without emitting or running:</strong> from the repository root, use the declared validator below. A successful compile does not verify credentials, environment protections, organization entitlements, billing, or real execution.</li>
+      </ol>
+      <pre><code>cd decks/gh-aw
+gh aw compile examples/repo-care.md \
+  --dir examples \
+  --no-emit \
+  --validate \
+  --strict \
+  --schedule-seed demo/gh-agentic-workflows \
+  --no-check-update</code></pre>
+      <p>If a compiler version does not support a control, stop and reconcile source/documentation/version with the maintainer; do not weaken controls to make a demo pass. Installation into an active sandbox and any live dispatch require a separate reviewed operator runbook and explicit approval. No activation, write-enablement, production dispatch, or credential provisioning command is supplied here.</p>
+      <h3>What staging actually means</h3>
+      <p>The supplied <code>safe-outputs.staged: true</code> previews requested writes rather than automatically applying them. Its proposed issue outputs use <code>automation</code> and <code>needs-review</code> labels, a maximum of two issues and title deduplication; proposed pull requests are draft with a maximum of one and protected-file fallback. Those source settings do not demonstrate that an issue or PR was created. Do not turn staging off for a demo. Human acceptance, any later write enablement, and production rollout are separate decisions.</p>
+      <h3>Stop and cleanup plan</h3>
+      <p>For an independently approved sandbox run, the operator must be able to pause the optional workflow in Actions, cancel a specific active run, and verify no queued or scheduled execution remains before closing the exercise. Follow approved credential expiry/revocation and artifact-retention procedures. Do not delete repositories, issues, branches, labels, environments, or customer data as a demo reset. If these controls cannot be established without production changes, use static replay only.</p>
+    </section>
+
+    <section id="discovery" aria-labelledby="discovery-title">
+      <h2 id="discovery-title">Discovery worksheet: eight questions</h2>
+      <p>Discuss these before proposing a pilot. Record sanitized answers in the scorecard or a customer-approved system—not in public fixture data.</p>
+      <ol>
+        <li>Which specific maintenance decision consumes reviewer time, and what is the current workflow?</li>
+        <li>Which repository, owner, and low-risk task type are in scope, and what is explicitly excluded?</li>
+        <li>What evidence can deterministic collection or skip rules establish before invoking a model?</li>
+        <li>What untrusted inputs, sensitive data, network paths, and tool capabilities must be bounded?</li>
+        <li>Who approves permissions, engine entitlement/authentication, spend, schedules, and environment protections?</li>
+        <li>What counts as useful, duplicate, unsupported, accepted, and safely rejected work for this team?</li>
+        <li>What baseline, sample window, reviewer capacity, budget, and stop criteria can the team commit to?</li>
+        <li>Who owns the go/no-go decision, support escalation, retention, and rollback, and when will they review evidence?</li>
+      </ol>
+      <h3>Workshop proposal</h3>
+      <p><strong>Proposed 60 minutes, not a purchased service commitment:</strong> 10 minutes discovery, 15 minutes the technical demo, 15 minutes source and trust-boundary review, 15 minutes scorecard and pilot design, and 5 minutes owner/date confirmation. Invite a repository maintainer, platform engineer, security reviewer, and cost owner. Deliver a scoped decision record, not an activated workflow.</p>
+      <h3>Pilot proposal</h3>
+      <p>Propose one approved sandbox repository, one low-risk repository-care task family, staged outputs only, and an agreed time-box (for example, two weeks). Establish baselines before execution; record every eligible case, skip, proposal, reviewer disposition, validation result, and cost observation. Use a named human reviewer and customer-defined sample/thresholds. Stop on sensitive-data exposure, unauthorized capability, uncontrolled execution, budget breach, or inability to review safely. Expansion requires a new security/operational review; a small pilot does not establish production readiness.</p>
+    </section>
+
+    <section id="metrics" aria-labelledby="metrics-title">
+      <h2 id="metrics-title">Measurement definitions—not claimed outcomes</h2>
+      <p>All targets and results below are blank by design. Synthetic fixture counts, slide models, and recording duration are not evidence of savings, accuracy, safety, or customer adoption. Use an agreed observation window, consistent denominators, reviewer rubric, and sufficient sample; record exclusions and uncertainty.</p>
+      <dl>
+        <dt>Eligible cases and invocation rate</dt>
+        <dd>Eligible cases meet the agreed scope and evidence criteria. Invocation rate = model invocations ÷ eligible cases in the same window. Separately report deterministic skips; low invocation alone is not success.</dd>
+        <dt>Useful-proposal rate</dt>
+        <dd>Reviewer-rated useful proposals ÷ proposals reviewed. Define “useful” before collection; distinguish useful-but-deferred from accepted.</dd>
+        <dt>Duplicate and unsupported-proposal rates</dt>
+        <dd>Proposals duplicating already tracked work ÷ proposals reviewed; proposals lacking required evidence ÷ proposals reviewed. Also record cases correctly withheld or redirected for more evidence.</dd>
+        <dt>Acceptance and validated outcomes</dt>
+        <dd>Accepted proposals ÷ proposals with a final reviewer disposition; pending proposals remain separate. Count a validated outcome only after the agreed downstream validation, not when an agent requests an output. Staged proposals alone are not applied outcomes.</dd>
+        <dt>Reviewer effort and cycle time</dt>
+        <dd>Record hands-on reviewer minutes per case and elapsed time from eligible case to final disposition. Compare median and spread with a comparable baseline, including setup and rework; do not assume causality or extrapolate from fixture replay.</dd>
+        <dt>Cost per accepted outcome</dt>
+        <dd>Report model usage/AI Credits and Actions compute separately. If monetary conversion is agreed, document its price basis and date. Divide total agreed cost by accepted outcomes; if none are accepted, report “not defined,” not zero.</dd>
+        <dt>Safety and operational exceptions</dt>
+        <dd>Count and describe attempted out-of-scope actions, sensitive-data handling incidents, budget/timeout breaches, and approval failures. Zero observed incidents is not proof that a control cannot fail.</dd>
+      </dl>
+    </section>
+
+    <section id="scorecard" aria-labelledby="scorecard-title">
+      <h2 id="scorecard-title">Editable, printable pilot scorecard</h2>
+      <p id="form-help">Local worksheet only: no submission, backend, autosave, browser storage, or metrics collection. Entries disappear on reload. Use browser Print to retain a reviewed copy; check print preview. Do not enter credentials, personal data, or confidential customer details.</p>
+      <form aria-describedby="form-help">
+        <fieldset>
+          <legend>Scope and ownership</legend>
+          <label for="pilot-name">Pilot alias and approved sandbox scope<input id="pilot-name" type="text" autocomplete="off"></label>
+          <label for="pilot-owner">Accountable operator and reviewer roles<input id="pilot-owner" type="text" autocomplete="off"></label>
+          <label for="pilot-window">Observation window and review date<input id="pilot-window" type="text" placeholder="Start / end / review date" autocomplete="off"></label>
+          <label for="pilot-exclusions">Exclusions, trust boundaries, and required approvals<textarea id="pilot-exclusions"></textarea></label>
+          <label for="pilot-discovery">Sanitized discovery answers and missing evidence<textarea id="pilot-discovery"></textarea></label>
+        </fieldset>
+        <fieldset>
+          <legend>Baseline, targets, and observations</legend>
+          <label for="sample">Eligibility rubric, sample size, denominator, and exclusions<textarea id="sample"></textarea></label>
+          <label for="baseline">Baseline window, reviewer minutes, cycle time, and source of evidence<textarea id="baseline"></textarea></label>
+          <label for="targets">Customer-agreed target thresholds (set before the pilot)<textarea id="targets"></textarea></label>
+          <label for="observations">Observed counts: eligible / invoked / skipped / proposed / reviewed / useful / duplicate / unsupported / accepted / pending / validated<textarea id="observations"></textarea></label>
+          <label for="cost">Cost observations: model usage, Actions compute, pricing basis, budget, and cost per accepted outcome<textarea id="cost"></textarea></label>
+          <label for="exceptions">Review effort, uncertainty, safety exceptions, and stop conditions<textarea id="exceptions"></textarea></label>
+        </fieldset>
+        <fieldset>
+          <legend>Decision record</legend>
+          <label for="decision">Current decision<select id="decision"><option value="">Not decided</option><option>No-go: close evaluation</option><option>Defer: gather evidence</option><option>Proceed to separately approved staged sandbox pilot</option><option>Review pilot evidence; no expansion authorized yet</option></select></label>
+          <label for="rationale">Rationale, evidence references, alternatives, and residual risks<textarea id="rationale"></textarea></label>
+          <label for="approvals">Required approvals, status, and responsible roles<textarea id="approvals"></textarea></label>
+          <label for="next-actions">Next actions, owners, due dates, and support/rollback responsibilities<textarea id="next-actions"></textarea></label>
+          <label for="review-date">Next decision date<input id="review-date" type="date"></label>
+          <label><input type="checkbox">I have distinguished synthetic demonstration, compiler validation, and live execution evidence.</label>
+          <label><input type="checkbox">Scope, review capacity, stop criteria, and required approvals are documented.</label>
+        </fieldset>
+      </form>
+    </section>
+
+    <section id="reuse" aria-labelledby="reuse-title">
+      <h2 id="reuse-title">Reusable core versus customer customization</h2>
+      <div class="table-wrap" role="region" aria-label="Reuse boundaries" tabindex="0">
+        <table>
+          <caption>Keep the platform shared; customize the decision context</caption>
+          <thead><tr><th scope="col">Reusable</th><th scope="col">Customize and approve</th></tr></thead>
+          <tbody>
+            <tr><td>Shared runtime navigation, builds, print, accessibility; existing GitHub Copilot dark tokens</td><td>Customer narrative, audience, terminology, delivery duration, and accessibility needs</td></tr>
+            <tr><td>Synthetic three-case replay, source inspection, staged-first teaching pattern</td><td>Approved anonymized examples, evidence criteria, expected reviewer dispositions</td></tr>
+            <tr><td>Workflow source as an inspectable reference; architecture discussion</td><td>Triggers, roles, repository scope, labels, engine, network, permissions, approvals, limits, budget, and operator runbook</td></tr>
+            <tr><td>Discovery prompts, metric definitions, blank scorecard, release gates</td><td>Baselines, targets, sample size, ownership, retention, support agreement, and go/no-go criteria</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Anonymization, licensing, and asset review</h3>
+      <p>Prefer invented fixture records. Before any recording or publication, replace repository names, issue text, identities, URLs, timestamps, paths, logs, and identifiers that could reveal a customer or correlate to private work. Inspect screen content, audio, captions, transcript, JSON, and manifest metadata together. Redaction is not approval; obtain an authorized review of the final artifact.</p>
+      <p>Review <a href="../../../LICENSE">LICENSE</a> and <a href="../../../NOTICE.md">NOTICE.md</a>. Repository-authored material uses MIT terms; fonts have their own notices, and trademarks/third-party references do not inherit a blanket redistribution permission. Record asset provenance and approval evidence before external reuse. Do not download or copy protected logos, templates, mascots, internal guides, or customer assets. No customer consent, trademark approval, or completed licensing review is asserted here.</p>
+      <p><strong>Maintainer confirmation pending:</strong> confirm a named maintainer/contact, supported delivery scope, review cadence, licensing disposition, and ownership of future updates before promising a maintained accelerator or support commitment.</p>
+    </section>
+
+    <section id="release" aria-labelledby="release-title">
+      <h2 id="release-title">Release checklist: implemented versus unverified</h2>
+      <p>Checked entries below identify inspectable documentation/source facts, not passed tests or external approvals. Unchecked entries are gates for the release owner to verify and record. Keep catalog submission blocked until access and owner instructions are available.</p>
+      <ul class="checks">
+        <li>☑ Existing deck metadata declares GitHub / copilot-dark and a GH-AW compiler validator.</li>
+        <li>☑ Supplied repo-care source declares staged outputs, daily and manual triggers, role restrictions, and production-named manual approval.</li>
+        <li>☑ This guide documents static/live boundaries, synthetic-data limits, fallback, operator prerequisites, and release blockers.</li>
+        <li>☑ Discovery questions, proposed workshop/pilot, metric definitions, blank scorecard, and decision record are included.</li>
+        <li>☐ Run validation, build, browser tests, and compiler validator on the release revision; retain results.</li>
+        <li>☐ Verify replay useful/duplicate/insufficient cases, raw source display, fixture provenance, and no accidental network execution.</li>
+        <li>☐ Verify media file playback, caption synchronization, transcript accuracy, manifest provenance, and nested built/deployed links.</li>
+        <li>☐ Inspect all affected pages at 1366×768, 1200×796, and 1920×1080; check keyboard, focus, reduced motion, contrast, print, and console.</li>
+        <li>☐ An independent presenter completes both demo lengths and fallback without author assistance; record feedback and revision.</li>
+        <li>☐ Maintainer confirms ownership/contact and ongoing review responsibilities.</li>
+        <li>☐ Authorized reviewers approve licensing, asset provenance, anonymization, and public-host visibility.</li>
+        <li>☐ If execution is proposed, operator verifies authentication, entitlements, budget, roles/labels, environment protections, schedule handling, stop procedures, and sandbox approval. Otherwise explicitly mark execution out of scope.</li>
+        <li>☐ Catalog owner resolves authenticated 404, provides schema/submission guidance, and confirms conformance. Submission and acceptance remain pending.</li>
+        <li>☐ Record approved publication revision, deployment verification, rollback owner, and final customer handoff decision.</li>
+      </ul>
+    </section>
+
+    <section id="support" aria-labelledby="support-title">
+      <h2 id="support-title">Support, known limits, and source map</h2>
+      <p>Report reproducible, sanitized issues at <a href="https://github.com/vevarunsharma/technical-presentations-decks/issues">the repository issue tracker</a>. Include revision, page/deck, browser, viewport, expected behavior, and safe reproduction steps. Do not attach tokens, private logs, or customer evidence. Support is best-effort, with <strong>no SLA, named support commitment, or production support entitlement</strong>; customer-specific escalation and operational coverage must be agreed separately.</p>
+      <p>Known limits: synthetic replay cannot establish model quality, runtime security, cost, or business value; compile-only checks cannot establish live execution behavior; GH-AW/product behavior and pricing can change; static-host access policies are deployment-specific; a production-named environment is not proof of protection; external catalog schema and acceptance are unverified. Independent rehearsal and maintainer confirmation remain outstanding until recorded by their owners.</p>
+      <ul>
+        <li><a href="../sources.md">GH-AW source register</a> — authoritative references and caveats for deck claims, architecture, staged mode, permissions, costs, and outcomes.</li>
+        <li><a href="../examples/repo-care.md">Supplied workflow source</a> — actual triggers, roles, approval, labels, intent, and output controls.</li>
+        <li><a href="../deck.json">Deck metadata</a> — audience, objectives, theme, and exact compiler validator.</li>
+        <li><a href="fixtures.json">Synthetic fixtures</a> and <a href="replay.html">raw source display in replay</a> — demonstration inputs and outcomes, not customer/run evidence.</li>
+        <li><a href="media/manifest.json">Media manifest</a>, <a href="media/walkthrough.webm">recording</a>, <a href="media/walkthrough.vtt">captions</a>, and <a href="transcript.html">transcript</a> — verify consistency before handoff.</li>
+        <li><a href="../../../design.md">Design contract</a>, <a href="../../../CONTRIBUTING.md">contribution requirements</a>, and <a href="../../../README.md">repository overview</a> — authoring and release responsibilities.</li>
+      </ul>
+    </section>
+  </main>
+  <footer>
+    <p>Next step: choose one bounded question, name its human owner, and record the evidence required for a go/no-go decision. This package does not authorize production execution.</p>
+  </footer>
+</body>
+</html>

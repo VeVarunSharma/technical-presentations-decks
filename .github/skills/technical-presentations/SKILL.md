@@ -34,6 +34,15 @@ Before editing:
 
 Official brand guidance overrides repository guidance. Never copy protected presentation-template imagery or long passages from brand guides.
 
+For accelerator demonstrations, use synthetic data and label simulated,
+recorded, and live results explicitly. Staged Repo Care output is not an
+applied change. Keep customer identities, credentials, internal URLs, and
+unapproved assets out of source, screenshots, videos, logs, and fixtures.
+Everything under a deck, including support files, may be published by the
+static build. Review that boundary before adding any asset.
+Run every deck-declared validator as well as the repository quality gate;
+never mark catalog readiness from a successful presentation build alone.
+
 ## Repository model
 
 ```text

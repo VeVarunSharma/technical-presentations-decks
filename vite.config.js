@@ -4,6 +4,12 @@ import { defineConfig } from "vite";
 
 const root = process.cwd();
 const decksDirectory = resolve(root, "decks");
+const supportPages = [
+  "decks/gh-aw/accelerator/guide.html",
+  "decks/gh-aw/accelerator/replay.html",
+  "decks/gh-aw/accelerator/transcript.html",
+];
+const builtSupportPages = new Set(supportPages.map((path) => resolve(root, path)));
 
 const deckInputs = existsSync(decksDirectory)
   ? Object.fromEntries(
@@ -30,7 +36,7 @@ function copyDeckFiles() {
           cpSync(
             resolve(sourceDirectory, file.name),
             resolve(destinationDirectory, file.name),
-            { recursive: true },
+            { recursive: true, filter: (path) => !builtSupportPages.has(path) },
           );
         }
       }
@@ -46,6 +52,7 @@ export default defineConfig({
       input: {
         root: resolve(root, "index.html"),
         ...deckInputs,
+        ...Object.fromEntries(supportPages.map((path, index) => [`accelerator-${index}`, resolve(root, path)])),
       },
     },
   },

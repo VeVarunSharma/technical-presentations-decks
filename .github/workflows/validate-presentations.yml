@@ -37,6 +37,9 @@ jobs:
           PLAYWRIGHT_SERVER: preview
         run: npm test
 
+      - name: Validate Copilot governance examples
+        run: node decks/copilot-governance/validate-examples.mjs
+
       - name: Install GitHub Agentic Workflows CLI
         env:
           GH_TOKEN: ${{ github.token }}
